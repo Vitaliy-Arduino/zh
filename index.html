@@ -6,11 +6,11 @@
 <meta name="keywords" content="Arduino, программирование для детей, роботы, IoT, обучение">
 <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<link rel="stylesheet" href="./js/index.css">
+<link rel="stylesheet" href="./index.css">
 <title>ArduBlock | Визуальное блочное программирование</title>
-<link rel="shortcut icon" type="image/x-icon" href="./js/icon.ico">
+<link rel="shortcut icon" type="image/x-icon" href="./favicon.ico">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<link href="./js/favicon.ico" rel="apple-touch-icon">
+<link href="./favicon.ico" rel="apple-touch-icon">
 
 <style>
 /* ====== Модалки ====== */
@@ -44,6 +44,28 @@
 .buy-key-link{ display:block; text-align:center; color:#ff6a00; font:14px arial; cursor:pointer; }
 .auth-error{ color:#d00; font:14px arial; margin:0 0 10px; }
 #authReason{ color:#ff6a00; font:14px arial; margin:0 0 10px; }
+
+/* ====== Ячейки ввода ключа ====== */
+.key-cells{
+  display:flex; align-items:center; justify-content:center;
+  gap:4px; margin-bottom:16px;
+}
+.key-cell{
+  width:46px; height:48px; text-align:center;
+  font:bold 18px arial; text-transform:lowercase;
+  border:1px solid #ccc; border-radius:8px;
+  box-sizing:border-box; outline:none;
+  transition:border-color .15s, box-shadow .15s;
+  margin-bottom:0 !important; padding:0 !important;
+}
+.key-cell:focus{
+  border-color:#ff6a00;
+  box-shadow:0 0 0 2px rgba(255,106,0,.25);
+}
+.key-dash{ font:bold 18px arial; color:#999; user-select:none; }
+@media (max-width:480px){
+  .key-cell{ width:40px; height:44px; font-size:16px; }
+}
 
 /* ====== МОДАЛКА ВИДЕО ====== */
 #videoModal .modal-box{
@@ -176,7 +198,7 @@ a.btn-mini{ text-decoration:none; color:#222; }
         </div>
       </div>
       <div class="info-img">
-        <img src="./js/ru.png" alt="ArduBlock interface">
+        <img src="./zh.png" alt="ArduBlock interface">
       </div>
     </div>
   </div>
@@ -207,7 +229,7 @@ a.btn-mini{ text-decoration:none; color:#222; }
           <p class="copyright"><span>&copy; 2012 - <span id="yearSlot"></span></span> Все права защищены.</p>
         </div>
         <div class="language-switch white pointer" style="padding:0 10px 0 0;">
-          <a href="https://ardublock.ru/gpt/" class="link_underline" target="_blank">Тех. поддержка</a>
+          <a href="./" class="link_underline">en</a>
         </div>
       </div>
     </div>
@@ -222,7 +244,18 @@ a.btn-mini{ text-decoration:none; color:#222; }
     <p id="authReason" style="display:none;">Это платный материал — войдите по ключу, чтобы открыть.</p>
     <p class="auth-error" id="authError" style="display:none;"></p>
     <form id="authForm" onsubmit="return submitKey(event)">
-      <input type="text" name="key" id="keyInput" placeholder="xx-xx-xx-xx-xx" autocomplete="off" required>
+      <div class="key-cells" id="keyCells">
+        <input type="text" class="key-cell" maxlength="2" inputmode="text" autocomplete="off" spellcheck="false">
+        <span class="key-dash">-</span>
+        <input type="text" class="key-cell" maxlength="2" inputmode="text" autocomplete="off" spellcheck="false">
+        <span class="key-dash">-</span>
+        <input type="text" class="key-cell" maxlength="2" inputmode="text" autocomplete="off" spellcheck="false">
+        <span class="key-dash">-</span>
+        <input type="text" class="key-cell" maxlength="2" inputmode="text" autocomplete="off" spellcheck="false">
+        <span class="key-dash">-</span>
+        <input type="text" class="key-cell" maxlength="2" inputmode="text" autocomplete="off" spellcheck="false">
+      </div>
+      <input type="hidden" name="key" id="keyInput">
       <div class="modal-actions">
         <button type="submit" class="btn btn-orange">Войти</button>
         <button type="button" class="btn btn-white" onclick="closeAuthModal()">Нет ключа</button>
@@ -236,7 +269,7 @@ a.btn-mini{ text-decoration:none; color:#222; }
 <div id="buyModal" class="modal-overlay">
   <div class="modal-box modal-wide">
     <span class="modal-close" onclick="closeBuyModal()">✕</span>
-    <img id="buyInstructionImg" src="./js/buy-instruction.jpg" alt="Инструкция по покупке ключа">
+    <img id="buyInstructionImg" src="./buy.jpg" alt="Инструкция по покупке ключа">
   </div>
 </div>
 
@@ -256,16 +289,16 @@ a.btn-mini{ text-decoration:none; color:#222; }
   </div>
 </div>
 
-<script src="./js/index.js"></script>
+<script src="./index.js"></script>
 <script>
 /* =====================================================
    КЛЮЧИ ДОСТУПА (пропишите свои 3 ключа здесь)
    Формат: xx-xx-xx-xx-xx
    ===================================================== */
 var VALID_KEYS = [
-  'ab-12-cd-34-ef',
+  'aa-ss-dd-ff-gg',
   '11-22-33-44-55',
-  'aa-bb-cc-dd-ee'
+  'zz-xx-cc-vv-bb'
 ];
 
 var STORAGE_KEY = 'ardublock_key';
@@ -313,7 +346,7 @@ function renderAuthUI(){
   var dl = document.getElementById('downloadSlot');
   if (dl){
     dl.innerHTML = authed
-      ? '<a href="./x32.exe/"><button class="btn btn-white btn-max btn-download authed">Download</button></a>'
+      ? '<a href="./mysetup.exe"><button class="btn btn-white btn-max btn-download">Download</button></a>'
       : '<button class="btn btn-white btn-max btn-download" onclick="openAuthModal(event)">Download</button>';
   }
 
@@ -334,8 +367,101 @@ function logout(e){
 }
 
 /* =====================================================
-   МОДАЛКА ВХОДА
+   МОДАЛКА ВХОДА (5 ячеек по 2 символа)
    ===================================================== */
+var keyCells = [];
+
+function getKeyCells(){
+  return document.querySelectorAll('#keyCells .key-cell');
+}
+
+function collectKey(){
+  var cells = getKeyCells();
+  var parts = [];
+  for (var i = 0; i < cells.length; i++){
+    parts.push(cells[i].value.trim().toLowerCase());
+  }
+  for (var j = 0; j < parts.length; j++){
+    if (parts[j].length !== 2) return '';
+  }
+  return parts.join('-');
+}
+
+function focusCell(idx){
+  var cells = getKeyCells();
+  if (idx < 0 || idx >= cells.length) return;
+  cells[idx].focus();
+  cells[idx].select();
+}
+
+function resetCells(){
+  var cells = getKeyCells();
+  for (var i = 0; i < cells.length; i++){
+    cells[i].value = '';
+  }
+  focusCell(0);
+}
+
+function setupKeyCells(){
+  var cells = getKeyCells();
+  if (!cells.length) return;
+  keyCells = Array.prototype.slice.call(cells);
+
+  keyCells.forEach(function(cell, idx){
+    cell.addEventListener('input', function(){
+      var v = cell.value.replace(/[^a-z0-9]/gi, '').toLowerCase();
+      if (v.length > 2) v = v.slice(0, 2);
+      cell.value = v;
+
+      if (v.length === 2){
+        if (idx < keyCells.length - 1){
+          focusCell(idx + 1);
+        } else {
+          // последняя ячейка заполнена — авто-сабмит
+          cell.blur();
+          submitKey();
+        }
+      }
+    });
+
+    cell.addEventListener('keydown', function(e){
+      if (e.key === 'Backspace' && cell.value.length === 0 && idx > 0){
+        e.preventDefault();
+        focusCell(idx - 1);
+      } else if (e.key === 'ArrowLeft' && idx > 0){
+        e.preventDefault();
+        focusCell(idx - 1);
+      } else if (e.key === 'ArrowRight' && idx < keyCells.length - 1){
+        e.preventDefault();
+        focusCell(idx + 1);
+      } else if (e.key === 'Enter'){
+        e.preventDefault();
+        submitKey();
+      }
+    });
+
+    cell.addEventListener('focus', function(){ cell.select(); });
+
+    cell.addEventListener('paste', function(e){
+      e.preventDefault();
+      var text = (e.clipboardData || window.clipboardData).getData('text') || '';
+      var clean = text.toLowerCase().replace(/[^a-z0-9]/g, '');
+      if (clean.length >= 10){
+        var cellsAll = getKeyCells();
+        for (var i = 0; i < 5; i++){
+          cellsAll[i].value = clean.substr(i * 2, 2);
+        }
+        if (collectKey()) submitKey();
+        else focusCell(4);
+      } else {
+        var v = clean.slice(0, 2);
+        cell.value = v;
+        if (v.length === 2 && idx < 4) focusCell(idx + 1);
+      }
+    });
+  });
+}
+
 function openAuthModal(e, reason){
   if (e && e.preventDefault) e.preventDefault();
   var r = document.getElementById('authReason');
@@ -343,18 +469,20 @@ function openAuthModal(e, reason){
   var err = document.getElementById('authError');
   if (err){ err.style.display = 'none'; err.textContent = ''; }
   document.getElementById('authModal').classList.add('active');
-  setTimeout(function(){ var i = document.getElementById('keyInput'); if (i) i.focus(); }, 100);
+  setTimeout(function(){
+    resetCells();
+    focusCell(0);
+  }, 100);
 }
 function closeAuthModal(){ document.getElementById('authModal').classList.remove('active'); }
 
 function submitKey(e){
-  if (e) e.preventDefault();
-  var input = document.getElementById('keyInput');
+  if (e && e.preventDefault) e.preventDefault();
   var err = document.getElementById('authError');
-  var key = input ? input.value.trim() : '';
+  var key = collectKey();
 
   if (!key){
-    if (err){ err.textContent = 'Введите ключ'; err.style.display = 'block'; }
+    if (err){ err.textContent = 'Введите все 5 пар символов'; err.style.display = 'block'; }
     return false;
   }
   if (!isValidKey(key)){
@@ -364,7 +492,7 @@ function submitKey(e){
 
   saveKey(key);
   IS_AUTHED = true;
-  if (input) input.value = '';
+  resetCells();
   closeAuthModal();
   renderAuthUI();
   return false;
@@ -1398,6 +1526,7 @@ function loadMore(){
   var y = document.getElementById('yearSlot');
   if (y) y.textContent = new Date().getFullYear();
 
+  setupKeyCells();
   renderAuthUI();
 
   var sentinel = document.getElementById('loadMoreSentinel');
