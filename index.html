@@ -1,41 +1,3 @@
-<?php
-/* =========================================================
-   1. ПРОВЕРКА КЛЮЧА — прямо из keys.txt (PHP 5.6+)
-   ========================================================= */
-$isAuthed = false;
-$authError = '';
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['key'])) {
-    $key = trim($_POST['key']);
-    $keysFile = __DIR__ . '/keys.txt';
-
-    if ($key !== '' && is_file($keysFile)) {
-        $lines = file($keysFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-        foreach ($lines as $line) {
-            if (hash_equals(trim($line), $key)) {
-                $isAuthed = true;
-                setcookie('ardublock_key', $key, time() + 60*60*24*30, '/');
-                $_COOKIE['ardublock_key'] = $key;
-                break;
-            }
-        }
-        if (!$isAuthed) $authError = 'Неверный ключ';
-    } else {
-        $authError = 'Введите ключ';
-    }
-}
-
-if (!$isAuthed && !empty($_COOKIE['ardublock_key'])) {
-    $isAuthed = true;
-}
-
-if (isset($_GET['logout'])) {
-    setcookie('ardublock_key', '', time() - 3600, '/');
-    unset($_COOKIE['ardublock_key']);
-    header('Location: ./');
-    exit;
-}
-?>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -83,41 +45,22 @@ if (isset($_GET['logout'])) {
 .auth-error{ color:#d00; font:14px arial; margin:0 0 10px; }
 #authReason{ color:#ff6a00; font:14px arial; margin:0 0 10px; }
 
-/* ====== МОДАЛКА ВИДЕО (вертикальная, без чёрных полос) ====== */
+/* ====== МОДАЛКА ВИДЕО ====== */
 #videoModal .modal-box{
-  background:transparent;
-  box-shadow:none;
-  padding:0;
+  background:transparent; box-shadow:none; padding:0;
   max-width:min(92vw, 520px);
 }
-#videoModal .modal-close{
-  background:rgba(0,0,0,.55);
-  color:#fff;
-}
-#videoPlayerWrap{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  width:100%;
-}
+#videoModal .modal-close{ background:rgba(0,0,0,.55); color:#fff; }
+#videoPlayerWrap{ display:flex; align-items:center; justify-content:center; width:100%; }
 #videoPlayerWrap video{
-  display:block;
-  width:auto;
-  height:auto;
-  max-width:100%;
-  max-height:85vh;
-  aspect-ratio:9 / 16;
-  object-fit:contain;
-  background:#000;
-  border-radius:10px;
+  display:block; width:auto; height:auto; max-width:100%; max-height:85vh;
+  aspect-ratio:9 / 16; object-fit:contain; background:#000; border-radius:10px;
 }
 
-/* ====== Сетка видео (вертикальные карточки 9:16) ====== */
+/* ====== Сетка видео ====== */
 #videoGrid{
-  display:grid;
-  grid-template-columns:repeat(5,1fr);
-  gap:16px;
-  padding:0 20px;
+  display:grid; grid-template-columns:repeat(5,1fr);
+  gap:16px; padding:0 20px;
 }
 @media (max-width:1400px){ #videoGrid{ grid-template-columns:repeat(4,1fr);} }
 @media (max-width:1100px){ #videoGrid{ grid-template-columns:repeat(3,1fr);} }
@@ -125,15 +68,9 @@ if (isset($_GET['logout'])) {
 @media (max-width:480px){ #videoGrid{ grid-template-columns:1fr;} }
 
 .video-card{
-  position:relative;
-  background-size:cover;
-  background-position:center;
-  background-repeat:no-repeat;
-  aspect-ratio:9 / 16;
-  cursor:pointer;
-  border-radius:10px;
-  overflow:hidden;
-  transition:transform .25s ease;
+  position:relative; background-size:cover; background-position:center;
+  background-repeat:no-repeat; aspect-ratio:9 / 16; cursor:pointer;
+  border-radius:10px; overflow:hidden; transition:transform .25s ease;
   box-shadow:0 4px 14px rgba(0,0,0,.15);
 }
 .video-card:hover{ transform:scale(1.03); }
@@ -160,20 +97,16 @@ if (isset($_GET['logout'])) {
 
 .btn-download.authed{ position:relative; }
 .btn-download.authed::after{
-  content:"✓";
-  display:inline-flex; align-items:center; justify-content:center;
+  content:"✓"; display:inline-flex; align-items:center; justify-content:center;
   width:22px; height:22px; border-radius:50%;
   background:#009c4c; color:#fff; font:bold 14px arial;
   margin-left:10px; vertical-align:middle;
 }
 
-/* 3 кнопки на карточке — в ряд */
 .card-actions{
   position:absolute; bottom:0; left:0; right:0;
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:5px;
-  padding:8px;
+  display:grid; grid-template-columns:repeat(3,1fr);
+  gap:5px; padding:8px;
   background:linear-gradient(0deg,rgba(0,0,0,.75),transparent);
 }
 .btn-mini{
@@ -185,9 +118,7 @@ if (isset($_GET['logout'])) {
 }
 .btn-mini:hover{ background:#ffd28a; text-decoration:none; }
 a.btn-mini{ text-decoration:none; color:#222; }
-@media (max-width:480px){
-  .btn-mini{ font-size:10px; padding:6px 2px; }
-}
+@media (max-width:480px){ .btn-mini{ font-size:10px; padding:6px 2px; } }
 .video-loader{ text-align:center; padding:30px; font:14px arial; color:#888; }
 </style>
 </head>
@@ -201,13 +132,9 @@ a.btn-mini{ text-decoration:none; color:#222; }
       <div class="logo white"><a href="./" style="font:bold 30px arial;">ArduBlock</a></div>
       <div class="nav-content-wrap">
         <ul>
-         <li><a href="./com/" class="link_underline">Уроки</a></li>
-           <li><a href="./cre/" class="link_underline">Контакты</a></li>
-          <?php if ($isAuthed): ?>
-            <li><a href="?logout=1" class="link_underline">Выход</a></li>
-          <?php else: ?>
-            <li><a href="#" class="link_underline" onclick="openAuthModal(event)">Вход</a></li>
-          <?php endif; ?>
+          <li><a href="./com/" class="link_underline">Уроки</a></li>
+          <li><a href="./cre/" class="link_underline">Контакты</a></li>
+          <li id="navAuthSlot"></li>
         </ul>
       </div>
     </nav>
@@ -222,13 +149,9 @@ a.btn-mini{ text-decoration:none; color:#222; }
       </div>
       <div class="nav-content-wrap">
         <ul>
-         <li><a href="./com/" class="link_underline">Уроки</a></li>
-           <li><a href="./cre/" class="link_underline">Контакты</a></li>
-          <?php if ($isAuthed): ?>
-            <li><a href="?logout=1" class="link_underline">Выход</a></li>
-          <?php else: ?>
-            <li><a href="#" class="link_underline" onclick="openAuthModal(event)">Вход</a></li>
-          <?php endif; ?>
+          <li><a href="./com/" class="link_underline">Уроки</a></li>
+          <li><a href="./cre/" class="link_underline">Контакты</a></li>
+          <li id="navAuthSlotMobile"></li>
         </ul>
       </div>
     </nav>
@@ -244,13 +167,7 @@ a.btn-mini{ text-decoration:none; color:#222; }
           <button class="btn btn-orange btn-max">Online</button>
         </a>
 
-        <?php if ($isAuthed): ?>
-          <a href="./x32.exe/">
-            <button class="btn btn-white btn-max btn-download authed">Download</button>
-          </a>
-        <?php else: ?>
-          <button class="btn btn-white btn-max btn-download" onclick="openAuthModal(event)">Download</button>
-        <?php endif; ?>
+        <span id="downloadSlot"></span>
 
         <div class="banner-icons" style="margin:30px;" id="ikonps">
           <a href="./" style="margin:0 10px;"><i class="iconfont">&#xe723;</i></a>
@@ -270,7 +187,7 @@ a.btn-mini{ text-decoration:none; color:#222; }
   <div class="ending-words-wrap-inner" style="text-align:center;">
     <h3 class="subtitle" style="margin:50px 0 20px;">Проекты на платформе Arduino UNO</h3>
     <p style="color:#888;font:14px arial;margin-bottom:20px;">
-     На странице представлены видео и схемы — примеры подключаемых к плате модулей программы ArduBlock.
+      На странице представлены видео и схемы — примеры подключаемых к плате модулей программы ArduBlock.
     </p>
   </div>
 </div>
@@ -287,7 +204,7 @@ a.btn-mini{ text-decoration:none; color:#222; }
     <div class="row footer-inner">
       <div class="footer-badge white">
         <div class="footer-logo-wrap" style="padding:0 0 0 10px;">
-          <p class="copyright"><span>&copy; 2012 - <?php echo date('Y'); ?></span> Все права защищены.</p>
+          <p class="copyright"><span>&copy; 2012 - <span id="yearSlot"></span></span> Все права защищены.</p>
         </div>
         <div class="language-switch white pointer" style="padding:0 10px 0 0;">
           <a href="https://ardublock.ru/gpt/" class="link_underline" target="_blank">Тех. поддержка</a>
@@ -303,11 +220,9 @@ a.btn-mini{ text-decoration:none; color:#222; }
     <span class="modal-close" onclick="closeAuthModal()">✕</span>
     <h3>Вход по ключу</h3>
     <p id="authReason" style="display:none;">Это платный материал — войдите по ключу, чтобы открыть.</p>
-    <?php if (!empty($authError)): ?>
-      <p class="auth-error"><?php echo htmlspecialchars($authError); ?></p>
-    <?php endif; ?>
-    <form method="post" action="./">
-      <input type="text" name="key" id="keyInput" placeholder="Введите ключ доступа" autocomplete="off" required>
+    <p class="auth-error" id="authError" style="display:none;"></p>
+    <form id="authForm" onsubmit="return submitKey(event)">
+      <input type="text" name="key" id="keyInput" placeholder="xx-xx-xx-xx-xx" autocomplete="off" required>
       <div class="modal-actions">
         <button type="submit" class="btn btn-orange">Войти</button>
         <button type="button" class="btn btn-white" onclick="closeAuthModal()">Нет ключа</button>
@@ -344,32 +259,129 @@ a.btn-mini{ text-decoration:none; color:#222; }
 <script src="./js/index.js"></script>
 <script>
 /* =====================================================
-   СОСТОЯНИЕ АВТОРИЗАЦИИ (из PHP)
+   КЛЮЧИ ДОСТУПА (пропишите свои 3 ключа здесь)
+   Формат: xx-xx-xx-xx-xx
    ===================================================== */
-var IS_AUTHED = <?php echo $isAuthed ? 'true' : 'false'; ?>;
+var VALID_KEYS = [
+  'ab-12-cd-34-ef',
+  '11-22-33-44-55',
+  'aa-bb-cc-dd-ee'
+];
 
-function openAuthModal(e, reason){
+var STORAGE_KEY = 'ardublock_key';
+
+/* =====================================================
+   СОСТОЯНИЕ АВТОРИЗАЦИИ (localStorage)
+   ===================================================== */
+function getStoredKey(){
+  try { return localStorage.getItem(STORAGE_KEY) || ''; } catch(e){ return ''; }
+}
+function isValidKey(key){
+  if (!key) return false;
+  var k = String(key).trim().toLowerCase();
+  for (var i = 0; i < VALID_KEYS.length; i++){
+    if (VALID_KEYS[i].toLowerCase() === k) return true;
+  }
+  return false;
+}
+function isAuthed(){
+  return isValidKey(getStoredKey());
+}
+function saveKey(key){
+  try { localStorage.setItem(STORAGE_KEY, String(key).trim()); } catch(e){}
+}
+function clearKey(){
+  try { localStorage.removeItem(STORAGE_KEY); } catch(e){}
+}
+
+var IS_AUTHED = isAuthed();
+
+/* =====================================================
+   ОБНОВЛЕНИЕ ИНТЕРФЕЙСА (nav / download)
+   ===================================================== */
+function renderAuthUI(){
+  var authed = IS_AUTHED;
+  var navItem = authed
+    ? '<a href="#" class="link_underline" onclick="logout(event)">Выход</a>'
+    : '<a href="#" class="link_underline" onclick="openAuthModal(event)">Вход</a>';
+
+  var slot1 = document.getElementById('navAuthSlot');
+  var slot2 = document.getElementById('navAuthSlotMobile');
+  if (slot1) slot1.innerHTML = navItem;
+  if (slot2) slot2.innerHTML = navItem;
+
+  var dl = document.getElementById('downloadSlot');
+  if (dl){
+    dl.innerHTML = authed
+      ? '<a href="./x32.exe/"><button class="btn btn-white btn-max btn-download authed">Download</button></a>'
+      : '<button class="btn btn-white btn-max btn-download" onclick="openAuthModal(event)">Download</button>';
+  }
+
+  // перерисовать карточки (бейджи PREMIUM/FREE ↔ ✓)
+  var grid = document.getElementById('videoGrid');
+  if (grid){
+    grid.innerHTML = '';
+    currentPage = 0; isLoading = false; reachedEnd = false;
+    loadMore();
+  }
+}
+
+function logout(e){
   if (e) e.preventDefault();
+  clearKey();
+  IS_AUTHED = false;
+  renderAuthUI();
+}
+
+/* =====================================================
+   МОДАЛКА ВХОДА
+   ===================================================== */
+function openAuthModal(e, reason){
+  if (e && e.preventDefault) e.preventDefault();
   var r = document.getElementById('authReason');
   if (r) r.style.display = reason ? 'block' : 'none';
+  var err = document.getElementById('authError');
+  if (err){ err.style.display = 'none'; err.textContent = ''; }
   document.getElementById('authModal').classList.add('active');
   setTimeout(function(){ var i = document.getElementById('keyInput'); if (i) i.focus(); }, 100);
 }
 function closeAuthModal(){ document.getElementById('authModal').classList.remove('active'); }
 
-function openBuyModal(e){
+function submitKey(e){
   if (e) e.preventDefault();
+  var input = document.getElementById('keyInput');
+  var err = document.getElementById('authError');
+  var key = input ? input.value.trim() : '';
+
+  if (!key){
+    if (err){ err.textContent = 'Введите ключ'; err.style.display = 'block'; }
+    return false;
+  }
+  if (!isValidKey(key)){
+    if (err){ err.textContent = 'Неверный ключ'; err.style.display = 'block'; }
+    return false;
+  }
+
+  saveKey(key);
+  IS_AUTHED = true;
+  if (input) input.value = '';
+  closeAuthModal();
+  renderAuthUI();
+  return false;
+}
+
+/* =====================================================
+   МОДАЛКА ПОКУПКИ
+   ===================================================== */
+function openBuyModal(e){
+  if (e && e.preventDefault) e.preventDefault();
   closeAuthModal();
   document.getElementById('buyModal').classList.add('active');
 }
 function closeBuyModal(){ document.getElementById('buyModal').classList.remove('active'); }
 
-<?php if (!empty($authError)): ?>
-document.addEventListener('DOMContentLoaded', function(){ openAuthModal(); });
-<?php endif; ?>
-
 /* =====================================================
-   МОДАЛКИ: видео (mp4) / схема
+   МОДАЛКИ: видео / схема
    ===================================================== */
 function openVideoModal(videoSrc){
   var wrap = document.getElementById('videoPlayerWrap');
@@ -402,16 +414,7 @@ document.addEventListener('keydown', function(e){
 });
 
 /* =====================================================
-   📍 СПИСОК УРОКОВ — ЗДЕСЬ ПРОПИСЫВАЙТЕ ПУТИ
-   
-   Поля:
-     title   — название на карточке
-     thumb   — обложка карточки (вертикальная jpg/png/webp)
-     video   — mp4-видео для модалки
-     file    — ссылка для кнопки «taobao.com» (открывается в новой вкладке)
-     online  — ссылка на страницу «Открыть онлайн»
-     scheme  — картинка схемы
-     premium — true = схемы и онлайн только после входа, false = доступно всем
+   📍 СПИСОК УРОКОВ
    ===================================================== */
 var ALL_VIDEOS = [
   {
@@ -477,7 +480,7 @@ var ALL_VIDEOS = [
     scheme:  './index/007.png',
     premium: true
   },
-   {
+  {
     title:   'Bluetooth HC06',
     thumb:   './index/008.jpg',
     video:   './index/008.mp4',
@@ -486,7 +489,7 @@ var ALL_VIDEOS = [
     scheme:  './index/008.png',
     premium: false
   },
-   {
+  {
     title:   'IR Пульт',
     thumb:   './index/009.jpg',
     video:   './index/009.mp4',
@@ -495,7 +498,7 @@ var ALL_VIDEOS = [
     scheme:  './index/009.png',
     premium: false
   },
-   {
+  {
     title:   'IR передатчик',
     thumb:   './index/010.jpg',
     video:   './index/010.mp4',
@@ -504,7 +507,7 @@ var ALL_VIDEOS = [
     scheme:  './index/010.png',
     premium: true
   },
-   {
+  {
     title:   'R433 Mhz',
     thumb:   './index/011.jpg',
     video:   './index/011.mp4',
@@ -513,13 +516,7 @@ var ALL_VIDEOS = [
     scheme:  './index/011.png',
     premium: true
   },
-  
-  
-  
-  
-  
-  
-    {
+  {
     title:   'PS2 DualShock 2',
     thumb:   './index/012.jpg',
     video:   './index/012.mp4',
@@ -1320,13 +1317,6 @@ var ALL_VIDEOS = [
     scheme:  './index/100.png',
     premium: false
   }
-  
- 
-  
-  
-  
-  
-  
   // ← добавляйте новые уроки по образцу, через запятую
 ];
 
@@ -1355,16 +1345,13 @@ function renderCard(v){
     badgeHTML +
     '<p class="feature-text">' + v.title + '</p>' +
     '<div class="card-actions">' +
-      
       '<button class="btn-mini btn-scheme">Схема</button>' +
-	  '<a href="' + v.online + '" class="btn-mini btn-online" target="_blank" rel="noopener">ArduBlock</a>' +
-    '<button class="btn-mini btn-download-mini">taobao.com</button>' +
-	'</div>';
+      '<a href="' + v.online + '" class="btn-mini btn-online" target="_blank" rel="noopener">ArduBlock</a>' +
+      '<button class="btn-mini btn-download-mini">taobao.com</button>' +
+    '</div>';
 
-  // клик по карточке — модалка видео (ВСЕГДА бесплатно)
   div.addEventListener('click', function(){ openVideoModal(v.video); });
 
-  // «Открыть онлайн» — ссылка; PREMIUM без ключа блокируем (платно)
   div.querySelector('.btn-online').addEventListener('click', function(e){
     e.stopPropagation();
     if (v.premium && !IS_AUTHED){
@@ -1373,13 +1360,11 @@ function renderCard(v){
     }
   });
 
-  // Кнопка «taobao.com» — ВСЕГДА бесплатно, открывается в новой вкладке
   div.querySelector('.btn-download-mini').addEventListener('click', function(e){
     e.stopPropagation();
     window.open(v.file, '_blank', 'noopener');
   });
 
-  // Открыть схему — платно для PREMIUM без ключа
   div.querySelector('.btn-scheme').addEventListener('click', function(e){
     e.stopPropagation();
     if (v.premium && !IS_AUTHED){ openAuthModal(null, true); return; }
@@ -1392,7 +1377,8 @@ function renderCard(v){
 function loadMore(){
   if (isLoading || reachedEnd) return;
   isLoading = true;
-  document.getElementById('videoLoader').style.display = 'block';
+  var loader = document.getElementById('videoLoader');
+  if (loader) loader.style.display = 'block';
 
   var data = fetchVideos(currentPage);
   var grid = document.getElementById('videoGrid');
@@ -1401,23 +1387,33 @@ function loadMore(){
   currentPage++;
   if (data.done) reachedEnd = true;
 
-  document.getElementById('videoLoader').style.display = 'none';
+  if (loader) loader.style.display = 'none';
   isLoading = false;
 }
 
-var sentinel = document.getElementById('loadMoreSentinel');
-if ('IntersectionObserver' in window){
-  var io = new IntersectionObserver(function(entries){
-    if (entries[0].isIntersecting) loadMore();
-  }, { rootMargin: '300px' });
-  io.observe(sentinel);
-} else {
-  window.addEventListener('scroll', function(){
-    if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 300) loadMore();
-  });
-}
+/* =====================================================
+   ИНИЦИАЛИЗАЦИЯ
+   ===================================================== */
+(function init(){
+  var y = document.getElementById('yearSlot');
+  if (y) y.textContent = new Date().getFullYear();
 
-loadMore();
+  renderAuthUI();
+
+  var sentinel = document.getElementById('loadMoreSentinel');
+  if ('IntersectionObserver' in window && sentinel){
+    var io = new IntersectionObserver(function(entries){
+      if (entries[0].isIntersecting) loadMore();
+    }, { rootMargin: '300px' });
+    io.observe(sentinel);
+  } else {
+    window.addEventListener('scroll', function(){
+      if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 300) loadMore();
+    });
+  }
+
+  loadMore();
+})();
 </script>
 </body>
 </html>
