@@ -1,0 +1,146 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <toolbox>toolbox_arduino_all</toolbox>
+  <block type="arduino_setup" id="d$vr?QM-5~E@:Oe5{0!;" x="-157" y="7">
+    <statement name="MySetup">
+      <block type="variables_set_init" id="{.hyu-G05L1EBCa#FvK|">
+        <field name="VAR">x</field>
+        <field name="VARIABLE_SETTYPE_TYPE">NUMBER</field>
+        <value name="VALUE">
+          <block type="math_number" id="O/m5EoB*VCup){4F}E!#">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <next>
+          <block type="serial_init" id="UHv,{IdzBY_1?]@uV!ny">
+            <field name="pin">0</field>
+            <field name="SPEED">9600</field>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <statement name="MyLoop">
+      <block type="ds1990_Read" id="/}9!*HdC^s?kdyXY?mR}">
+        <field name="NUMBER">2</field>
+        <value name="Writecounter">
+          <shadow type="math_number" id="L.a$X]!XR(7h;Ci+fWAd">
+            <field name="NUM">R1</field>
+          </shadow>
+          <block type="variables_get" id="D*HyFc[XB.pOi1cw;%Vu">
+            <field name="VAR">x</field>
+          </block>
+        </value>
+        <value name="Writecounter1">
+          <shadow type="math_number" id="rlc2FVjggeVr/S.XC(X%">
+            <field name="NUM">R2</field>
+          </shadow>
+        </value>
+        <value name="Writecounter2">
+          <shadow type="math_number" id="LU5b-%gBz{yvXaR^|wTX">
+            <field name="NUM">R3</field>
+          </shadow>
+        </value>
+        <value name="Writecounter3">
+          <shadow type="math_number" id="i^sKZp0h/euTY6/sQ(if">
+            <field name="NUM">R4</field>
+          </shadow>
+        </value>
+        <value name="Writecounter4">
+          <shadow type="math_number" id="j=-PH!gnTM)ae@eA~q^o">
+            <field name="NUM">R5</field>
+          </shadow>
+        </value>
+        <value name="Writecounter5">
+          <shadow type="math_number" id="tFJDaqO*Wl%{=FH-fJN-">
+            <field name="NUM">R6</field>
+          </shadow>
+        </value>
+        <value name="Writecounter6">
+          <shadow type="math_number" id="Sg921?xqpTr7E~cJ01oS">
+            <field name="NUM">R7</field>
+          </shadow>
+        </value>
+        <value name="Writecounter7">
+          <shadow type="math_number" id="n)AI7W/gpCt^|mCN1Q)f">
+            <field name="NUM">R8</field>
+          </shadow>
+        </value>
+        <next>
+          <block type="serial_write_ln" id="Zf}4)R#wUYHU%Zg~:Z2/">
+            <value name="CONTENT">
+              <shadow type="text" id="PDj{MD$G#A^UH*CIwyqA">
+                <field name="TEXT">ArduBlock RU EN</field>
+              </shadow>
+              <block type="variables_get" id="K)mXJxZ:j24+s2+}d{2o">
+                <field name="VAR">x</field>
+              </block>
+            </value>
+            <next>
+              <block type="controls_if" id="Vh*L!Ku-xs$D{sherao9">
+                <value name="IF0">
+                  <block type="logic_compare_log" id="vO0_$O6gQrvaOt{;aEhi">
+                    <field name="OP">EQ</field>
+                    <value name="A">
+                      <shadow type="math_number" id="KSa0%N/H/a)PMwW@9$(?">
+                        <field name="NUM">R</field>
+                      </shadow>
+                      <block type="variables_get" id="@/0yq@O#|SD)6Y45Tm{f">
+                        <field name="VAR">x</field>
+                      </block>
+                    </value>
+                    <value name="B">
+                      <shadow type="math_number" id="~7hCh,UYWTB)n2LiEQeH">
+                        <field name="NUM">1</field>
+                      </shadow>
+                    </value>
+                  </block>
+                </value>
+                <statement name="DO0">
+                  <block type="inout_digital_writeD" id="`jtGK5Y)7MQZCG{*([$7">
+                    <field name="OUTPUT_VALUE">1</field>
+                    <field name="STAT">1</field>
+                    <value name="PIN">
+                      <shadow type="math_number" id="?-FU/aF6u$i-cW$~5wWc">
+                        <field name="NUM">13</field>
+                      </shadow>
+                    </value>
+                    <next>
+                      <block type="base_delay" id="Xg9`kB@]qPw9gW*j{OBo">
+                        <field name="unite">m</field>
+                        <value name="DELAY_TIME">
+                          <shadow type="math_number" id="nB}xdpd_FJH5rb#*DD@$">
+                            <field name="NUM">3000</field>
+                          </shadow>
+                        </value>
+                        <next>
+                          <block type="inout_digital_writeD" id="}hTMNJg3ypx5df}M8(u:">
+                            <field name="OUTPUT_VALUE">1</field>
+                            <field name="STAT">0</field>
+                            <value name="PIN">
+                              <shadow type="math_number" id="dJ8S(_B?1_J|14Z=jUYU">
+                                <field name="NUM">13</field>
+                              </shadow>
+                            </value>
+                            <next>
+                              <block type="base_delay" id="M`/$fHyurq*}Xd}#_aIM">
+                                <field name="unite">m</field>
+                                <value name="DELAY_TIME">
+                                  <shadow type="math_number" id="S%I0x.cvu2[m_vo^?g4d">
+                                    <field name="NUM">100</field>
+                                  </shadow>
+                                </value>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>
