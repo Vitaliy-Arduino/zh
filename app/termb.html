@@ -1,0 +1,239 @@
+<!doctype html>
+<html>
+<head>
+ 
+ <link rel="icon" type="image/png" href="media/icon.png" />
+  <title>Web Serial Terminal</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	 <script src="../serial/term.js"></script> 
+  <style>
+        /* Устанавливаем box-sizing для всех элементов */
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%; /* Устанавливаем высоту 100% для html и body */
+            margin: 0; /* Убираем отступы */
+            padding: 0; /* Убираем отступы */
+            display: flex;
+            flex-direction: column;
+            background-color: #f4f4f4;
+        }
+
+        .top-bar {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            padding: 10px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .top-bar > * {
+            margin: 0 10px;
+        }
+
+        select, input, button {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        select {
+            width: 120px;
+        }
+
+        input {
+            flex-grow: 1;
+            min-width: 200px;
+        }
+
+        button {
+            background-color: #011f35;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #011f35;
+        }
+
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        #term {
+            flex-grow: 1;
+            background-color: #000;
+			
+            border-top: 1px solid #ccc;
+            padding: 20px;
+            overflow-y: auto;
+			color:#fff;
+			font-family: "DejaVu Sans Mono", "Liberation Mono", monospace;
+			font-size: 14px;
+        }
+		.terminal {
+    font-family: "DejaVu Sans Mono", "Liberation Mono", monospace;
+    font-size: 14px;
+    background: #000;
+}
+
+    </style>
+</head>
+<body>
+
+<div class="top-bar">
+    <b style="font-family:arial;">Web Serial Monitor</b>
+
+    <select name="speed" id="SerialSpeed">
+        <option value="300">300</option>
+        <option value="600">600</option>
+        <option value="1200">1200</option>
+        <option value="2400">2400</option>
+        <option value="4800">4800</option>
+        <option value="9600" selected>9600</option>
+        <option value="14400">14400</option>
+        <option value="19200">19200</option>
+        <option value="28800">28800</option>
+        <option value="31250">31250</option>
+        <option value="38400">38400</option>
+        <option value="57600">57600</option>
+        <option value="115200">115200</option>
+    </select>
+
+    <button id="SerialConnectButton" type="button" disabled>Connect</button>
+    <input type="text" id="inputText" placeholder="Введите текст">
+    <button id="sendButton" type="button" disabled>Отправить</button>
+    <a href="./in.html"><button type="button">ArduBlock</button></a>
+</div>
+
+<div id="term" >
+    <p>Здесь будет вывод данных.</p>
+</div>
+
+</body>
+
+<script>
+
+var term;
+
+function calculate_size(win) {
+    var cols = Math.max(80, Math.min(150, (win.innerWidth - 280) / 7)) | 0;
+    var rows = Math.max(24, Math.min(80, (win.innerHeight - 180) / 12)) | 0;
+    return [cols, rows];
+}
+
+(function() {
+    window.onload = function() {
+    
+      var size = calculate_size(self);
+      term = new Terminal({
+        cols: 120,
+        rows: 50,
+        useStyle: true,
+        screenKeys: true,
+        cursorBlink: false
+      });
+      term.open(document.getElementById("term"));
+    };
+    window.addEventListener('resize', function() {
+        var size = calculate_size(self);
+        term.resize(size[0], size[1]);
+    });
+}).call(this);
+
+const connectButton = document.getElementById('SerialConnectButton');
+const sendButton = document.getElementById('sendButton');
+const inputText = document.getElementById('inputText');
+let port;
+
+if ('serial' in navigator) {
+  connectButton.addEventListener('click', function () {
+    if (port) {
+      term.write('\n\n\n\x1b[31mDisconnected .. \x1b[0m\r\nПлата отключена! \x1b[m\r\n \x1b[31m\r\nАвтоматическая перезагрузка страницы!');
+      port.close();
+      port = undefined;
+      connectButton.innerText = 'Connect';
+      sendButton.disabled = true; // Отключаем кнопку отправки
+      inputText.value = ''; // Очищаем поле ввода
+	  // Перезагрузка страницы
+
+	  setTimeout(() => {
+    location.reload();
+  }, 2000); // Задержка в 3 секунды перед перезагрузкой
+  
+    }
+    else {
+      connectButton.innerText = 'Disconnect';
+      getReader();
+    }
+  });
+
+  connectButton.disabled = false;
+}
+else {
+  const error = document.createElement('p');
+  error.innerHTML = '<p>Support for Serial Web API not enabled. Please enable it using chrome://flags/ and enable Experimental Web Platform fetures</p>';
+}
+
+let lineBuffer = '';
+let latestValue = 0;
+
+async function serialWrite(data) {
+  const encoder = new TextEncoder();
+  const dataArrayBuffer = encoder.encode(data);
+
+  if (port && port.writable) {
+    const writer = port.writable.getWriter();
+    await writer.write(dataArrayBuffer);
+    writer.releaseLock();
+  }
+}
+
+async function getReader() {
+  port = await navigator.serial.requestPort({});
+  var e = document.getElementById("SerialSpeed");
+  var strSpd = e.options[e.selectedIndex].value;
+
+  var speed = parseInt(strSpd);
+  await port.open({ baudRate: speed });
+
+  document.getElementById('SerialSpeed').disabled = true;
+  sendButton.disabled = false; // Включаем кнопку отправки
+
+  connectButton.innerText = 'Disconnect';
+  term.write('\x1b[32mConnected .. \x1b[0m\r\nПлата готова к работе! \x1b[m\r\n\n\n');
+
+  const appendStream = new WritableStream({
+    write(chunk) {
+      term.write(chunk);
+    }
+  });
+
+  port.readable
+    .pipeThrough(new TextDecoderStream())
+    .pipeTo(appendStream);
+
+  term.on('data', function(data) {
+    serialWrite(data);
+  });
+}
+
+// Обработчик события для кнопки отправки
+sendButton.addEventListener('click', function() {
+  const textToSend = inputText.value;
+  if (textToSend) {
+    serialWrite(textToSend + '\r\n'); // Отправляем текст с переводом строки
+    inputText.value = ''; // Очищаем поле ввода
+  }
+});
+
+</script>
+
+</html>
