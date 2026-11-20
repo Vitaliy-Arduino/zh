@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="description" content="ArduBlock — визуальное блочное программирование для детей и студентов">
+<meta name="keywords" content="Arduino, программирование для детей, роботы, IoT, обучение">
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link rel="stylesheet" href="./js/index.css">
+<title>ArduBlock | Визуальное блочное программирование</title>
+<link rel="shortcut icon" type="image/x-icon" href="./js/favicon.ico">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link href="./js/favicon.ico" rel="apple-touch-icon">
+
+<style>
+/* ====== Модалки ====== */
+.modal-overlay{
+  position:fixed; inset:0; background:rgba(0,0,0,.65);
+  display:none; align-items:center; justify-content:center;
+  z-index:9999; padding:20px;
+}
+.modal-overlay.active{ display:flex; }
+.modal-box{
+  background:#fff; border-radius:12px; padding:24px;
+  max-width:420px; width:100%; position:relative;
+  box-shadow:0 10px 40px rgba(0,0,0,.4); color:#222;
+}
+.modal-box.modal-wide{ max-width:900px; padding:0; overflow:hidden; }
+.modal-close{
+  position:absolute; top:10px; right:14px; cursor:pointer;
+  font-size:22px; color:#999; z-index:2; background:#fff;
+  width:34px; height:34px; border-radius:50%; text-align:center; line-height:34px;
+}
+.modal-close:hover{ color:#000; }
+#schemeImg{ width:100%; display:block; max-height:70vh; object-fit:contain; background:#f4f4f4; }
+#buyInstructionImg{ width:100%; display:block; max-height:80vh; object-fit:contain; background:#fff; }
+.modal-box h3{ margin:0 0 14px; font:bold 20px arial; }
+.modal-box input{
+  width:100%; padding:12px; border:1px solid #ccc; border-radius:8px;
+  font:16px arial; box-sizing:border-box; margin-bottom:14px;
+}
+.modal-actions{ display:flex; gap:10px; margin-bottom:12px; }
+.modal-actions .btn{ flex:1; }
+.buy-key-link{ display:block; text-align:center; color:#ff6a00; font:14px arial; cursor:pointer; }
+.auth-error{ color:#d00; font:14px arial; margin:0 0 10px; }
+#authReason{ color:#ff6a00; font:14px arial; margin:0 0 10px; }
+
+/* ====== Ячейки ввода ключа ====== */
+.key-cells{
+  display:flex; align-items:center; justify-content:center;
+  gap:4px; margin-bottom:16px;
+}
+.key-cell{
+  width:46px; height:48px; text-align:center;
+  font:bold 18px arial; text-transform:lowercase;
+  border:1px solid #ccc; border-radius:8px;
+  box-sizing:border-box; outline:none;
+  transition:border-color .15s, box-shadow .15s;
+  margin-bottom:0 !important; padding:0 !important;
+}
+.key-cell:focus{
+  border-color:#ff6a00;
+  box-shadow:0 0 0 2px rgba(255,106,0,.25);
+}
+.key-dash{ font:bold 18px arial; color:#999; user-select:none; }
+@media (max-width:480px){
+  .key-cell{ width:40px; height:44px; font-size:16px; }
+}
+
+/* ====== МОДАЛКА ВИДЕО ====== */
+#videoModal .modal-box{
+  background:transparent; box-shadow:none; padding:0;
+  max-width:min(92vw, 520px);
+}
+#videoModal .modal-close{ background:rgba(0,0,0,.55); color:#fff; }
+#videoPlayerWrap{ display:flex; align-items:center; justify-content:center; width:100%; }
+#videoPlayerWrap video{
+  display:block; width:auto; height:auto; max-width:100%; max-height:85vh;
+  aspect-ratio:9 / 16; object-fit:contain; background:#000; border-radius:10px;
+}
+
+/* ====== Сетка видео ====== */
+#videoGrid{
+  display:grid; grid-template-columns:repeat(5,1fr);
+  gap:16px; padding:0 20px;
+}
+@media (max-width:1400px){ #videoGrid{ grid-template-columns:repeat(4,1fr);} }
+@media (max-width:1100px){ #videoGrid{ grid-template-columns:repeat(3,1fr);} }
+@media (max-width:780px){ #videoGrid{ grid-template-columns:repeat(2,1fr);} }
+@media (max-width:480px){
+  #videoGrid{ grid-template-columns:repeat(2,1fr); gap:10px; padding:0 12px; }
+  .video-card{ aspect-ratio:3 / 4; border-radius:8px; }
+  .video-card .feature-text{ font-size:12px; padding:8px; }
+  .card-actions{ grid-template-columns:repeat(3,1fr); gap:3px; padding:5px; }
+  .btn-mini{ font-size:9px; padding:6px 1px; }
+}
+
+.video-card{
+  position:relative; background-size:cover; background-position:center;
+  background-repeat:no-repeat; aspect-ratio:9 / 16; cursor:pointer;
+  border-radius:10px; overflow:hidden; transition:transform .25s ease;
+  box-shadow:0 4px 14px rgba(0,0,0,.15);
+}
+.video-card:hover{ transform:scale(1.03); }
+.video-card .feature-text{
+  position:absolute; left:0; right:0; top:0; margin:0; padding:10px;
+  color:#fff; font:bold 14px arial;
+  background:linear-gradient(180deg,rgba(0,0,0,.65),transparent);
+}
+.badge-free,.badge-premium{
+  position:absolute; top:8px; right:8px; padding:3px 8px; border-radius:4px;
+  font:bold 11px arial; color:#fff; z-index:2;
+}
+.badge-free{ background:#009c4c; }
+.badge-premium{ background:#ff9800; }
+
+.badge-check{
+  position:absolute; top:8px; right:8px; z-index:2;
+  width:26px; height:26px; border-radius:50%;
+  background:#009c4c; color:#fff;
+  display:flex; align-items:center; justify-content:center;
+  font:bold 15px arial; box-shadow:0 2px 6px rgba(0,0,0,.3);
+}
+.badge-check::before{ content:"✓"; }
+
+.btn-download.authed{ position:relative; }
+.btn-download.authed::after{
+  content:"✓"; display:inline-flex; align-items:center; justify-content:center;
+  width:22px; height:22px; border-radius:50%;
+  background:#009c4c; color:#fff; font:bold 14px arial;
+  margin-left:10px; vertical-align:middle;
+}
+
+.card-actions{
+  position:absolute; bottom:0; left:0; right:0;
+  display:grid; grid-template-columns:repeat(3,1fr);
+  gap:5px; padding:8px;
+  background:linear-gradient(0deg,rgba(0,0,0,.75),transparent);
+}
+.btn-mini{
+  font:11px arial; padding:7px 3px; border:none; border-radius:6px;
+  cursor:pointer; text-align:center; text-decoration:none; color:#222;
+  background:#fff; transition:background .2s;
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+  display:flex; align-items:center; justify-content:center;
+}
+.btn-mini:hover{ background:#ffd28a; text-decoration:none; }
+a.btn-mini{ text-decoration:none; color:#222; }
+@media (max-width:480px){ .btn-mini{ font-size:10px; padding:6px 2px; } }
+.video-loader{ text-align:center; padding:30px; font:14px arial; color:#888; }
+
+/* ====== ВЫЕЗЖАЮЩАЯ ШАПКА ====== */
+#siteHeader{
+  position:relative; width:100%; z-index:9997;
+  background:#021a32;
+}
+#siteHeader.header-fixed{
+  position:fixed; top:0; left:0; right:0;
+  background:#021a32;
+  box-shadow:0 4px 18px rgba(0,0,0,.35);
+  animation:headerSlideDown .28s ease;
+}
+@keyframes headerSlideDown{
+  from{ transform:translateY(-100%); }
+  to{ transform:translateY(0); }
+}
+body.header-spacer{ padding-top:64px; }
+
+/* Мобильное меню */
+.mobile-nav{ display:none; }
+#mobileNav .nav-content-wrap{ display:none; padding:10px 0 0; }
+#mobileNav.menu-open .nav-content-wrap{ display:block; }
+#mobileNav .nav-control .close{ display:none; }
+#mobileNav .nav-control .open{ display:inline-block; }
+#mobileNav.menu-open .nav-control .close{ display:inline-block; }
+#mobileNav.menu-open .nav-control .open{ display:none; }
+@media (max-width:880px){
+  .pc-nav{ display:none; }
+  .mobile-nav{ display:block; }
+}
+</style>
+</head>
+<body data-attr="ru">
+<div class="cover"></div>
+
+<!-- ================= BANNER ================= -->
+<section class="container banner bg-img">
+
+  <div id="siteHeader">
+    <div class="nav-wrap row">
+      <nav class="pc-nav">
+        <div class="logo white"><a href="./" style="font:bold 30px arial;">ArduBlock</a></div>
+        <div class="nav-content-wrap">
+          <ul>
+            <li><a href="./lessons/" class="link_underline">教训</a></li>
+            <li><a href="./company/" class="link_underline">联络人</a></li>
+            <li id="navAuthSlot"></li>
+          </ul>
+        </div>
+      </nav>
+
+      <nav class="mobile-nav" id="mobileNav">
+        <div class="logo white">
+          <a href="./" style="font:bold 30px arial;">ArduBlock</a>
+          <div class="nav-control">
+            <i class="iconfont close" id="menuClose" role="button" aria-label="Закрыть меню">&#xe72a;</i>
+            <i class="iconfont open"  id="menuOpen"  role="button" aria-label="Открыть меню">&#xe729;</i>
+          </div>
+        </div>
+        <div class="nav-content-wrap" id="mobileNavContent">
+          <ul>
+            <li><a href="./lessons/" class="link_underline">教训</a></li>
+            <li><a href="./company/" class="link_underline">联络人</a></li>
+            <li id="navAuthSlotMobile"></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="hero">
+      <div class="hero-text">
+        <h1 class="main-title">ArduBlock</h1>
+        <h1 class="subtitle">可视化积木编程<br>为孩子和学生开启通往未来世界的大门</h1>
+
+        <a href="./app/">
+          <button class="btn btn-orange btn-max">在线</button>
+        </a>
+
+        <span id="downloadSlot"></span>
+
+        <div class="banner-icons" style="margin:30px;" id="ikonps">
+          <a href="./" style="margin:0 10px;"><i class="iconfont">&#xe723;</i></a>
+          <a href="./" style="margin:0 10px;"><i class="iconfont">&#xe725;</i></a>
+        </div>
+      </div>
+      <div class="info-img">
+        <img src="./js/zh.png" alt="ArduBlock interface">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ВИДЕО ================= -->
+<div class="row ending-words-wrap">
+  <div class="ending-words-wrap-inner" style="text-align:center;">
+    <h3 class="subtitle" style="margin:50px 0 20px;">Arduino UNO 平台项目</h3>
+    <p style="color:#888;font:14px arial;margin-bottom:20px;">
+      本页面提供视频和接线图，展示可连接到开发板的各类模块示例。
+    </p>
+  </div>
+</div>
+
+<section class="container feature-section">
+  <div id="videoGrid"></div>
+  <div id="videoLoader" class="video-loader" style="display:none;">加载中…</div>
+  <div id="loadMoreSentinel" style="height:1px;"></div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<section class="container footer-section" id="doc">
+  <footer class="bg-img">
+    <div class="row footer-inner">
+      <div class="footer-badge white">
+        <div class="footer-logo-wrap" style="padding:0 0 0 10px;">
+          <p class="copyright"><span>&copy; 2009 - 2027 版权所有。</span></p>
+        </div>
+        <div class="language-switch white pointer" style="padding:0 10px 0 0;">
+          <!--<a href="./" class="link_underline">en</a>-->
+        </div>
+      </div>
+    </div>
+  </footer>
+</section>
+
+<!-- ================= МОДАЛКА ВХОДА ================= -->
+<div id="authModal" class="modal-overlay">
+  <div class="modal-box">
+    <span class="modal-close" onclick="closeAuthModal()">✕</span>
+    <h3>使用许可证密钥登录</h3>
+    <p id="authReason" style="display:none;">使用许可证密钥登录以打开。</p>
+    <p class="auth-error" id="authError" style="display:none;"></p>
+    <form id="authForm" onsubmit="return submitKey(event)">
+      <div class="key-cells" id="keyCells">
+        <input type="text" class="key-cell" maxlength="2" inputmode="text" autocomplete="off" spellcheck="false">
+        <span class="key-dash">-</span>
+        <input type="text" class="key-cell" maxlength="2" inputmode="text" autocomplete="off" spellcheck="false">
+        <span class="key-dash">-</span>
+        <input type="text" class="key-cell" maxlength="2" inputmode="text" autocomplete="off" spellcheck="false">
+        <span class="key-dash">-</span>
+        <input type="text" class="key-cell" maxlength="2" inputmode="text" autocomplete="off" spellcheck="false">
+        <span class="key-dash">-</span>
+        <input type="text" class="key-cell" maxlength="2" inputmode="text" autocomplete="off" spellcheck="false">
+      </div>
+      <input type="hidden" name="key" id="keyInput">
+      <div class="modal-actions">
+        <button type="submit" class="btn btn-orange">登入网站</button>
+        <button type="button" class="btn btn-white" onclick="openBuyModal(event)">购买钥匙</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ================= МОДАЛКА ПОКУПКИ ================= -->
+<div id="buyModal" class="modal-overlay">
+  <div class="modal-box modal-wide">
+    <span class="modal-close" onclick="closeBuyModal()">✕</span>
+    <img id="buyInstructionImg" src="./buy.png" alt="购买钥匙的说明">
+  </div>
+</div>
+
+<!-- ================= МОДАЛКА ВИДЕО ================= -->
+<div id="videoModal" class="modal-overlay">
+  <div class="modal-box">
+    <span class="modal-close" onclick="closeVideoModal()">✕</span>
+    <div id="videoPlayerWrap"></div>
+  </div>
+</div>
+
+<!-- ================= МОДАЛКА СХЕМЫ ================= -->
+<div id="schemeModal" class="modal-overlay">
+  <div class="modal-box modal-wide">
+    <span class="modal-close" onclick="closeSchemeModal()">✕</span>
+    <img id="schemeImg" src="" alt="Схема">
+  </div>
+</div>
+
+<script src="./js/index.js"></script>
+<script>
+/* =====================================================
+   секретики
+   ===================================================== */
+var VALID_KEYS = [
+  '98-16-26-27-67',
+  '69-31-07-97-86',
+  '94-45-39-28-64'
+];
+var STORAGE_KEY = 'ardublock_key';
+
+function getStoredKey(){ try { return localStorage.getItem(STORAGE_KEY) || ''; } catch(e){ return ''; } }
+function isValidKey(key){
+  if (!key) return false;
+  var k = String(key).trim().toLowerCase();
+  for (var i = 0; i < VALID_KEYS.length; i++){
+    if (VALID_KEYS[i].toLowerCase() === k) return true;
+  }
+  return false;
+}
+function isAuthed(){ return isValidKey(getStoredKey()); }
+function saveKey(key){ try { localStorage.setItem(STORAGE_KEY, String(key).trim()); } catch(e){} }
+function clearKey(){ try { localStorage.removeItem(STORAGE_KEY); } catch(e){} }
+
+var IS_AUTHED = isAuthed();
+
+/* =====================================================
+   ОБНОВЛЕНИЕ ИНТЕРФЕЙСА
+   ===================================================== */
+function renderAuthUI(){
+  var navItem = IS_AUTHED
+    ? '<a href="#" class="link_underline" onclick="logout(event)">退出网站</a>'
+    : '<a href="#" class="link_underline" onclick="openAuthModal(event)">登入网站</a>';
+
+  var s1 = document.getElementById('navAuthSlot');
+  var s2 = document.getElementById('navAuthSlotMobile');
+  if (s1) s1.innerHTML = navItem;
+  if (s2) s2.innerHTML = navItem;
+
+  var dl = document.getElementById('downloadSlot');
+  if (dl){
+    dl.innerHTML = IS_AUTHED
+      ? '<a href="./mysetup.exe"><button style="color:#008440;" class="btn btn-white btn-max btn-download">下载</button></a>'
+      : '<button class="btn btn-white btn-max btn-download" onclick="openAuthModal(event)">下载</button>';
+  }
+
+  var grid = document.getElementById('videoGrid');
+  if (grid){
+    grid.innerHTML = '';
+    currentPage = 0; isLoading = false; reachedEnd = false;
+    loadMore();
+  }
+}
+function logout(e){
+  if (e) e.preventDefault();
+  clearKey();
+  IS_AUTHED = false;
+  renderAuthUI();
+}
+
+/* =====================================================
+   МОДАЛКА ВХОДА
+   ===================================================== */
+var keyCells = [];
+function getKeyCells(){ return document.querySelectorAll('#keyCells .key-cell'); }
+function collectKey(){
+  var cells = getKeyCells();
+  var parts = [];
+  for (var i = 0; i < cells.length; i++) parts.push(cells[i].value.trim().toLowerCase());
+  for (var j = 0; j < parts.length; j++) if (parts[j].length !== 2) return '';
+  return parts.join('-');
+}
+function focusCell(idx){
+  var cells = getKeyCells();
+  if (idx < 0 || idx >= cells.length) return;
+  cells[idx].focus(); cells[idx].select();
+}
+function resetCells(){
+  var cells = getKeyCells();
+  for (var i = 0; i < cells.length; i++) cells[i].value = '';
+  focusCell(0);
+}
+function setupKeyCells(){
+  var cells = getKeyCells();
+  if (!cells.length) return;
+  keyCells = Array.prototype.slice.call(cells);
+
+  keyCells.forEach(function(cell, idx){
+    cell.addEventListener('input', function(){
+      var v = cell.value.replace(/[^a-z0-9]/gi, '').toLowerCase();
+      if (v.length > 2) v = v.slice(0, 2);
+      cell.value = v;
+      if (v.length === 2){
+        if (idx < keyCells.length - 1) focusCell(idx + 1);
+        else { cell.blur(); submitKey(); }
+      }
+    });
+    cell.addEventListener('keydown', function(e){
+      if (e.key === 'Backspace' && cell.value.length === 0 && idx > 0){ e.preventDefault(); focusCell(idx - 1); }
+      else if (e.key === 'ArrowLeft' && idx > 0){ e.preventDefault(); focusCell(idx - 1); }
+      else if (e.key === 'ArrowRight' && idx < keyCells.length - 1){ e.preventDefault(); focusCell(idx + 1); }
+      else if (e.key === 'Enter'){ e.preventDefault(); submitKey(); }
+    });
+    cell.addEventListener('focus', function(){ cell.select(); });
+    cell.addEventListener('paste', function(e){
+      e.preventDefault();
+      var text = (e.clipboardData || window.clipboardData).getData('text') || '';
+      var clean = text.toLowerCase().replace(/[^a-z0-9]/g, '');
+      if (clean.length >= 10){
+        var all = getKeyCells();
+        for (var i = 0; i < 5; i++) all[i].value = clean.substr(i * 2, 2);
+        if (collectKey()) submitKey(); else focusCell(4);
+      } else {
+        var v = clean.slice(0, 2);
+        cell.value = v;
+        if (v.length === 2 && idx < 4) focusCell(idx + 1);
+      }
+    });
+  });
+}
+
+function openAuthModal(e, reason){
+  if (e && e.preventDefault) e.preventDefault();
+  var r = document.getElementById('authReason');
+  if (r) r.style.display = reason ? 'block' : 'none';
+  var err = document.getElementById('authError');
+  if (err){ err.style.display = 'none'; err.textContent = ''; }
+  document.getElementById('authModal').classList.add('active');
+  setTimeout(function(){ resetCells(); focusCell(0); }, 100);
+}
+function closeAuthModal(){ document.getElementById('authModal').classList.remove('active'); }
+
+function submitKey(e){
+  if (e && e.preventDefault) e.preventDefault();
+  var err = document.getElementById('authError');
+  var key = collectKey();
+  if (!key){ if (err){ err.textContent = '输入许可证密钥的所有5对字符'; err.style.display = 'block'; } return false; }
+  if (!isValidKey(key)){ if (err){ err.textContent = '无效密钥'; err.style.display = 'block'; } return false; }
+  saveKey(key);
+  IS_AUTHED = true;
+  resetCells();
+  closeAuthModal();
+  renderAuthUI();
+  return false;
+}
+
+function openBuyModal(e){
+  if (e && e.preventDefault) e.preventDefault();
+  closeAuthModal();
+  document.getElementById('buyModal').classList.add('active');
+}
+function closeBuyModal(){ document.getElementById('buyModal').classList.remove('active'); }
+
+/* =====================================================
+   МОДАЛКИ: видео / схема
+   ===================================================== */
+function openVideoModal(videoSrc){
+  var wrap = document.getElementById('videoPlayerWrap');
+  wrap.innerHTML = '<video src="' + videoSrc + '" controls autoplay loop muted playsinline preload="metadata"></video>';
+  document.getElementById('videoModal').classList.add('active');
+}
+function closeVideoModal(){
+  var wrap = document.getElementById('videoPlayerWrap');
+  var vid = wrap.querySelector('video');
+  if (vid) { vid.pause(); vid.src = ''; }
+  document.getElementById('videoModal').classList.remove('active');
+  wrap.innerHTML = '';
+}
+function openSchemeModal(schemeSrc){
+  document.getElementById('schemeImg').src = schemeSrc;
+  document.getElementById('schemeModal').classList.add('active');
+}
+function closeSchemeModal(){ document.getElementById('schemeModal').classList.remove('active'); }
+
+document.querySelectorAll('.modal-overlay').forEach(function(m){
+  m.addEventListener('click', function(e){ if (e.target === m) m.classList.remove('active'); });
+});
+document.addEventListener('keydown', function(e){
+  if (e.key === 'Escape'){
+    document.querySelectorAll('.modal-overlay.active').forEach(function(m){ m.classList.remove('active'); });
+    closeVideoModal();
+  }
+});
+
+/* =====================================================
+   МОБИЛЬНОЕ МЕНЮ
+   ===================================================== */
+(function(){
+  var nav = document.getElementById('mobileNav');
+  if (!nav) return;
+  var openBtn  = document.getElementById('menuOpen');
+  var closeBtn = document.getElementById('menuClose');
+  var content  = document.getElementById('mobileNavContent');
+  function openMenu(){ nav.classList.add('menu-open'); }
+  function closeMenu(){ nav.classList.remove('menu-open'); }
+  if (openBtn)  openBtn.addEventListener('click',  function(e){ e.preventDefault(); openMenu();  });
+  if (closeBtn) closeBtn.addEventListener('click', function(e){ e.preventDefault(); closeMenu(); });
+  if (content){
+    content.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click', function(){ setTimeout(closeMenu, 50); });
+    });
+  }
+})();
+
+/* =====================================================
+   ВЫЕЗЖАЮЩАЯ ШАПКА ПРИ ПРОКРУТКЕ
+   ===================================================== */
+(function(){
+  var header = document.getElementById('siteHeader');
+  if (!header) return;
+  var headerH = header.offsetHeight || 64;
+  function onScroll(){
+    var y = window.scrollY || window.pageYOffset;
+    if (y > headerH){
+      if (!header.classList.contains('header-fixed')){
+        header.classList.add('header-fixed');
+        document.body.classList.add('header-spacer');
+      }
+    } else {
+      if (header.classList.contains('header-fixed')){
+        header.classList.remove('header-fixed');
+        document.body.classList.remove('header-spacer');
+      }
+    }
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();
+
+/* =====================================================
+   СПИСОК УРОКОВ
+   ===================================================== */
+var ALL_VIDEOS = [
+  { title:'LED 灯', thumb:'./index/001.jpg', video:'./index/001.mp4', file:'https://s.taobao.com/search?q=led 5mm', online:'./app/?url=../index/001.ardublock', scheme:'./index/001.png', premium:false },
+  { title:'按钮', thumb:'./index/002.jpg', video:'./index/002.mp4', file:'https://s.taobao.com/search?q=按钮', online:'./app/?url=../index/002.ardublock', scheme:'./index/002.png', premium:false },
+  { title:'电位器', thumb:'./index/003.jpg', video:'./index/003.mp4', file:'https://s.taobao.com/search?q=电位器', online:'./app/?url=../index/003.ardublock', scheme:'./index/003.png', premium:false },
+  { title:'DS1302 时钟', thumb:'./index/004.jpg', video:'./index/004.mp4', file:'https://s.taobao.com/search?q=DS1302 时钟', online:'./app/?url=../index/004.ardublock', scheme:'./index/004.png', premium:false },
+  { title:'DS3231 时钟', thumb:'./index/005.jpg', video:'./index/005.mp4', file:'https://s.taobao.com/search?q=DS3231 时钟', online:'./app/?url=../index/005.ardublock', scheme:'./index/005.png', premium:false },
+  { title:'NEO-6M GPS', thumb:'./index/006.jpg', video:'./index/006.mp4', file:'https://s.taobao.com/search?q=NEO-6M GPS', online:'./app/?url=../index/006.ardublock', scheme:'./index/006.png', premium:true },
+  { title:'软串口', thumb:'./index/007.jpg', video:'./index/007.mp4', file:'https://s.taobao.com/search?q=Arduino UNO', online:'./app/?url=../index/007.ardublock', scheme:'./index/007.png', premium:true },
+  { title:'Bluetooth HC06', thumb:'./index/008.jpg', video:'./index/008.mp4', file:'https://s.taobao.com/search?q=Bluetooth HC06', online:'./app/?url=../index/008.ardublock', scheme:'./index/008.png', premium:false },
+  { title:'红外遥控器', thumb:'./index/009.jpg', video:'./index/009.mp4', file:'https://s.taobao.com/search?q=红外遥控器', online:'./app/?url=../index/009.ardublock', scheme:'./index/009.png', premium:false },
+  { title:'红外发射器', thumb:'./index/010.jpg', video:'./index/010.mp4', file:'https://s.taobao.com/search?q=红外发射器', online:'./app/?url=../index/010.ardublock', scheme:'./index/010.png', premium:true },
+  { title:'R433 Mhz', thumb:'./index/011.jpg', video:'./index/011.mp4', file:'https://s.taobao.com/search?q=R433 Mhz', online:'./app/?url=../index/011.ardublock', scheme:'./index/011.png', premium:true },
+  { title:'PS2 DualShock 2', thumb:'./index/012.jpg', video:'./index/012.mp4', file:'https://s.taobao.com/search?q=PS2 DualShock 2', online:'./app/?url=../index/012.ardublock', scheme:'./index/012.png', premium:true },
+  { title:'SD 模块', thumb:'./index/013.jpg', video:'./index/013.mp4', file:'https://s.taobao.com/search?q=SD 模块', online:'./app/?url=../index/013.ardublock', scheme:'./index/013.png', premium:true },
+  { title:'DS 1990', thumb:'./index/014.jpg', video:'./index/014.mp4', file:'https://s.taobao.com/search?q=DS 1990', online:'./app/?url=../index/014.ardublock', scheme:'./index/014.png', premium:true },
+  { title:'RFID MFRC 522', thumb:'./index/015.jpg', video:'./index/015.mp4', file:'https://s.taobao.com/search?q=RFID MFRC 522', online:'./app/?url=../index/015.ardublock', scheme:'./index/015.png', premium:true },
+  { title:'Servo SG90', thumb:'./index/016.jpg', video:'./index/016.mp4', file:'https://s.taobao.com/search?q=Servo SG90', online:'./app/?url=../index/016.ardublock', scheme:'./index/016.png', premium:false },
+  { title:'L9110S DC', thumb:'./index/017.jpg', video:'./index/017.mp4', file:'https://s.taobao.com/search?q=L9110S DC', online:'./app/?url=../index/017.ardublock', scheme:'./index/017.png', premium:false },
+  { title:'L298N', thumb:'./index/018.jpg', video:'./index/018.mp4', file:'https://s.taobao.com/search?q=L298N', online:'./app/?url=../index/018.ardublock', scheme:'./index/018.png', premium:true },
+  { title:'ULN2003', thumb:'./index/019.jpg', video:'./index/019.mp4', file:'https://s.taobao.com/search?q=ULN2003', online:'./app/?url=../index/019.ardublock', scheme:'./index/019.png', premium:false },
+  { title:'A4988', thumb:'./index/020.jpg', video:'./index/020.mp4', file:'https://s.taobao.com/search?q=A4988', online:'./app/?url=../index/020.ardublock', scheme:'./index/020.png', premium:true },
+  { title:'2200KV', thumb:'./index/021.jpg', video:'./index/021.mp4', file:'https://s.taobao.com/search?q=2200KV', online:'./app/?url=../index/021.ardublock', scheme:'./index/021.png', premium:true },
+  { title:'VL53L0 测距模块', thumb:'./index/022.jpg', video:'./index/022.mp4', file:'https://s.taobao.com/search?q=VL53L0 测距', online:'./app/?url=../index/022.ardublock', scheme:'./index/022.png', premium:true },
+  { title:'HC-SR04 测距模块', thumb:'./index/023.jpg', video:'./index/023.mp4', file:'https://s.taobao.com/search?q=HC-SR04 测距', online:'./app/?url=../index/023.ardublock', scheme:'./index/023.png', premium:false },
+  { title:'DHT 11', thumb:'./index/024.jpg', video:'./index/024.mp4', file:'https://s.taobao.com/search?q=DHT 11', online:'./app/?url=../index/024.ardublock', scheme:'./index/024.png', premium:false },
+  { title:'DS18B20 传感器', thumb:'./index/025.jpg', video:'./index/025.mp4', file:'https://s.taobao.com/search?q=DS18B20 传感器', online:'./app/?url=../index/025.ardublock', scheme:'./index/025.png', premium:false },
+  { title:'DS18B20 传感器', thumb:'./index/026.jpg', video:'./index/026.mp4', file:'https://s.taobao.com/search?q=DS18B20 传感器', online:'./app/?url=../index/026.ardublock', scheme:'./index/026.png', premium:false },
+  { title:'BMP280 气压计', thumb:'./index/027.jpg', video:'./index/027.mp4', file:'https://s.taobao.com/search?q=BMP280 气压计', online:'./app/?url=../index/027.ardublock', scheme:'./index/027.png', premium:true },
+  { title:'GY-906 温度计', thumb:'./index/028.jpg', video:'./index/028.mp4', file:'https://s.taobao.com/search?q=GY-906 温度计', online:'./app/?url=../index/028.ardublock', scheme:'./index/028.png', premium:true },
+  { title:'GP2Y0A21', thumb:'./index/029.jpg', video:'./index/029.mp4', file:'https://s.taobao.com/search?q=GP2Y0A21', online:'./app/?url=../index/029.ardublock', scheme:'./index/029.png', premium:true },
+  { title:'4x4 键盘', thumb:'./index/030.jpg', video:'./index/030.mp4', file:'https://s.taobao.com/search?q=4x4 键盘', online:'./app/?url=../index/030.ardublock', scheme:'./index/030.png', premium:false },
+  { title:'编码器', thumb:'./index/031.jpg', video:'./index/031.mp4', file:'https://s.taobao.com/search?q=编码器', online:'./app/?url=../index/031.ardublock', scheme:'./index/031.png', premium:false },
+  { title:'ADXL345 加速度计', thumb:'./index/032.jpg', video:'./index/032.mp4', file:'https://s.taobao.com/search?q=ADXL345 加速度计', online:'./app/?url=../index/032.ardublock', scheme:'./index/032.png', premium:true },
+  { title:'HMC5883 指南针', thumb:'./index/033.jpg', video:'./index/033.mp4', file:'https://s.taobao.com/search?q=HMC5883 指南针', online:'./app/?url=../index/033.ardublock', scheme:'./index/033.png', premium:true },
+  { title:'MPU6050 陀螺仪', thumb:'./index/034.jpg', video:'./index/034.mp4', file:'https://s.taobao.com/search?q=MPU6050 陀螺仪', online:'./app/?url=../index/034.ardublock', scheme:'./index/034.png', premium:true },
+  { title:'CZL-611CD 称重传感器', thumb:'./index/035.jpg', video:'./index/035.mp4', file:'https://s.taobao.com/search?q=CZL-611CD 称重传感器', online:'./app/?url=../index/035.ardublock', scheme:'./index/035.png', premium:true },
+  { title:'继电器 ~220V', thumb:'./index/036.jpg', video:'./index/036.mp4', file:'https://s.taobao.com/search?q=继电器 220V', online:'./app/?url=../index/036.ardublock', scheme:'./index/036.png', premium:true },
+  { title:'PWM ~220V', thumb:'./index/037.jpg', video:'./index/037.mp4', file:'https://s.taobao.com/search?q=PWM 220V', online:'./app/?url=../index/037.ardublock', scheme:'./index/037.png', premium:true },
+  { title:'IRF520', thumb:'./index/038.jpg', video:'./index/038.mp4', file:'https://s.taobao.com/search?q=IRF520', online:'./app/?url=../index/038.ardublock', scheme:'./index/038.png', premium:false },
+  { title:'RGB LED', thumb:'./index/039.jpg', video:'./index/039.mp4', file:'https://s.taobao.com/search?q=RGB LED', online:'./app/?url=../index/039.ardublock', scheme:'./index/039.png', premium:false },
+  { title:'WS2812 灯带', thumb:'./index/040.jpg', video:'./index/040.mp4', file:'https://s.taobao.com/search?q=WS2812 灯带', online:'./app/?url=../index/040.ardublock', scheme:'./index/040.png', premium:true },
+  { title:'共阴极数码管', thumb:'./index/041.jpg', video:'./index/041.mp4', file:'https://s.taobao.com/search?q=共阴极数码管', online:'./app/?url=../index/041.ardublock', scheme:'./index/041.png', premium:false },
+  { title:'TM1637 4', thumb:'./index/042.jpg', video:'./index/042.mp4', file:'https://s.taobao.com/search?q=TM1637 4', online:'./app/?url=../index/042.ardublock', scheme:'./index/042.png', premium:false },
+  { title:'TM1637 6', thumb:'./index/043.jpg', video:'./index/043.mp4', file:'https://s.taobao.com/search?q=TM1637 6', online:'./app/?url=../index/043.ardublock', scheme:'./index/043.png', premium:false },
+  { title:'MAX7219 8', thumb:'./index/044.jpg', video:'./index/044.mp4', file:'https://s.taobao.com/search?q=MAX7219 8', online:'./app/?url=../index/044.ardublock', scheme:'./index/044.png', premium:true },
+  { title:'MAX7219 8х32', thumb:'./index/045.jpg', video:'./index/045.mp4', file:'https://s.taobao.com/search?q=MAX7219 8х32', online:'./app/?url=../index/045.ardublock', scheme:'./index/045.png', premium:true },
+  { title:'MAX7219 8х8', thumb:'./index/046.jpg', video:'./index/046.mp4', file:'https://s.taobao.com/search?q=MAX7219 8х8', online:'./app/?url=../index/046.ardublock', scheme:'./index/046.png', premium:true },
+  { title:'LCD 1602A', thumb:'./index/047.jpg', video:'./index/047.mp4', file:'https://s.taobao.com/search?q=LCD 1602A', online:'./app/?url=../index/047.ardublock', scheme:'./index/047.png', premium:false },
+  { title:'LCD 1602A I2C', thumb:'./index/048.jpg', video:'./index/048.mp4', file:'https://s.taobao.com/search?q=LCD 1602A I2C', online:'./app/?url=../index/048.ardublock', scheme:'./index/048.png', premium:false },
+  { title:'Nokia LCD SPI', thumb:'./index/049.jpg', video:'./index/049.mp4', file:'https://s.taobao.com/search?q=Nokia LCD SPI', online:'./app/?url=../index/049.ardublock', scheme:'./index/049.png', premium:true },
+  { title:'迷你 OLED I2C', thumb:'./index/050.jpg', video:'./index/050.mp4', file:'https://s.taobao.com/search?q=迷你 OLED I2C', online:'./app/?url=../index/050.ardublock', scheme:'./index/050.png', premium:false },
+  { title:'迷你 OLED SPI', thumb:'./index/051.jpg', video:'./index/051.mp4', file:'https://s.taobao.com/search?q=迷你 OLED SPI', online:'./app/?url=../index/051.ardublock', scheme:'./index/051.png', premium:true },
+  { title:'LCD 128x64 SPI', thumb:'./index/052.jpg', video:'./index/052.mp4', file:'https://s.taobao.com/search?q=LCD 128x64 SPI', online:'./app/?url=../index/052.ardublock', scheme:'./index/052.png', premium:true },
+  { title:'TFT ST7735', thumb:'./index/053.jpg', video:'./index/053.mp4', file:'https://s.taobao.com/search?q=TFT ST7735', online:'./app/?url=../index/053.ardublock', scheme:'./index/053.png', premium:true },
+  { title:'DWIN Box', thumb:'./index/054.jpg', video:'./index/054.mp4', file:'https://s.taobao.com/search?q=DWIN Box', online:'./app/?url=../index/054.ardublock', scheme:'./index/054.png', premium:true },
+  { title:'Nextion', thumb:'./index/055.jpg', video:'./index/055.mp4', file:'https://s.taobao.com/search?q=Nextion', online:'./app/?url=../index/055.ardublock', scheme:'./index/055.png', premium:true },
+  { title:'Arduino Tex', thumb:'./index/056.jpg', video:'./index/056.mp4', file:'https://s.taobao.com/search?q=Arduino Tex', online:'./app/?url=../index/056.ardublock', scheme:'./index/056.png', premium:true },
+  { title:'微型 OLED I2C', thumb:'./index/057.jpg', video:'./index/057.mp4', file:'https://s.taobao.com/search?q=微型 OLED I2C', online:'./app/?url=../index/057.ardublock', scheme:'./index/057.png', premium:false },
+  { title:'TTL HC-12', thumb:'./index/058.jpg', video:'./index/058.mp4', file:'https://s.taobao.com/search?q=TTL HC-12', online:'./app/?url=../index/058.ardublock', scheme:'./index/058.png', premium:true },
+  { title:'LCD 1602 МЭЛТ', thumb:'./index/059.jpg', video:'./index/059.mp4', file:'https://s.taobao.com/search?q=LCD 1602 МЭЛТ', online:'./app/?url=../index/059.ardublock', scheme:'./index/059.png', premium:false },
+  { title:'LCD 2004 英文', thumb:'./index/060.jpg', video:'./index/060.mp4', file:'https://s.taobao.com/search?q=LCD 2004 英文', online:'./app/?url=../index/060.ardublock', scheme:'./index/060.png', premium:false },
+  { title:'投币器', thumb:'./index/061.jpg', video:'./index/061.mp4', file:'https://s.taobao.com/search?q=投币器', online:'./app/?url=../index/061.ardublock', scheme:'./index/061.png', premium:true },
+  { title:'迷你微型 OLED 64x32 I2C', thumb:'./index/062.jpg', video:'./index/062.mp4', file:'https://s.taobao.com/search?q=迷你微型 OLED 64x32 I2C', online:'./app/?url=../index/062.ardublock', scheme:'./index/062.png', premium:false },
+  { title:'迷你微型 OLED 64x48 SPI', thumb:'./index/063.jpg', video:'./index/063.mp4', file:'https://s.taobao.com/search?q=迷你微型 OLED 64x48 SPI', online:'./app/?url=../index/063.ardublock', scheme:'./index/063.png', premium:true },
+  { title:'火焰传感器', thumb:'./index/064.jpg', video:'./index/064.mp4', file:'https://s.taobao.com/search?q=火焰传感器', online:'./app/?url=../index/064.ardublock', scheme:'./index/064.png', premium:false },
+  { title:'MQ-135 气体传感器', thumb:'./index/065.jpg', video:'./index/065.mp4', file:'https://s.taobao.com/search?q=MQ-135 气体传感器', online:'./app/?url=../index/065.ardublock', scheme:'./index/065.png', premium:true },
+  { title:'MQ-3 酒精传感器', thumb:'./index/066.jpg', video:'./index/066.mp4', file:'https://s.taobao.com/search?q=MQ-3 酒精传感器', online:'./app/?url=../index/066.ardublock', scheme:'./index/066.png', premium:true },
+  { title:'振动传感器', thumb:'./index/067.jpg', video:'./index/067.mp4', file:'https://s.taobao.com/search?q=振动传感器', online:'./app/?url=../index/067.ardublock', scheme:'./index/067.png', premium:false },
+  { title:'光敏传感器', thumb:'./index/068.jpg', video:'./index/068.mp4', file:'https://s.taobao.com/search?q=光敏传感器', online:'./app/?url=../index/068.ardublock', scheme:'./index/068.png', premium:false },
+  { title:'IK 遥控模块', thumb:'./index/069.jpg', video:'./index/069.mp4', file:'https://s.taobao.com/search?q=IK 遥控模块', online:'./app/?url=../index/069.ardublock', scheme:'./index/069.png', premium:true },
+  { title:'LCD 2004 I2C', thumb:'./index/070.jpg', video:'./index/070.mp4', file:'https://s.taobao.com/search?q=LCD 2004 I2C', online:'./app/?url=../index/070.ardublock', scheme:'./index/070.png', premium:false },
+  { title:'10k 热敏电阻', thumb:'./index/071.jpg', video:'./index/071.mp4', file:'https://s.taobao.com/search?q=10k 热敏电阻', online:'./app/?url=../index/071.ardublock', scheme:'./index/071.png', premium:false },
+  { title:'触摸按钮', thumb:'./index/072.jpg', video:'./index/072.mp4', file:'https://s.taobao.com/search?q=触摸按钮', online:'./app/?url=../index/072.ardublock', scheme:'./index/072.png', premium:false },
+  { title:'滑动电位器', thumb:'./index/073.jpg', video:'./index/073.mp4', file:'https://s.taobao.com/search?q=滑动电位器', online:'./app/?url=../index/073.ardublock', scheme:'./index/073.png', premium:false },
+  { title:'PCA9685 舵机 I2C', thumb:'./index/074.jpg', video:'./index/074.mp4', file:'https://s.taobao.com/search?q=PCA9685 舵机 I2C', online:'./app/?url=../index/074.ardublock', scheme:'./index/074.png', premium:true },
+  { title:'DFP MP3 播放器', thumb:'./index/075.jpg', video:'./index/075.mp4', file:'https://s.taobao.com/search?q=DFP MP3 播放器', online:'./app/?url=../index/075.ardublock', scheme:'./index/075.png', premium:true },
+  { title:'TEA5767 FM 收音机', thumb:'./index/076.jpg', video:'./index/076.mp4', file:'https://s.taobao.com/search?q=TEA5767 FM 收音机', online:'./app/?url=../index/076.ardublock', scheme:'./index/076.png', premium:true },
+  { title:'MCP23017', thumb:'./index/077.jpg', video:'./index/077.mp4', file:'https://s.taobao.com/search?q=MCP23017', online:'./app/?url=../index/077.ardublock', scheme:'./index/077.png', premium:true },
+  { title:'声音传感器', thumb:'./index/078.jpg', video:'./index/078.mp4', file:'https://s.taobao.com/search?q=声音传感器', online:'./app/?url=../index/078.ardublock', scheme:'./index/078.png', premium:false },
+  { title:'水位传感器', thumb:'./index/079.jpg', video:'./index/079.mp4', file:'https://s.taobao.com/search?q=水位传感器', online:'./app/?url=../index/079.ardublock', scheme:'./index/079.png', premium:false },
+  { title:'循迹传感器', thumb:'./index/080.jpg', video:'./index/080.mp4', file:'https://s.taobao.com/search?q=循迹传感器', online:'./app/?url=../index/080.ardublock', scheme:'./index/080.png', premium:false },
+  { title:'74HC 数码管 2位', thumb:'./index/081.jpg', video:'./index/081.mp4', file:'https://s.taobao.com/search?q=74HC 数码管 2位', online:'./app/?url=../index/081.ardublock', scheme:'./index/081.png', premium:true },
+  { title:'74HC 数码管 3位', thumb:'./index/082.jpg', video:'./index/082.mp4', file:'https://s.taobao.com/search?q=74HC 数码管 3位', online:'./app/?url=../index/082.ardublock', scheme:'./index/082.png', premium:true },
+  { title:'74HC 数码管 4位', thumb:'./index/083.jpg', video:'./index/083.mp4', file:'https://s.taobao.com/search?q=74HC 数码管 4位', online:'./app/?url=../index/083.ardublock', scheme:'./index/083.png', premium:true },
+  { title:'BLD 10P OW', thumb:'./index/084.jpg', video:'./index/084.mp4', file:'https://s.taobao.com/search?q=BLD 10P OW', online:'./app/?url=../index/084.ardublock', scheme:'./index/084.png', premium:true },
+  { title:'L293D 驱动', thumb:'./index/085.jpg', video:'./index/085.mp4', file:'https://s.taobao.com/search?q=L293D 驱动', online:'./app/?url=../index/085.ardublock', scheme:'./index/085.png', premium:false },
+  { title:'TC1508A 驱动', thumb:'./index/086.jpg', video:'./index/086.mp4', file:'https://s.taobao.com/search?q=TC1508A 驱动', online:'./app/?url=../index/086.ardublock', scheme:'./index/086.png', premium:false },
+  { title:'FS-iA6B 遥控器', thumb:'./index/087.jpg', video:'./index/087.mp4', file:'https://s.taobao.com/search?q=FS-iA6B 遥控器', online:'./app/?url=../index/087.ardublock', scheme:'./index/087.png', premium:true },
+  { title:'BTS7960 驱动', thumb:'./index/088.jpg', video:'./index/088.mp4', file:'https://s.taobao.com/search?q=BTS7960 驱动', online:'./app/?url=../index/088.ardublock', scheme:'./index/088.png', premium:true },
+  { title:'AM 2320', thumb:'./index/089.jpg', video:'./index/089.mp4', file:'https://s.taobao.com/search?q=AM 2320', online:'./app/?url=../index/089.ardublock', scheme:'./index/089.png', premium:true },
+  { title:'DHT 22', thumb:'./index/090.jpg', video:'./index/090.mp4', file:'https://s.taobao.com/search?q=DHT 22', online:'./app/?url=../index/090.ardublock', scheme:'./index/090.png', premium:false },
+  { title:'VGA 显示器', thumb:'./index/091.jpg', video:'./index/091.mp4', file:'https://s.taobao.com/search?q=VGA 显示器', online:'./app/?url=../index/091.ardublock', scheme:'./index/091.png', premium:true },
+  { title:'AV 显示器', thumb:'./index/092.jpg', video:'./index/092.mp4', file:'https://s.taobao.com/search?q=AV 显示器', online:'./app/?url=../index/092.ardublock', scheme:'./index/092.png', premium:true },
+  { title:'INA 226', thumb:'./index/093.jpg', video:'./index/093.mp4', file:'https://s.taobao.com/search?q=INA 226', online:'./app/?url=../index/093.ardublock', scheme:'./index/093.png', premium:true },
+  { title:'WS2812 4x', thumb:'./index/094.jpg', video:'./index/094.mp4', file:'https://s.taobao.com/search?q=WS2812 4x', online:'./app/?url=../index/094.ardublock', scheme:'./index/094.png', premium:true },
+  { title:'WS2812 8x8', thumb:'./index/095.jpg', video:'./index/095.mp4', file:'https://s.taobao.com/search?q=WS2812 8x8', online:'./app/?url=../index/095.ardublock', scheme:'./index/095.png', premium:true },
+  { title:'指针式指示器', thumb:'./index/096.jpg', video:'./index/096.mp4', file:'https://s.taobao.com/search?q=指针式指示器', online:'./app/?url=../index/096.ardublock', scheme:'./index/096.png', premium:true },
+  { title:'人体移动传感器', thumb:'./index/097.jpg', video:'./index/097.mp4', file:'https://s.taobao.com/search?q=人体移动传感器', online:'./app/?url=../index/097.ardublock', scheme:'./index/097.png', premium:false },
+  { title:'霍尔传感器', thumb:'./index/098.jpg', video:'./index/098.mp4', file:'https://s.taobao.com/search?q=霍尔传感器', online:'./app/?url=../index/098.ardublock', scheme:'./index/098.png', premium:false },
+  { title:'WS2812 灯环', thumb:'./index/099.jpg', video:'./index/099.mp4', file:'https://s.taobao.com/search?q=WS2812 灯环', online:'./app/?url=../index/099.ardublock', scheme:'./index/099.png', premium:true },
+  { title:'LCD 4002 I2C', thumb:'./index/100.jpg', video:'./index/100.mp4', file:'https://s.taobao.com/search?q=LCD 4002 I2C', online:'./app/?url=../index/100.ardublock', scheme:'./index/100.png', premium:false }
+];
+
+var currentPage = 0;
+var isLoading = false;
+var reachedEnd = false;
+var PAGE_SIZE = 10;
+
+function fetchVideos(page){
+  var start = page * PAGE_SIZE;
+  var items = ALL_VIDEOS.slice(start, start + PAGE_SIZE);
+  return { items: items, done: start + PAGE_SIZE >= ALL_VIDEOS.length };
+}
+
+function renderCard(v){
+  var div = document.createElement('div');
+  div.className = 'video-card';
+  div.style.backgroundImage = 'url(' + v.thumb + ')';
+
+  var badgeHTML = IS_AUTHED
+    ? '<span class="badge-check"></span>'
+    : '<span class="' + (v.premium ? 'badge-premium' : 'badge-free') + '">' +
+        (v.premium ? '高级' : '免费') + '</span>';
+
+  div.innerHTML =
+    badgeHTML +
+    '<p class="feature-text">' + v.title + '</p>' +
+    '<div class="card-actions">' +
+      '<button class="btn-mini btn-scheme">接线图</button>' +
+      '<a href="' + v.online + '" class="btn-mini btn-online" target="_blank" rel="noopener">在线打开</a>' +
+      '<button class="btn-mini btn-download-mini">淘宝网</button>' +
+    '</div>';
+
+  div.addEventListener('click', function(){ openVideoModal(v.video); });
+
+  div.querySelector('.btn-online').addEventListener('click', function(e){
+    e.stopPropagation();
+    if (v.premium && !IS_AUTHED){ e.preventDefault(); openAuthModal(null, true); }
+  });
+
+  div.querySelector('.btn-download-mini').addEventListener('click', function(e){
+    e.stopPropagation();
+    window.open(v.file, '_blank', 'noopener');
+  });
+
+  div.querySelector('.btn-scheme').addEventListener('click', function(e){
+    e.stopPropagation();
+    if (v.premium && !IS_AUTHED){ openAuthModal(null, true); return; }
+    openSchemeModal(v.scheme);
+  });
+
+  return div;
+}
+
+function loadMore(){
+  if (isLoading || reachedEnd) return;
+  isLoading = true;
+  var loader = document.getElementById('videoLoader');
+  if (loader) loader.style.display = 'block';
+
+  var data = fetchVideos(currentPage);
+  var grid = document.getElementById('videoGrid');
+  data.items.forEach(function(v){ grid.appendChild(renderCard(v)); });
+
+  currentPage++;
+  if (data.done) reachedEnd = true;
+
+  if (loader) loader.style.display = 'none';
+  isLoading = false;
+}
+
+/* =====================================================
+   ИНИЦИАЛИЗАЦИЯ
+   ===================================================== */
+(function init(){
+  setupKeyCells();
+  renderAuthUI();
+
+  var sentinel = document.getElementById('loadMoreSentinel');
+  if ('IntersectionObserver' in window && sentinel){
+    var io = new IntersectionObserver(function(entries){
+      if (entries[0].isIntersecting) loadMore();
+    }, { rootMargin: '300px' });
+    io.observe(sentinel);
+  } else {
+    window.addEventListener('scroll', function(){
+      if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 300) loadMore();
+    });
+  }
+
+  loadMore();
+})();
+</script>
+</body>
+</html>
