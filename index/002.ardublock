@@ -1,0 +1,83 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <toolbox>toolbox_arduino_all</toolbox>
+  <block type="arduino_setup" id="eAmx:jBG*0a?mh[4Oaq8" x="71" y="76">
+    <statement name="MySetup">
+      <block type="serial_init" id="ift#w-L/Bm$]=?Obt-@Q">
+        <field name="pin">0</field>
+        <field name="SPEED">9600</field>
+      </block>
+    </statement>
+    <statement name="MyLoop">
+      <block type="pin_botton_pro" id="%dQxESi407}dL:{ynG|5">
+        <field name="idn_text">2</field>
+        <field name="bb_dropdown">0</field>
+        <statement name="bot_statement">
+          <block type="serial_write_ln" id="G;Q]GkV.I?zm)IR$cad1">
+            <value name="CONTENT">
+              <shadow type="text" id="wq|Ig[RAiA!TJj%!A!1V">
+                <field name="TEXT">Кнопка - 1</field>
+              </shadow>
+            </value>
+            <next>
+              <block type="inout_digital_write" id="?]HT6`^eesBw3Ce!vj%Z">
+                <value name="PIN">
+                  <shadow type="math_number" id="CA4j$fO4-0FnY|:`3w(g">
+                    <field name="NUM">13</field>
+                  </shadow>
+                </value>
+                <value name="STAT">
+                  <shadow type="math_number" id="=%(^Iq5{f.@3-7R#oo$I">
+                    <field name="NUM">1</field>
+                  </shadow>
+                </value>
+                <next>
+                  <block type="base_delay" id="|GH!e1H^8Xj0``K_SrE2">
+                    <field name="unite">m</field>
+                    <value name="DELAY_TIME">
+                      <shadow type="math_number" id="]SQYh/pNYM1LFzmgVVH@">
+                        <field name="NUM">300</field>
+                      </shadow>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+        <statement name="bot_statement1">
+          <block type="serial_write_ln" id="73FQd6~L.eJS0cWWJCi-">
+            <value name="CONTENT">
+              <shadow type="text" id=".1N.c#,jmV2(WLLKoB5Q">
+                <field name="TEXT">Кнопка - 0</field>
+              </shadow>
+            </value>
+            <next>
+              <block type="inout_digital_write" id="[kfBrWr_FOrIQYjB$Ra!">
+                <value name="PIN">
+                  <shadow type="math_number" id="}M.S3T)G:(bu_S,Tp]Wc">
+                    <field name="NUM">13</field>
+                  </shadow>
+                </value>
+                <value name="STAT">
+                  <shadow type="math_number" id="T,2hq2Ufaw5?K2cgqinP">
+                    <field name="NUM">0</field>
+                  </shadow>
+                </value>
+                <next>
+                  <block type="base_delay" id="j;[wxj7|ftooIA_#?uf@">
+                    <field name="unite">m</field>
+                    <value name="DELAY_TIME">
+                      <shadow type="math_number" id="the$OupX@8!Per55`ZSb">
+                        <field name="NUM">300</field>
+                      </shadow>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+      </block>
+    </statement>
+  </block>
+</xml>
