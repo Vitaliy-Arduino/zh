@@ -1,0 +1,261 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <toolbox>toolbox_arduino_all</toolbox>
+  <block type="arduino_setup" id="-u,^Hf+6DTKj(]TQ,dWg" x="-652" y="93">
+    <statement name="MySetup">
+      <block type="soft_init" id="drrvOBkMozH:EAELY!b}">
+        <field name="SPEED">57600</field>
+        <value name="PIN1">
+          <shadow type="math_number" id="qdwER-6IYc1Lonto#x(N">
+            <field name="NUM">2</field>
+          </shadow>
+        </value>
+        <value name="PIN2">
+          <shadow type="math_number" id="E1ui:{#ie@wfW*fJ-N6I">
+            <field name="NUM">3</field>
+          </shadow>
+        </value>
+        <next>
+          <block type="variables_set_init" id="dfY.TwngAb)3xBzeOf,k">
+            <field name="VAR">x</field>
+            <field name="VARIABLE_SETTYPE_TYPE">NUMBER</field>
+            <value name="VALUE">
+              <block type="math_number" id="wVmf}jKIM/H@z|INC?gA">
+                <field name="NUM">0</field>
+              </block>
+            </value>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <statement name="MyLoop">
+      <block type="base_delay" id="[miPi1dUf[S$VFJ,H6rY">
+        <field name="unite">m</field>
+        <value name="DELAY_TIME">
+          <shadow type="math_number" id="N!h;NwjR9YD-{C~(.cpK">
+            <field name="NUM">1000</field>
+          </shadow>
+        </value>
+        <next>
+          <block type="variables_set" id="Ho1N?sQHiS0M%k)t[q5l">
+            <field name="VAR">x</field>
+            <value name="VALUE">
+              <block type="math_arithmetic" id="Tjk?EbwkpCS1,;i+JM-W">
+                <field name="OP">ADD</field>
+                <value name="A">
+                  <shadow type="math_number" id="O3$TMp){S4ql?=`.k/QF">
+                    <field name="NUM">R</field>
+                  </shadow>
+                  <block type="variables_get" id="}m3ul{1H=c1vLkfgxRLQ">
+                    <field name="VAR">x</field>
+                  </block>
+                </value>
+                <value name="B">
+                  <shadow type="math_number" id="$HWx[$)4w0{OIh3*2Q@`">
+                    <field name="NUM">1</field>
+                  </shadow>
+                </value>
+              </block>
+            </value>
+            <next>
+              <block type="at_arduino_tex_pn" id="sqS;m9GJ,Cl{^k[QV;fM">
+                <field name="bt_text">pl.1.txt</field>
+                <value name="at_block">
+                  <shadow type="text" id="nOGNNhKFraDqQcuBp~K@">
+                    <field name="TEXT">ArduBlock</field>
+                  </shadow>
+                  <block type="variables_get" id="VdNeeQ8gmHlGeBgOcGN|">
+                    <field name="VAR">x</field>
+                  </block>
+                </value>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <block type="interrupts_attach_yield" id="Jyi}sREwbl5HwL31rtZF" x="-647" y="348">
+    <statement name="CONTENT">
+      <block type="at_arduino_tex" id="mu~F8VOkpA{YF5{5Rfs=">
+        <statement name="at_statement">
+          <block type="controls_if" id="Mq2lj%)Q?=$}K9ZWSSb;">
+            <value name="IF0">
+              <block type="at_arduino_tex_box" id="j6!@=9mC,I9Ej8F?7SEd">
+                <field name="bt_text">Bt01=1</field>
+              </block>
+            </value>
+            <statement name="DO0">
+              <block type="inout_digital_write" id="5IVT}qWI~auxTfcrL5j~">
+                <value name="PIN">
+                  <shadow type="math_number" id="1c1N0)*NUrG)T4{nm.@c">
+                    <field name="NUM">13</field>
+                  </shadow>
+                </value>
+                <value name="STAT">
+                  <shadow type="math_number" id="pAhusuZ9g`.H~(|!-E)Y">
+                    <field name="NUM">1</field>
+                  </shadow>
+                </value>
+              </block>
+            </statement>
+            <next>
+              <block type="controls_if" id="iW3QperdzYt*%tT:.XX@">
+                <value name="IF0">
+                  <block type="at_arduino_tex_box" id="Ec]M3uzec*f7lLqP.},U">
+                    <field name="bt_text">Bt02=1</field>
+                  </block>
+                </value>
+                <statement name="DO0">
+                  <block type="inout_digital_write" id="bLS6b095Mdp1%r~LE=Qb">
+                    <value name="PIN">
+                      <shadow type="math_number" id="++f;i.|M;P(Doo?BqxCh">
+                        <field name="NUM">13</field>
+                      </shadow>
+                    </value>
+                    <value name="STAT">
+                      <shadow type="math_number" id="MTE|hK_N~|0tma$#NcHC">
+                        <field name="NUM">0</field>
+                      </shadow>
+                    </value>
+                  </block>
+                </statement>
+                <next>
+                  <block type="controls_if" id="xLek8Gl7R`e0XKo77H)I">
+                    <value name="IF0">
+                      <block type="at_arduino_tex_box" id="^#|x8R@qLHgxbp-[a7M|">
+                        <field name="bt_text">Bt03=1</field>
+                      </block>
+                    </value>
+                    <statement name="DO0">
+                      <block type="at_arduino_tex_pn" id="gdF@]DlK;+Q=MW!?7eB~">
+                        <field name="bt_text">bt.3.txt</field>
+                        <value name="at_block">
+                          <shadow type="text" id="}Y}KX!Vwz$z*R=T5V=X{">
+                            <field name="TEXT">ON</field>
+                          </shadow>
+                        </value>
+                        <next>
+                          <block type="inout_digital_write" id="]EQp8_8vuY+Uh%5%e6_$">
+                            <value name="PIN">
+                              <shadow type="math_number" id="fd~TDe+T7J2Z-^/K=D{$">
+                                <field name="NUM">13</field>
+                              </shadow>
+                            </value>
+                            <value name="STAT">
+                              <shadow type="math_number" id="FET~eN7VP{yZn:O_h$xO">
+                                <field name="NUM">1</field>
+                              </shadow>
+                            </value>
+                          </block>
+                        </next>
+                      </block>
+                    </statement>
+                    <next>
+                      <block type="controls_if" id="mI?ffO_i04`_UF}m2Cx5">
+                        <value name="IF0">
+                          <block type="at_arduino_tex_box" id="Q.KK]L=u{AD7nHPb*n1~">
+                            <field name="bt_text">Bt03=0</field>
+                          </block>
+                        </value>
+                        <statement name="DO0">
+                          <block type="inout_digital_write" id="Z2!+?Mc|3PE%}xG0/=|J">
+                            <value name="PIN">
+                              <shadow type="math_number" id="QIjK6B#Ny9[,GLK=/Y+j">
+                                <field name="NUM">13</field>
+                              </shadow>
+                            </value>
+                            <value name="STAT">
+                              <shadow type="math_number" id="$ueCD4r??=y|}zK5G:Si">
+                                <field name="NUM">0</field>
+                              </shadow>
+                            </value>
+                            <next>
+                              <block type="at_arduino_tex_pn" id="^34O[F@bWn|[pn^U7A-L">
+                                <field name="bt_text">bt.3.txt</field>
+                                <value name="at_block">
+                                  <shadow type="text" id="PQ++tb}84-9NhJ|OwY{-">
+                                    <field name="TEXT">OFF</field>
+                                  </shadow>
+                                </value>
+                              </block>
+                            </next>
+                          </block>
+                        </statement>
+                        <next>
+                          <block type="controls_if" id="t|TQ5T[/R)N},O}Pi}[p">
+                            <value name="IF0">
+                              <block type="at_arduino_tex_box" id="fXB=YWxBI2Xj}Ng~9+Rm">
+                                <field name="bt_text">Bt04=1</field>
+                              </block>
+                            </value>
+                            <statement name="DO0">
+                              <block type="at_arduino_tex_pn" id="4poqqwA6?=F^V_,z~tEI">
+                                <field name="bt_text">bt.4.txt</field>
+                                <value name="at_block">
+                                  <shadow type="text" id="LFDI|PdIWWJtVJd[~}Ny">
+                                    <field name="TEXT">ВКЛ</field>
+                                  </shadow>
+                                </value>
+                                <next>
+                                  <block type="inout_digital_write" id="UUzdpvo*48QKUMf;L$4h">
+                                    <value name="PIN">
+                                      <shadow type="math_number" id="TIiT(Y*zXhIC^[!J6_%r">
+                                        <field name="NUM">13</field>
+                                      </shadow>
+                                    </value>
+                                    <value name="STAT">
+                                      <shadow type="math_number" id="Lt~~zm.ZhZ-qadf3u.Rh">
+                                        <field name="NUM">1</field>
+                                      </shadow>
+                                    </value>
+                                  </block>
+                                </next>
+                              </block>
+                            </statement>
+                            <next>
+                              <block type="controls_if" id="kJ8w}rj7yRt1-wy2hD$R">
+                                <value name="IF0">
+                                  <block type="at_arduino_tex_box" id="ZGM.!4|89a@p:kl6bUJf">
+                                    <field name="bt_text">Bt04=0</field>
+                                  </block>
+                                </value>
+                                <statement name="DO0">
+                                  <block type="at_arduino_tex_pn" id="RQ!(i0t{vx4fxSD.`!|,">
+                                    <field name="bt_text">bt.4.txt</field>
+                                    <value name="at_block">
+                                      <shadow type="text" id="w~TI;mX`-h(;3,?yU}rj">
+                                        <field name="TEXT">ОТКЛ</field>
+                                      </shadow>
+                                    </value>
+                                    <next>
+                                      <block type="inout_digital_write" id="}~/l@4ji]RCA$7?wVs`J">
+                                        <value name="PIN">
+                                          <shadow type="math_number" id="Z=-9euzo/:GyRV-a`4F)">
+                                            <field name="NUM">13</field>
+                                          </shadow>
+                                        </value>
+                                        <value name="STAT">
+                                          <shadow type="math_number" id="vT]u@$4i1fj8=+`5B*hE">
+                                            <field name="NUM">0</field>
+                                          </shadow>
+                                        </value>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </statement>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+      </block>
+    </statement>
+  </block>
+</xml>

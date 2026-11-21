@@ -1,0 +1,80 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <toolbox>toolbox_arduino_all</toolbox>
+  <block type="arduino_setup" id="^TXyH2G^c}dGR,$9?9RE" x="62" y="53">
+    <statement name="MySetup">
+      <block type="dwin_box_ttl" id="k=Ofr$D7[Azs45RXg[{+"></block>
+    </statement>
+    <statement name="MyLoop">
+      <block type="dwin_box_data" id="c@fQf^J3}WCsvDKnEk18">
+        <next>
+          <block type="dwin_box_bot1" id="gNdDX9l/921)lOo@mKPr">
+            <field name="idn_text">7</field>
+            <field name="id_text">2</field>
+            <field name="x_text">9</field>
+            <field name="y_text">118</field>
+            <field name="text_text">OFF</field>
+            <field name="color_dropdown">4</field>
+            <field name="bb_dropdown">0</field>
+            <statement name="bot_statement">
+              <block type="inout_digital_write" id=",QD]zwixbO`|P^Ha15I5">
+                <value name="PIN">
+                  <shadow type="math_number" id="wg1:E5;pgESG).zz7@_s">
+                    <field name="NUM">13</field>
+                  </shadow>
+                </value>
+                <value name="STAT">
+                  <shadow type="math_number" id="H]M.vHyN,GLO@@t4@V#Y">
+                    <field name="NUM">0</field>
+                  </shadow>
+                </value>
+                <next>
+                  <block type="dwin_box_zum" id="r73lp?PrwsvNvH!)T[{8">
+                    <value name="var_block">
+                      <shadow type="math_number" id="BD#sSu!|%50VM#D8js7=">
+                        <field name="NUM">5</field>
+                      </shadow>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </statement>
+            <next>
+              <block type="dwin_box_bot1" id="@~QdDYUbSoMbLv$=$VU@">
+                <field name="idn_text">8</field>
+                <field name="id_text">1</field>
+                <field name="x_text">10</field>
+                <field name="y_text">7</field>
+                <field name="text_text">ON</field>
+                <field name="color_dropdown">4</field>
+                <field name="bb_dropdown">0</field>
+                <statement name="bot_statement">
+                  <block type="inout_digital_write" id="NQ:`GG@@fRNw{Ni|r(Td">
+                    <value name="PIN">
+                      <shadow type="math_number" id="ag=N?fH-zaP;TrM2t~OR">
+                        <field name="NUM">13</field>
+                      </shadow>
+                    </value>
+                    <value name="STAT">
+                      <shadow type="math_number" id="luL)6.$c,Kau2F~)EY?J">
+                        <field name="NUM">1</field>
+                      </shadow>
+                    </value>
+                    <next>
+                      <block type="dwin_box_zum" id="skgu4N;7fAz7.B9FI*=X">
+                        <value name="var_block">
+                          <shadow type="math_number" id="^NJdPJIMU^!n:U7`1zlv">
+                            <field name="NUM">5</field>
+                          </shadow>
+                        </value>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>
