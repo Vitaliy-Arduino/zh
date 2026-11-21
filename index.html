@@ -2,12 +2,12 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="description" content="ArduBlock — визуальное блочное программирование для детей и студентов">
-<meta name="keywords" content="Arduino, программирование для детей, роботы, IoT, обучение">
+<meta name="description" content="阿德布洛克-儿童和学生的视觉块编程">
+<meta name="keywords" content="Arduino，儿童编程，机器人，物联网，学习">
 <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <link rel="stylesheet" href="./js/index.css">
-<title>ArduBlock | Визуальное блочное программирование</title>
+<title>ArduBlock | 可视化块编程</title>
 <link rel="shortcut icon" type="image/x-icon" href="./js/favicon.ico">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <link href="./js/favicon.ico" rel="apple-touch-icon">
@@ -369,8 +369,9 @@ function renderAuthUI(){
   var dl = document.getElementById('downloadSlot');
   if (dl){
     dl.innerHTML = IS_AUTHED
-      ? '<a href="./mysetup.exe"><button style="color:#008440;" class="btn btn-white btn-max btn-download">下载</button></a>'
-      : '<button class="btn btn-white btn-max btn-download" onclick="openAuthModal(event)">下载</button>';
+    //  ? '<a href="./mysetup.exe"><button style="color:#008440;" class="btn btn-white btn-max btn-download">下载</button></a>'
+     ? '<a href=" https://pan.quark.cn/s/a56b484a6cf0#/list/share"><button style="color:#008440;" class="btn btn-white btn-max btn-download">下载</button></a>'
+    : '<button class="btn btn-white btn-max btn-download" onclick="openAuthModal(event)">下载</button>';
   }
 
   var grid = document.getElementById('videoGrid');
