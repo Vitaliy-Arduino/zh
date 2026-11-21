@@ -1,0 +1,137 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <toolbox>toolbox_arduino_all</toolbox>
+  <block type="base_setup_loop" id="z51ntj^M_V8G|)`qo.N3" x="-663" y="-3">
+    <statement name="DO">
+      <block type="lcdm_setup" id="wM:nRYHnbBDv=:g+z:43">
+        <value name="PIN_RS">
+          <shadow type="math_number" id="ojMc1:oq/h-CR;wg%A^*">
+            <field name="NUM">8</field>
+          </shadow>
+        </value>
+        <value name="PIN_E">
+          <shadow type="math_number" id="SK-8-k[C}k!|.j%E=d.g">
+            <field name="NUM">9</field>
+          </shadow>
+        </value>
+        <value name="PIN_DB4">
+          <shadow type="math_number" id="o3^+f+4/d}xOW$;+Pl7s">
+            <field name="NUM">10</field>
+          </shadow>
+        </value>
+        <value name="PIN_DB5">
+          <shadow type="math_number" id=".wxVSDMk{B.bn4d@oK}h">
+            <field name="NUM">11</field>
+          </shadow>
+        </value>
+        <value name="PIN_DB6">
+          <shadow type="math_number" id="H;S3uu1xGAFLI,`lf3xr">
+            <field name="NUM">12</field>
+          </shadow>
+        </value>
+        <value name="PIN_DB7">
+          <shadow type="math_number" id="buas2LYV6CQ8|ec~A4P2">
+            <field name="NUM">13</field>
+          </shadow>
+        </value>
+        <value name="COLUMNS">
+          <shadow type="math_number" id="433x6/4ZzZfC];6[Q0}#">
+            <field name="NUM">16</field>
+          </shadow>
+        </value>
+        <value name="ROWS">
+          <shadow type="math_number" id="5=f!!J.--0KhuT`XDk-+">
+            <field name="NUM">2</field>
+          </shadow>
+        </value>
+        <next>
+          <block type="variables_set_init" id="9;QLTrrcqC[3[y%Ehm~:">
+            <field name="VAR">x</field>
+            <field name="VARIABLE_SETTYPE_TYPE">NUMBER</field>
+            <value name="VALUE">
+              <block type="math_number" id="wKVugMPd{akR=4mFt,d$">
+                <field name="NUM">0</field>
+              </block>
+            </value>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <statement name="LOOP">
+      <block type="lcdm_setcursor" id=",!9hnZJvrYHAr5i_GVf*">
+        <value name="column">
+          <shadow type="math_number" id="P}f`w*r1pMn.iUm3Ik3m">
+            <field name="NUM">0</field>
+          </shadow>
+        </value>
+        <value name="row">
+          <shadow type="math_number" id="Br-ZEA!5(t?jAcG.)L$p">
+            <field name="NUM">0</field>
+          </shadow>
+        </value>
+        <value name="texttoprint">
+          <shadow type="text" id="oIAL#jW+2LCa0XVd%g[*">
+            <field name="TEXT">Виталий</field>
+          </shadow>
+          <block type="text" id="8CPZ]LUdDxp.%s:RJB8B">
+            <field name="TEXT">ArduBlock</field>
+          </block>
+        </value>
+        <next>
+          <block type="variables_set" id="oRK~T[=^cM:{_{U5Pw+L">
+            <field name="VAR">x</field>
+            <value name="VALUE">
+              <block type="math_arithmetic" id="LFC@XNe41f]:|{bCO[{g">
+                <field name="OP">ADD</field>
+                <value name="A">
+                  <shadow type="math_number" id="AlhrZ4ZuX)D)Ngdr!ezX">
+                    <field name="NUM">R</field>
+                  </shadow>
+                  <block type="variables_get" id="SlR0,5$PsbJzS`cC^8Co">
+                    <field name="VAR">x</field>
+                  </block>
+                </value>
+                <value name="B">
+                  <shadow type="math_number" id="cKc54J{YXaiDd1{8f,1D">
+                    <field name="NUM">1</field>
+                  </shadow>
+                </value>
+              </block>
+            </value>
+            <next>
+              <block type="lcdm_setcursor" id=",yboJE.9I!hz2v?;O$-L">
+                <value name="column">
+                  <shadow type="math_number" id="r6Np:8).Xo5iH!j,.a$*">
+                    <field name="NUM">0</field>
+                  </shadow>
+                </value>
+                <value name="row">
+                  <shadow type="math_number" id="xeE:daR+f+7$kFe,;y^#">
+                    <field name="NUM">1</field>
+                  </shadow>
+                </value>
+                <value name="texttoprint">
+                  <shadow type="text" id="!]oJ^hq__go%ice:d4,=">
+                    <field name="TEXT">ArduBlock RU EN</field>
+                  </shadow>
+                  <block type="variables_get" id="M/-3~fo%8!c]HAc%lT6r">
+                    <field name="VAR">x</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="base_delay" id="nZi!X|.Pi3jv}G)-5e5`">
+                    <field name="unite">m</field>
+                    <value name="DELAY_TIME">
+                      <shadow type="math_number" id="x%a11/n)aJ_UC1HrM6.@">
+                        <field name="NUM">1000</field>
+                      </shadow>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>

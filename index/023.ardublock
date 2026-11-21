@@ -1,0 +1,210 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <toolbox>toolbox_arduino_all</toolbox>
+  <block type="base_setup_loop" id="q#zOXul[IA(2569=@A-@" x="-4" y="48">
+    <statement name="DO">
+      <block type="serial_init" id="#b{T0@.{QKg2-rt$I`dh">
+        <field name="pin">0</field>
+        <field name="SPEED">9600</field>
+        <next>
+          <block type="variables_set_init" id="z@K!LVGe|;(D#_|Wwc%d">
+            <field name="VAR">x</field>
+            <field name="VARIABLE_SETTYPE_TYPE">NUMBER</field>
+            <value name="VALUE">
+              <block type="math_number" id="Xq)Zvt_0s@QuZ+v:QuBl">
+                <field name="NUM">0</field>
+              </block>
+            </value>
+            <next>
+              <block type="variables_set_init" id="sCzXGEq,NvOIM*-2hG6z">
+                <field name="VAR">xx</field>
+                <field name="VARIABLE_SETTYPE_TYPE">NUMBER</field>
+                <value name="VALUE">
+                  <block type="math_number" id="FH)+IF$I*`g4ZA0m@p!8">
+                    <field name="NUM">0</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="minilcdi2c_setup" id="ZHFk?rO_yt1`?M4k,0Fc">
+                    <next>
+                      <block type="minilcdi2c_setcursor" id=";S=N~5e]k=R;GjH(Hw0[">
+                        <field name="dp">12x16</field>
+                        <value name="print_x">
+                          <shadow type="math_number" id="my}RAwTwO8We@0wWYa!1">
+                            <field name="NUM">20</field>
+                          </shadow>
+                        </value>
+                        <value name="print_y">
+                          <shadow type="math_number" id="cu~^_;(OX:$fG!R_![.-">
+                            <field name="NUM">1</field>
+                          </shadow>
+                        </value>
+                        <value name="texttoprint">
+                          <shadow type="text" id="]RGuMP/s^ZL9)v;]{Y{q">
+                            <field name="TEXT">ArduBlock RU EN</field>
+                          </shadow>
+                          <block type="text" id="{Q%EU4cl8nR6~]%AsnEC">
+                            <field name="TEXT">HC SR04</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="minilcdi2c_setcursor" id=".$n;!3B@7}D9,mJN`74n">
+                            <field name="dp">12x16</field>
+                            <value name="print_x">
+                              <shadow type="math_number" id="F*0h35c69LK.6?cJjB^]">
+                                <field name="NUM">25</field>
+                              </shadow>
+                            </value>
+                            <value name="print_y">
+                              <shadow type="math_number" id="7_xw$C0@D80f]Vu-lE({">
+                                <field name="NUM">4</field>
+                              </shadow>
+                            </value>
+                            <value name="texttoprint">
+                              <shadow type="text" id="]RGuMP/s^ZL9)v;]{Y{q">
+                                <field name="TEXT">ArduBlock RU EN</field>
+                              </shadow>
+                              <block type="text_st" id="/x?+6RaY(Fbg78~=1-;Q">
+                                <value name="string-int-block">
+                                  <block type="text_join" id="P,V7gAAI7AEJ77%k6=}g">
+                                    <mutation items="2"></mutation>
+                                    <value name="ADD0">
+                                      <block type="variables_get" id="e,3;jP*ClmiwsJb5dB)J">
+                                        <field name="VAR">x</field>
+                                      </block>
+                                    </value>
+                                    <value name="ADD1">
+                                      <block type="text" id="V|lmVxHC5AH+Exp?xU!D">
+                                        <field name="TEXT">см  </field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <statement name="LOOP">
+      <block type="variables_set" id="JK3BRnsoCh!4C;H^l/`|">
+        <field name="VAR">x</field>
+        <value name="VALUE">
+          <block type="ultrasonic_ranger_sensor" id="Y!v(M|e$FF7ZCpt{1qo#">
+            <value name="PIN_TRIG">
+              <shadow type="math_number" id="N%/|MR9LLx=*z:dHg%.T">
+                <field name="NUM">11</field>
+              </shadow>
+            </value>
+            <value name="PIN_ECHO">
+              <shadow type="math_number" id="u*oV}zc1imk|M/;msZJF">
+                <field name="NUM">12</field>
+              </shadow>
+            </value>
+          </block>
+        </value>
+        <next>
+          <block type="serial_write_ln" id="h:@X{4RECC:fysy)BzQs">
+            <value name="CONTENT">
+              <shadow type="text" id="J7?p}x37Hr1T0S0ke|R|">
+                <field name="TEXT">ArduBlock RU EN</field>
+              </shadow>
+              <block type="variables_get" id="lyiWolLbqSE8rp#{0`My">
+                <field name="VAR">x</field>
+              </block>
+            </value>
+            <next>
+              <block type="controls_if" id="{a%*FCH)z8ZeLQ8HtOGM">
+                <value name="IF0">
+                  <block type="logic_compare_log" id="W!s|UTZWmX*YpSuTRMeI">
+                    <field name="OP">NEQ</field>
+                    <value name="A">
+                      <shadow type="math_number" id="+((R935H0aWm=ljI`=:7">
+                        <field name="NUM">R</field>
+                      </shadow>
+                      <block type="variables_get" id="B)JS_kpU26sLm}S|q:o5">
+                        <field name="VAR">x</field>
+                      </block>
+                    </value>
+                    <value name="B">
+                      <shadow type="math_number" id="zpPjq7h:*:LNOU/;?PNp">
+                        <field name="NUM">10</field>
+                      </shadow>
+                      <block type="variables_get" id="%RQ%1yig)j!Xk3w:qkF0">
+                        <field name="VAR">xx</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <statement name="DO0">
+                  <block type="minilcdi2c_setcursor" id="u`~{{Ar%#iOBJE3Op~/!">
+                    <field name="dp">12x16</field>
+                    <value name="print_x">
+                      <shadow type="math_number" id="~El$AX-x#MoZI?6nM[hx">
+                        <field name="NUM">25</field>
+                      </shadow>
+                    </value>
+                    <value name="print_y">
+                      <shadow type="math_number" id=")/z|xQtK/u8Z7btLAen9">
+                        <field name="NUM">4</field>
+                      </shadow>
+                    </value>
+                    <value name="texttoprint">
+                      <shadow type="text" id="]RGuMP/s^ZL9)v;]{Y{q">
+                        <field name="TEXT">ArduBlock RU EN</field>
+                      </shadow>
+                      <block type="text_st" id="Oyiw=Yc8G!1w33w`5ywJ">
+                        <value name="string-int-block">
+                          <block type="text_join" id="vG7NFbe|;^G/#s#[b8)6">
+                            <mutation items="2"></mutation>
+                            <value name="ADD0">
+                              <block type="variables_get" id="~lfq6f4:~#}8{jZTn@L3">
+                                <field name="VAR">x</field>
+                              </block>
+                            </value>
+                            <value name="ADD1">
+                              <block type="text" id="L0RV.=l4w+bGk_6LQk~)">
+                                <field name="TEXT">см         </field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="variables_set" id="$O*~B:uD}/10t_fI/p16">
+                        <field name="VAR">xx</field>
+                        <value name="VALUE">
+                          <block type="variables_get" id="3mrHPt_BB_vE`;LH4CLw">
+                            <field name="VAR">x</field>
+                          </block>
+                        </value>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+                <next>
+                  <block type="base_delay" id="#/?oO.qB}Kf$`+,_kik,">
+                    <field name="unite">m</field>
+                    <value name="DELAY_TIME">
+                      <shadow type="math_number" id="@RwX6,~la4y8B{c.j1WZ">
+                        <field name="NUM">300</field>
+                      </shadow>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>

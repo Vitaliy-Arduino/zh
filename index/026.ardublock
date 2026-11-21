@@ -1,0 +1,229 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <toolbox>toolbox_arduino_all</toolbox>
+  <block type="arduino_setup" id="mp7QM6C;-50D_OGt::(c" x="86" y="46">
+    <statement name="MySetup">
+      <block type="serial_init" id="_)!;rBO]Znc!RD?NTNbe">
+        <field name="pin">0</field>
+        <field name="SPEED">9600</field>
+        <next>
+          <block type="init_temp_ds18b20_2" id="6)xrkbiPIQi1S.2ae/^i">
+            <field name="pin">12</field>
+            <field name="nomer">1</field>
+            <field name="adres">0x28, 0x4C, 0x83, 0x3D, 0x00, 0x00, 0x00, 0x46</field>
+            <next>
+              <block type="init_temp_ds18b20_2" id="H9Ha},Xo7x+}Gy!ibjw3">
+                <field name="pin">2</field>
+                <field name="nomer">2</field>
+                <field name="adres">0x28, 0xDB, 0xAC, 0x3C, 0x00, 0x00, 0x00, 0x6A</field>
+                <next>
+                  <block type="variables_set_init" id="q(=5])-/dMin#O`jQdhK">
+                    <field name="VAR">s1</field>
+                    <field name="VARIABLE_SETTYPE_TYPE">NUMBER</field>
+                    <value name="VALUE">
+                      <block type="math_number" id="E4!Q$)fK[_7@543+{b}%">
+                        <field name="NUM">0</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="variables_set_init" id="[AN}FcH9;Rbg0clcXQH7">
+                        <field name="VAR">s2</field>
+                        <field name="VARIABLE_SETTYPE_TYPE">NUMBER</field>
+                        <value name="VALUE">
+                          <block type="math_number" id="el.kk0]HiKmZN`WsC}Ci">
+                            <field name="NUM">0</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="minilcdi2c_setup" id="^u/t,Wc8^u8.:jUe6h)F">
+                            <next>
+                              <block type="minilcdi2c_setcursor" id="qz,0?hkY,[G8}F8%9P_W">
+                                <field name="dp">12x16</field>
+                                <value name="print_x">
+                                  <shadow type="math_number" id=",_s|T^PgJX+OG]HliW!z">
+                                    <field name="NUM">0</field>
+                                  </shadow>
+                                </value>
+                                <value name="print_y">
+                                  <shadow type="math_number" id="G?%#iH{ys:YEs]J%Ch]5">
+                                    <field name="NUM">0</field>
+                                  </shadow>
+                                </value>
+                                <value name="texttoprint">
+                                  <shadow type="text" id="B))$v6%[kCExL~`bXv[B">
+                                    <field name="TEXT">DS18B20</field>
+                                  </shadow>
+                                </value>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <statement name="MyLoop">
+      <block type="init_temp_ds18b20_3" id=")5x:pXB-b.dy6!rM[bQ]">
+        <field name="pin">12</field>
+        <next>
+          <block type="variables_set" id="oseOV~*/+U@@4OrV7v85">
+            <field name="VAR">s1</field>
+            <value name="VALUE">
+              <block type="init_temp_ds18b20_4" id="#Ot8IP^y.U5Ltx|ZXO@7">
+                <field name="pin">12</field>
+                <field name="nomer">1</field>
+              </block>
+            </value>
+            <next>
+              <block type="init_temp_ds18b20_3" id="Lw7+ZP24)jG!/!-]^.^Y">
+                <field name="pin">2</field>
+                <next>
+                  <block type="variables_set" id="[,~)a}qk.w.b5Za;v?hG">
+                    <field name="VAR">s2</field>
+                    <value name="VALUE">
+                      <block type="init_temp_ds18b20_4" id="cX7_nw3{lC0PGe/W=51[">
+                        <field name="pin">2</field>
+                        <field name="nomer">2</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="serial_write_ln" id=";rrr?R`P`wWYT.SZ7vVd">
+                        <value name="CONTENT">
+                          <shadow type="text" id="5IcSSyZA5Bl8cLB$x3Ns">
+                            <field name="TEXT">- - - - -</field>
+                          </shadow>
+                          <block type="text_join" id="0ctgM|O.GJm4S0!O5W$5">
+                            <mutation items="4"></mutation>
+                            <value name="ADD0">
+                              <block type="text" id="3Kh^kXsXSN!LvTC5|W)6">
+                                <field name="TEXT">S1 - </field>
+                              </block>
+                            </value>
+                            <value name="ADD1">
+                              <block type="variables_get" id="CXkN#20*1a#$-ab^jWb%">
+                                <field name="VAR">s1</field>
+                              </block>
+                            </value>
+                            <value name="ADD2">
+                              <block type="text" id="BXOF7#-Dn{o$tg=04:8/">
+                                <field name="TEXT"> S2 - </field>
+                              </block>
+                            </value>
+                            <value name="ADD3">
+                              <block type="variables_get" id="L7Dd_8^AvN%c21e*IaE,">
+                                <field name="VAR">s2</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="minilcdi2c_setcursor" id="0UN{9v~mE.S}Z?jnA*:s">
+                            <field name="dp">12x16</field>
+                            <value name="print_x">
+                              <shadow type="math_number" id="t6mtpIVIoeCfdgqquE-#">
+                                <field name="NUM">0</field>
+                              </shadow>
+                            </value>
+                            <value name="print_y">
+                              <shadow type="math_number" id="-[?U6s{fU}+6ch9U8zmC">
+                                <field name="NUM">3</field>
+                              </shadow>
+                            </value>
+                            <value name="texttoprint">
+                              <shadow type="text" id="B))$v6%[kCExL~`bXv[B">
+                                <field name="TEXT">ArduBlock RU EN</field>
+                              </shadow>
+                              <block type="text_st" id="d?Q!X,;t+!D)PHmTN2yg">
+                                <value name="string-int-block">
+                                  <block type="text_join" id=".R^h!gzcK#O^y%k;^wjt">
+                                    <mutation items="3"></mutation>
+                                    <value name="ADD0">
+                                      <block type="text" id="XRuz+P{?arnVxI~.YZMv">
+                                        <field name="TEXT">Темп1:</field>
+                                      </block>
+                                    </value>
+                                    <value name="ADD1">
+                                      <block type="variables_get" id="Vqou*^Y3.cLU#^j^tYh@">
+                                        <field name="VAR">s1</field>
+                                      </block>
+                                    </value>
+                                    <value name="ADD2">
+                                      <block type="text" id="Mo5(5U*?woPcxX)%xr:y">
+                                        <field name="TEXT">C  </field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="minilcdi2c_setcursor" id="i[w56Hfvh%2XsVDVqHH#">
+                                <field name="dp">12x16</field>
+                                <value name="print_x">
+                                  <shadow type="math_number" id="6-Ir$kNsLd!0S;Ks5SNN">
+                                    <field name="NUM">0</field>
+                                  </shadow>
+                                </value>
+                                <value name="print_y">
+                                  <shadow type="math_number" id="~_5!2NHmML9{cLJ41o,-">
+                                    <field name="NUM">6</field>
+                                  </shadow>
+                                </value>
+                                <value name="texttoprint">
+                                  <shadow type="text" id="B))$v6%[kCExL~`bXv[B">
+                                    <field name="TEXT">ArduBlock RU EN</field>
+                                  </shadow>
+                                  <block type="text_st" id="hwa^0[~zA?IXDIs[wB/o">
+                                    <value name="string-int-block">
+                                      <block type="text_join" id="7{Pkj4@{M#`O+]fxA{dr">
+                                        <mutation items="3"></mutation>
+                                        <value name="ADD0">
+                                          <block type="text" id="Rap;mOO.i%#.T%tq9nd#">
+                                            <field name="TEXT">Темп2:</field>
+                                          </block>
+                                        </value>
+                                        <value name="ADD1">
+                                          <block type="variables_get" id="a]euCN`hEd`?6{nV/1q2">
+                                            <field name="VAR">s2</field>
+                                          </block>
+                                        </value>
+                                        <value name="ADD2">
+                                          <block type="text" id="Ve+@~Ft=cbRfnXumlA9u">
+                                            <field name="TEXT">C  </field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="base_delay" id="|o}@PNhfCmN4T|q|$I$`">
+                                    <field name="unite">m</field>
+                                    <value name="DELAY_TIME">
+                                      <shadow type="math_number" id="N0WHN$[@HAu+x|N;=tuo">
+                                        <field name="NUM">1000</field>
+                                      </shadow>
+                                    </value>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>

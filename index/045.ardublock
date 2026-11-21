@@ -1,0 +1,41 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <toolbox>toolbox_arduino_all</toolbox>
+  <block type="arduino_setup" id="-u,^Hf+6DTKj(]TQ,dWg" x="-526" y="7">
+    <statement name="MySetup">
+      <block type="Init_MAX7219_ledmatrix4x" id="GPy=%ldac_inaa+lR}!P">
+        <field name="dp">1</field>
+        <field name="dp2">5</field>
+        <value name="PIN_DAT">
+          <shadow type="math_number" id="`F/,1R.d$eY2x3PxrDQG">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+        <value name="PIN_CS">
+          <shadow type="math_number" id="@kgfFSFw:Y58tAkN[~p7">
+            <field name="NUM">4</field>
+          </shadow>
+        </value>
+        <value name="PIN_CLK">
+          <shadow type="math_number" id="yo$3s|STv!5qqXGu)@S-">
+            <field name="NUM">10</field>
+          </shadow>
+        </value>
+      </block>
+    </statement>
+    <statement name="MyLoop">
+      <block type="Init_MAX7219_ledmatrix4x_text" id="u;ORmPH$udO?G[ti}-HY">
+        <field name="size">0</field>
+        <value name="texttoprint">
+          <shadow type="text" id="r;~Q93UvP[Zq6n.8!knI">
+            <field name="TEXT">ArduBlock RU EN Виталий Петров</field>
+          </shadow>
+        </value>
+        <value name="Y_Nokia">
+          <shadow type="math_number" id="Srt,BI~y[4~T2P?#z[I-">
+            <field name="NUM">30</field>
+          </shadow>
+        </value>
+      </block>
+    </statement>
+  </block>
+</xml>

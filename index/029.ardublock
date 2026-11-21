@@ -1,0 +1,100 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <toolbox>toolbox_arduino_all</toolbox>
+  <block type="base_setup_loop" id="q#zOXul[IA(2569=@A-@" x="60" y="44">
+    <statement name="DO">
+      <block type="serial_init" id="#b{ZDTi!MOqdaaVwoJ^i">
+        <field name="pin">0</field>
+        <field name="SPEED">9600</field>
+        <next>
+          <block type="variables_set_init" id="pUlD5;:j)nwBKbT~@Vmt">
+            <field name="VAR">x</field>
+            <field name="VARIABLE_SETTYPE_TYPE">NUMBER</field>
+            <value name="VALUE">
+              <block type="math_number" id="k,S*$in=igSrFB*}6!IN">
+                <field name="NUM">0</field>
+              </block>
+            </value>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <statement name="LOOP">
+      <block type="variables_set" id=".u!M!I#k^eD{iG_Tsvw=">
+        <field name="VAR">x</field>
+        <value name="VALUE">
+          <block type="inout_analog_readR" id="^S^Rh/D|sI@=7LNsX+@L">
+            <field name="NUMBER">2</field>
+            <field name="broche">A0</field>
+          </block>
+        </value>
+        <next>
+          <block type="serial_write_ln" id="u4!c`ImV6t/Bz.[tNf9)">
+            <value name="CONTENT">
+              <shadow type="text" id="9RjmZDeU{XE^9B}1E)%V">
+                <field name="TEXT">ArduBlock RU EN</field>
+              </shadow>
+              <block type="variables_get" id=".g?ysEqx5j|7[B{M[v`?">
+                <field name="VAR">x</field>
+              </block>
+            </value>
+            <next>
+              <block type="controls_if" id="l}W5WX[Y^5?%)ZFw+W9D">
+                <mutation else="1"></mutation>
+                <value name="IF0">
+                  <block type="logic_compare_log" id="+vAFIyXs_#g6_K_p3R)1">
+                    <field name="OP">GT</field>
+                    <value name="A">
+                      <shadow type="math_number" id="R8dnG{z;6G@f)4Q;1/*D">
+                        <field name="NUM">R</field>
+                      </shadow>
+                      <block type="variables_get" id="9:T`_nb?#vl*iTvC~n)l">
+                        <field name="VAR">x</field>
+                      </block>
+                    </value>
+                    <value name="B">
+                      <shadow type="math_number" id="Ooi$`|c,z0*)u?i~RhW}">
+                        <field name="NUM">100</field>
+                      </shadow>
+                    </value>
+                  </block>
+                </value>
+                <statement name="DO0">
+                  <block type="inout_digital_writeD" id="/wyFl!%V]hCyy]k:7,OY">
+                    <field name="OUTPUT_VALUE">1</field>
+                    <field name="STAT">1</field>
+                    <value name="PIN">
+                      <shadow type="math_number" id="mAt-q+Un[mEOEwbHWntw">
+                        <field name="NUM">13</field>
+                      </shadow>
+                    </value>
+                  </block>
+                </statement>
+                <statement name="ELSE">
+                  <block type="inout_digital_writeD" id="[L[YPKs3]r2hBur{YbIk">
+                    <field name="OUTPUT_VALUE">1</field>
+                    <field name="STAT">0</field>
+                    <value name="PIN">
+                      <shadow type="math_number" id=")H1eH.(?8Pr:WjF[m,21">
+                        <field name="NUM">13</field>
+                      </shadow>
+                    </value>
+                  </block>
+                </statement>
+                <next>
+                  <block type="base_delay" id="4C7^]Gn`{`JD3)XPC{ps">
+                    <field name="unite">m</field>
+                    <value name="DELAY_TIME">
+                      <shadow type="math_number" id="Brv9w=Sxq`j^M+KjZj3S">
+                        <field name="NUM">300</field>
+                      </shadow>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>

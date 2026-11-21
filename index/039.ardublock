@@ -1,0 +1,112 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <toolbox>toolbox_arduino_all</toolbox>
+  <block type="arduino_setup" id="haVJg/ymf|r0Jvcc~4W9" x="-396" y="51">
+    <statement name="MySetup">
+      <block type="inout_digital_write" id="m#@V;8Up|-JM,?knJ[Q2">
+        <value name="PIN">
+          <shadow type="math_number" id="TSq)7/b{YbYnch:_/GVT">
+            <field name="NUM">4</field>
+          </shadow>
+        </value>
+        <value name="STAT">
+          <shadow type="math_number" id=":BhH+H|zOG$5D2FwG`3(">
+            <field name="NUM">0</field>
+          </shadow>
+        </value>
+      </block>
+    </statement>
+    <statement name="MyLoop">
+      <block type="actuator_rgbled" id="Cqy80r_|nhZ%e6WQtb_.">
+        <field name="RGB_TYPE">0</field>
+        <field name="RGBCOLOR">#3333ff</field>
+        <value name="PINRed">
+          <shadow type="math_number" id="KQod6RytY`OG238]Lr=k">
+            <field name="NUM">3</field>
+          </shadow>
+        </value>
+        <value name="PINGreen">
+          <shadow type="math_number" id="^+:ll!$W;dQtfOvny6+j">
+            <field name="NUM">5</field>
+          </shadow>
+        </value>
+        <value name="PINBlue">
+          <shadow type="math_number" id="A?d^gU(lR;]:CSPl8$oC">
+            <field name="NUM">6</field>
+          </shadow>
+        </value>
+        <next>
+          <block type="base_delay" id=")F@_m#i.0IUai)rW@34I">
+            <field name="unite">m</field>
+            <value name="DELAY_TIME">
+              <shadow type="math_number" id="u#=|3Mnr-_B.8TtNQ(^L">
+                <field name="NUM">1000</field>
+              </shadow>
+            </value>
+            <next>
+              <block type="actuator_rgbled" id="Q75X:MQutqq58fe@.WUs">
+                <field name="RGB_TYPE">0</field>
+                <field name="RGBCOLOR">#cc0000</field>
+                <value name="PINRed">
+                  <shadow type="math_number" id="O6c5[@C=iZ86Fv)VdiKV">
+                    <field name="NUM">3</field>
+                  </shadow>
+                </value>
+                <value name="PINGreen">
+                  <shadow type="math_number" id="XhSLlXSNZo3SAf=lH3`+">
+                    <field name="NUM">5</field>
+                  </shadow>
+                </value>
+                <value name="PINBlue">
+                  <shadow type="math_number" id="J!@6Q$ryxR|vM^1l54=S">
+                    <field name="NUM">6</field>
+                  </shadow>
+                </value>
+                <next>
+                  <block type="base_delay" id="6?B/XNP32qr0[ABjOBtb">
+                    <field name="unite">m</field>
+                    <value name="DELAY_TIME">
+                      <shadow type="math_number" id=".zyWk*pjYRv(^3KVxfSF">
+                        <field name="NUM">1000</field>
+                      </shadow>
+                    </value>
+                    <next>
+                      <block type="actuator_rgbled" id="4RqP5|zlgH%ufemg]N+H">
+                        <field name="RGB_TYPE">0</field>
+                        <field name="RGBCOLOR">#33cc00</field>
+                        <value name="PINRed">
+                          <shadow type="math_number" id="Dgj~I(3eunwB:.M6f[HF">
+                            <field name="NUM">3</field>
+                          </shadow>
+                        </value>
+                        <value name="PINGreen">
+                          <shadow type="math_number" id=".o#}s/0jzTpZrIT`BW{W">
+                            <field name="NUM">5</field>
+                          </shadow>
+                        </value>
+                        <value name="PINBlue">
+                          <shadow type="math_number" id="I+UC@PIWYx`}(l?Pf?k[">
+                            <field name="NUM">6</field>
+                          </shadow>
+                        </value>
+                        <next>
+                          <block type="base_delay" id="%Gp1I{QCqG=A3rtFv80.">
+                            <field name="unite">m</field>
+                            <value name="DELAY_TIME">
+                              <shadow type="math_number" id="x%nW7:#@uB3%=?rA(pYR">
+                                <field name="NUM">1000</field>
+                              </shadow>
+                            </value>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>

@@ -1,0 +1,124 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <toolbox>toolbox_arduino_all</toolbox>
+  <block type="arduino_setup" id="}L7w5%I$1v/Sp^WNVO!M" x="51" y="53">
+    <statement name="MySetup">
+      <block type="lcdm7m_setup" id="w!HN6[HOa-vTv=Ms82Cj" inline="false" collapsed="true">
+        <value name="PINe">
+          <shadow type="math_number" id="QVOs*;cbJP(.8ZZ1}##W">
+            <field name="NUM">2</field>
+          </shadow>
+        </value>
+        <value name="PINd">
+          <shadow type="math_number" id="_DMk$DVOQ?$J;V5YyUjz">
+            <field name="NUM">3</field>
+          </shadow>
+        </value>
+        <value name="PINdp">
+          <shadow type="math_number" id="Eqoc#??7%0,Lk]1!creV">
+            <field name="NUM">4</field>
+          </shadow>
+        </value>
+        <value name="PINc">
+          <shadow type="math_number" id="sDP$Ic3tZQ(1L[+7.#pT">
+            <field name="NUM">5</field>
+          </shadow>
+        </value>
+        <value name="PINg">
+          <shadow type="math_number" id="VS8,/E[+3=w(CW#O#{w9">
+            <field name="NUM">6</field>
+          </shadow>
+        </value>
+        <value name="PIND4">
+          <shadow type="math_number" id="jlqpD-BYn4#n4w{hbv7B">
+            <field name="NUM">7</field>
+          </shadow>
+        </value>
+        <value name="PINb">
+          <shadow type="math_number" id="QyL=?]r].s0-kC$lbb3O">
+            <field name="NUM">8</field>
+          </shadow>
+        </value>
+        <value name="PIND3">
+          <shadow type="math_number" id="1iKGEXHj-2#J;?YHA-jr">
+            <field name="NUM">9</field>
+          </shadow>
+        </value>
+        <value name="PIND2">
+          <shadow type="math_number" id="^;W0rF9il+S;q,XjqG:r">
+            <field name="NUM">10</field>
+          </shadow>
+        </value>
+        <value name="PINf">
+          <shadow type="math_number" id="%-DB@uI)H3_=^8CdnC3`">
+            <field name="NUM">11</field>
+          </shadow>
+        </value>
+        <value name="PINa">
+          <shadow type="math_number" id="H[@nmGAZlw_Vu[fOrSjc">
+            <field name="NUM">12</field>
+          </shadow>
+        </value>
+        <value name="PIND1">
+          <shadow type="math_number" id="ueGDJ$XK,0!496Ju=d*)">
+            <field name="NUM">13</field>
+          </shadow>
+        </value>
+        <next>
+          <block type="variables_set_init" id="+-7w~gHtFL5AyP!1yZ3_">
+            <field name="VAR">x</field>
+            <field name="VARIABLE_SETTYPE_TYPE">NUMBER</field>
+            <value name="VALUE">
+              <block type="math_number" id="doTjPiFF@$V(iEYt!!]A">
+                <field name="NUM">0</field>
+              </block>
+            </value>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <statement name="MyLoop">
+      <block type="base_define_for" id="O]*+{^94S4{.Kt5(ekbL">
+        <value name="variable">
+          <shadow type="math_number" id="Zky[700CTJgx,8(]TZQ+">
+            <field name="NUM">100</field>
+          </shadow>
+        </value>
+        <statement name="DO">
+          <block type="lcdm7m_setcursor" id="apt`uC[k0q}DZuEr.`CE">
+            <value name="texttoprint">
+              <shadow type="math_number" id="+(izzKVgbz]dulMV5r1i">
+                <field name="NUM">1234</field>
+              </shadow>
+              <block type="variables_get" id="mhi7@x-V]wS0wDSDmh]i">
+                <field name="VAR">x</field>
+              </block>
+            </value>
+          </block>
+        </statement>
+        <next>
+          <block type="variables_set" id="@M`A)Muqmvo2yMd[O`(2">
+            <field name="VAR">x</field>
+            <value name="VALUE">
+              <block type="math_arithmetic" id="!qCkXF_@V%zzFh|J/?P|">
+                <field name="OP">ADD</field>
+                <value name="A">
+                  <shadow type="math_number" id="qyTQyz!)/qn]L=xYMOhp">
+                    <field name="NUM">R</field>
+                  </shadow>
+                  <block type="variables_get" id="`_6]Yi55GepX!{bh!cMR">
+                    <field name="VAR">x</field>
+                  </block>
+                </value>
+                <value name="B">
+                  <shadow type="math_number" id="3B{{S{*@gY1eTMH_XcWM">
+                    <field name="NUM">1</field>
+                  </shadow>
+                </value>
+              </block>
+            </value>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>
