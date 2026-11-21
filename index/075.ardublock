@@ -1,0 +1,146 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <toolbox>toolbox_arduino_all</toolbox>
+  <block type="base_setup_loop" id="ffSgOFk3t^AE.|1qsp!f" x="-644" y="119">
+    <statement name="DO">
+      <block type="ardublock_block23" id="3=,uXe;KLwK)AFV8o6nT">
+        <field name="d1">DFPlayer 12 (RX) 11 (TX)</field>
+        <field name="d2">mp3_set_serial(mySerial);</field>
+        <field name="a1">#include &lt;SoftwareSerial.h&gt;</field>
+        <field name="a2">#include &lt;DFPlayer_Mini_Mp3.h&gt;</field>
+        <field name="a3">SoftwareSerial mySerial(12, 11);</field>
+        <field name="a4">Serial.begin(9600); mySerial.begin(9600); </field>
+        <field name="a5">mp3_set</field>
+        <next>
+          <block type="ardublock_block25" id=":YkcGQX~B~WCitSGS[{O">
+            <field name="d1">DFPlayer - Звук</field>
+            <field name="d2">mp3_set_volume(</field>
+            <field name="d4">);</field>
+            <field name="a1"></field>
+            <field name="a2"></field>
+            <field name="a3"></field>
+            <field name="a4"></field>
+            <field name="a5">n1</field>
+            <value name="block1">
+              <shadow type="math_number" id="l~PxJiLK?pgmI[M@]V-v">
+                <field name="NUM">20</field>
+              </shadow>
+            </value>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <statement name="LOOP">
+      <block type="base_code_comment" id="02DHUR#qV`nrbmlfkrnf">
+        <field name="TEXT">SD:\mp3\0001.mp3 -- Номер трека 1</field>
+        <next>
+          <block type="controls_if" id="U[%L%#=uUO-i:.Ayev7;">
+            <value name="IF0">
+              <block type="logic_compare_log" id=".EDtFc@b~n`$w`[z{GT+">
+                <field name="OP">EQ</field>
+                <value name="A">
+                  <shadow type="math_number" id="x0I9(jiB~OM[9RWt`sDi">
+                    <field name="NUM">R</field>
+                  </shadow>
+                  <block type="digital_readbiR" id="J!lcNSzes/8TadWu+fdv">
+                    <field name="NUMBER">1</field>
+                    <value name="PIN">
+                      <shadow type="math_number" id="u`2o,e1|,=o=`lmiwBxV">
+                        <field name="NUM">2</field>
+                      </shadow>
+                    </value>
+                  </block>
+                </value>
+                <value name="B">
+                  <shadow type="math_number" id="W@_L+lbH:rxE0wpfpu(0">
+                    <field name="NUM">0</field>
+                  </shadow>
+                </value>
+              </block>
+            </value>
+            <statement name="DO0">
+              <block type="ardublock_block25" id="cnZxh[30a;Jq`:gP`;-G">
+                <field name="d1">DFPlayer - Трек</field>
+                <field name="d2">mp3_play(</field>
+                <field name="d4">);</field>
+                <field name="a1"></field>
+                <field name="a2"></field>
+                <field name="a3"></field>
+                <field name="a4"></field>
+                <field name="a5">n1</field>
+                <value name="block1">
+                  <shadow type="math_number" id="jy|L2{mWCYUHy%nCL(|B">
+                    <field name="NUM">1</field>
+                  </shadow>
+                </value>
+                <next>
+                  <block type="base_delay" id="qlKg!simn{cnc#g%kGX;">
+                    <field name="unite">m</field>
+                    <value name="DELAY_TIME">
+                      <shadow type="math_number" id="cgMS[+A:fjF:UUN8H=A+">
+                        <field name="NUM">300</field>
+                      </shadow>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </statement>
+            <next>
+              <block type="controls_if" id="U9Ceu6F9`Fp-ihE+j2so">
+                <value name="IF0">
+                  <block type="logic_compare_log" id="FL5k?w})0b2Y/:vJho2c">
+                    <field name="OP">EQ</field>
+                    <value name="A">
+                      <shadow type="math_number" id="x0I9(jiB~OM[9RWt`sDi">
+                        <field name="NUM">R</field>
+                      </shadow>
+                      <block type="digital_readbiR" id="hU{W$bGObx@K*1OL}A=S">
+                        <field name="NUMBER">1</field>
+                        <value name="PIN">
+                          <shadow type="math_number" id="%uwSf]29A9c^NUpEipti">
+                            <field name="NUM">3</field>
+                          </shadow>
+                        </value>
+                      </block>
+                    </value>
+                    <value name="B">
+                      <shadow type="math_number" id="(w{E^:^,2?.o[[x!$ysS">
+                        <field name="NUM">0</field>
+                      </shadow>
+                    </value>
+                  </block>
+                </value>
+                <statement name="DO0">
+                  <block type="ardublock_block25" id="z-*;011gjV_({}%3=gA.">
+                    <field name="d1">DFPlayer - Трек</field>
+                    <field name="d2">mp3_play(</field>
+                    <field name="d4">);</field>
+                    <field name="a1"></field>
+                    <field name="a2"></field>
+                    <field name="a3"></field>
+                    <field name="a4"></field>
+                    <field name="a5">n1</field>
+                    <value name="block1">
+                      <shadow type="math_number" id="WSir=DAa!y(GW@W%}9)j">
+                        <field name="NUM">2</field>
+                      </shadow>
+                    </value>
+                    <next>
+                      <block type="base_delay" id="w:*[^[7Ez8kd`h$IZiHP">
+                        <field name="unite">m</field>
+                        <value name="DELAY_TIME">
+                          <shadow type="math_number" id="c*wda$lWs[-`J[Uh8!DM">
+                            <field name="NUM">300</field>
+                          </shadow>
+                        </value>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>

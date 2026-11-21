@@ -1,0 +1,153 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <toolbox>toolbox_arduino_all</toolbox>
+  <block type="base_setup_loop" id="IU6LM_6T7pdJ-:L7Lm;6" x="84" y="52">
+    <statement name="DO">
+      <block type="variables_set_init" id="YI@3fos#35@_H1r*;5vK">
+        <field name="VAR">x</field>
+        <field name="VARIABLE_SETTYPE_TYPE">NUMBER</field>
+        <value name="VALUE">
+          <block type="math_number" id="SyjoOQNl}K9G*~sC$U|l">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <next>
+          <block type="ardublock_block31" id="@ii;eqEd9$#`fZ-$DMb7">
+            <field name="d1">Цифровой индикатор - Подключение Shift595 - data</field>
+            <field name="d2">dataPin = </field>
+            <field name="d4">;latchPin = </field>
+            <field name="d6">latch</field>
+            <field name="d5">;clockPin = </field>
+            <field name="d8">clock</field>
+            <field name="d7">; pinMode(dataPin, OUTPUT);pinMode(latchPin, OUTPUT);pinMode(clockPin, OUTPUT);</field>
+            <field name="a1"></field>
+            <field name="a2"></field>
+            <field name="a3"></field>
+            <field name="a4"></field>
+            <field name="a5">name16</field>
+            <value name="block1">
+              <shadow type="math_number" id="1{vr1uSrfnm/H;6h3gEf">
+                <field name="NUM">10</field>
+              </shadow>
+            </value>
+            <value name="block2">
+              <shadow type="math_number" id="J#lFK|juS~Z4gv#FquF!">
+                <field name="NUM">12</field>
+              </shadow>
+            </value>
+            <value name="block3">
+              <shadow type="math_number" id="gIz_:1Hyz`P4-nb%N!4-">
+                <field name="NUM">11</field>
+              </shadow>
+            </value>
+            <next>
+              <block type="ardublock_block33" id="QS=8)tP}ehL*:V}v6$nN">
+                <field name="d1">Цифровой индикатор - Shift595 от 1 до 9</field>
+                <field name="d2">int dataPin = 0; int latchPin = 0;int clockPin = 0;</field>
+                <field name="d3">const int numSegments = </field>
+                <field name="d4">2</field>
+                <field name="d5">; unsigned long displayNumber = 0; </field>
+                <field name="d6">name14</field>
+                <next>
+                  <block type="ardublock_block23" id="h|NNl.SStyQhjB-Wj:aN">
+                    <field name="d1">Цифровой индикатор - с общим катодом</field>
+                    <field name="d2"></field>
+                    <field name="a1">const byte digitCodes[10] = { 0b11000000, 0b11111001, 0b10100100, 0b10110000, 0b10011001, 0b10010010, 0b10000010, 0b11111000, 0b10000000, 0b10010000 };</field>
+                    <field name="a2"></field>
+                    <field name="a3"></field>
+                    <field name="a4"></field>
+                    <field name="a5">name13</field>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <statement name="LOOP">
+      <block type="variables_set" id="EFxZ5~Rt~2dfWA@#!T4h">
+        <field name="VAR">x</field>
+        <value name="VALUE">
+          <block type="math_arithmetic" id="^j-m2D9dL@2*!?r86g9Q">
+            <field name="OP">ADD</field>
+            <value name="A">
+              <shadow type="math_number" id="xbJg9QEV~pNGP#}~kJV#">
+                <field name="NUM">R</field>
+              </shadow>
+              <block type="variables_get" id="0M9b8EEK3HWCD21bHKuc">
+                <field name="VAR">x</field>
+              </block>
+            </value>
+            <value name="B">
+              <shadow type="math_number" id="Re|T76JOexvQeK#-/`gr">
+                <field name="NUM">1</field>
+              </shadow>
+            </value>
+          </block>
+        </value>
+        <next>
+          <block type="controls_if" id="#Y.ldFD@6#F7cYNg2Vz4">
+            <value name="IF0">
+              <block type="logic_compare_log" id="`sCW|zGyQ=~6DU8t,`/N">
+                <field name="OP">EQ</field>
+                <value name="A">
+                  <shadow type="math_number" id="`bwVCgWN=8}cBy#PJG+u">
+                    <field name="NUM">R</field>
+                  </shadow>
+                  <block type="variables_get" id="aZz^VGqh!`uMro_|(@|(">
+                    <field name="VAR">x</field>
+                  </block>
+                </value>
+                <value name="B">
+                  <shadow type="math_number" id="FY|.bFU2_M6p.JPv+^B=">
+                    <field name="NUM">100</field>
+                  </shadow>
+                </value>
+              </block>
+            </value>
+            <statement name="DO0">
+              <block type="variables_set" id="y^ZZnVOh/JUh?WGkrz}0">
+                <field name="VAR">x</field>
+                <value name="VALUE">
+                  <block type="math_number" id="y9s{NJ?U;*Ka@3+b!Nn~">
+                    <field name="NUM">0</field>
+                  </block>
+                </value>
+              </block>
+            </statement>
+            <next>
+              <block type="ardublock_block25" id="ZuI=oqgGtLI~NMM+?23`">
+                <field name="d1">Цифровой индикатор - Значение</field>
+                <field name="d2">displayNumber = </field>
+                <field name="d4">;   byte digits[9] = {0};   unsigned long temp = displayNumber; for (int i = 0; i &lt; numSegments; i++) { digits[i] = temp % 10;   temp /= 10;  } digitalWrite(latchPin, LOW);  for (int i = 0; i &lt; numSegments; i++) {shiftOut(dataPin, clockPin, MSBFIRST, digitCodes[digits[i]]);} digitalWrite(latchPin, HIGH); </field>
+                <field name="a1"></field>
+                <field name="a2"></field>
+                <field name="a3"></field>
+                <field name="a4"></field>
+                <field name="a5">name17</field>
+                <value name="block1">
+                  <shadow type="math_number" id="J?KfT-{lXlU!,fqE+^DC">
+                    <field name="NUM">1234</field>
+                  </shadow>
+                  <block type="variables_get" id="L?I9+H_i3HCN}6pU]h[!">
+                    <field name="VAR">x</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="base_delay" id="4x0@p6e0KC-Zn;*l3K5A">
+                    <field name="unite">m</field>
+                    <value name="DELAY_TIME">
+                      <shadow type="math_number" id="T8Z@@VgsMRv6h#ENZ-4r">
+                        <field name="NUM">400</field>
+                      </shadow>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>

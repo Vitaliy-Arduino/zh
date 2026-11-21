@@ -1,0 +1,162 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <toolbox>toolbox_arduino_all</toolbox>
+  <block type="arduino_setup" id="#N%gEBiT/q@a4/CL[NKI" x="166" y="78">
+    <statement name="MySetup">
+      <block type="serial_init" id="ZbLc;w0po_2.KKzjKQOg">
+        <field name="pin">0</field>
+        <field name="SPEED">9600</field>
+        <next>
+          <block type="variables_set_init" id="4,H8[KYrhLdc*9`@6fvM">
+            <field name="VAR">W</field>
+            <field name="VARIABLE_SETTYPE_TYPE">LARGE_NUMBER</field>
+            <value name="VALUE">
+              <block type="math_number" id="{[aM+(8Iqu=?Vm?l*w*}">
+                <field name="NUM">1</field>
+              </block>
+            </value>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <statement name="MyLoop">
+      <block type="variables_set" id=".a?k,pU_7?J,I@xKQdb@">
+        <field name="VAR">W</field>
+        <value name="VALUE">
+          <block type="inout_analog_readR" id="/#Y6.@6`d#qiL=8_X^}y">
+            <field name="NUMBER">12</field>
+            <field name="broche">A0</field>
+          </block>
+        </value>
+        <next>
+          <block type="serial_write_ln" id="JoR!nW)OWnf/Ku.%4#~`">
+            <value name="CONTENT">
+              <shadow type="text" id="t?4t9l0qIXR*~?Oq(fLV">
+                <field name="TEXT">ArduBlock</field>
+              </shadow>
+              <block type="variables_get" id="$0uFm7HiXQ?$ZG_B:|Pv">
+                <field name="VAR">W</field>
+              </block>
+            </value>
+            <next>
+              <block type="base_code_comment" id="RU~Qs]Yjc;$Niq((mv?B">
+                <field name="TEXT">Измените &gt; или  &lt;  и число на свое значение</field>
+                <next>
+                  <block type="controls_if" id="Dx-R]@L4K|$q4YpECxsw">
+                    <mutation else="1"></mutation>
+                    <value name="IF0">
+                      <block type="logic_compare_log" id="TJ)gA$lISMi`(TwSl`c;">
+                        <field name="OP">GT</field>
+                        <value name="A">
+                          <shadow type="math_number" id="S=[jDn]P#K0k,v=4{iIF">
+                            <field name="NUM">R</field>
+                          </shadow>
+                          <block type="variables_get" id="G/i!`|,DFe;?-]h~z;Xf">
+                            <field name="VAR">W</field>
+                          </block>
+                        </value>
+                        <value name="B">
+                          <shadow type="math_number" id="dmIS?5gr3*%BCAMKw;cK">
+                            <field name="NUM">10</field>
+                          </shadow>
+                        </value>
+                      </block>
+                    </value>
+                    <statement name="DO0">
+                      <block type="inout_digital_writeD" id="CE!n*L%zrFcQ/H.k1KW+">
+                        <field name="OUTPUT_VALUE">1</field>
+                        <field name="STAT">1</field>
+                        <value name="PIN">
+                          <shadow type="math_number" id="Dw?r6ZcqTx%5NJQslm4f">
+                            <field name="NUM">13</field>
+                          </shadow>
+                        </value>
+                        <next>
+                          <block type="actuator_tonedure" id="6ioc3P;xj.WX|[R7_jI!" disabled="true">
+                            <value name="PIN">
+                              <shadow type="math_number" id="}{4L~!OiSiori!?jUt^Q">
+                                <field name="NUM">3</field>
+                              </shadow>
+                            </value>
+                            <value name="NUM">
+                              <shadow type="math_number" id="f7XNp2]VNJReJ73dIK_g">
+                                <field name="NUM">1200</field>
+                              </shadow>
+                            </value>
+                            <value name="DUR">
+                              <shadow type="math_number" id="1KJbU%!!C|eP(fIDdvOU">
+                                <field name="NUM">100</field>
+                              </shadow>
+                            </value>
+                            <next>
+                              <block type="actuator_tonedure" id="3~oLJosMu1#^2%%sb=P{" disabled="true">
+                                <value name="PIN">
+                                  <shadow type="math_number" id="#W(Fhj-{eW-tsC4*knyY">
+                                    <field name="NUM">3</field>
+                                  </shadow>
+                                </value>
+                                <value name="NUM">
+                                  <shadow type="math_number" id="NG*V1kZ$U%X}H]omp5z8">
+                                    <field name="NUM">1000</field>
+                                  </shadow>
+                                </value>
+                                <value name="DUR">
+                                  <shadow type="math_number" id="9.^P%(1hqQ6$~@zN=Y86">
+                                    <field name="NUM">0</field>
+                                  </shadow>
+                                </value>
+                                <next>
+                                  <block type="base_delay" id="n1t^+FLBX~a7aM5-|5!?">
+                                    <field name="unite">m</field>
+                                    <value name="DELAY_TIME">
+                                      <shadow type="math_number" id="vD/!%;@gaR+T);wkDo.=">
+                                        <field name="NUM">300</field>
+                                      </shadow>
+                                    </value>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </statement>
+                    <statement name="ELSE">
+                      <block type="inout_digital_writeD" id="t7OcJWHX`-5luNa:LUV[">
+                        <field name="OUTPUT_VALUE">1</field>
+                        <field name="STAT">0</field>
+                        <value name="PIN">
+                          <shadow type="math_number" id="vC-C=._iu=,e5-ZjHdYh">
+                            <field name="NUM">13</field>
+                          </shadow>
+                        </value>
+                        <next>
+                          <block type="notone22" id="k-63D9S,csvT%IB%Zw/." disabled="true">
+                            <value name="PIN">
+                              <shadow type="math_number" id="ei(*QK-nP~?nAT1[-YU/">
+                                <field name="NUM">3</field>
+                              </shadow>
+                            </value>
+                            <next>
+                              <block type="base_delay" id="/6.aSxE#KE.*:9KB1sEi">
+                                <field name="unite">m</field>
+                                <value name="DELAY_TIME">
+                                  <shadow type="math_number" id="Y#:DKJ@{z+5?o`MCGoW/">
+                                    <field name="NUM">300</field>
+                                  </shadow>
+                                </value>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </statement>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>
