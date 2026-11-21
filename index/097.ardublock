@@ -1,0 +1,110 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <toolbox>toolbox_arduino_all</toolbox>
+  <block type="arduino_setup" id="U+1WR;V}vnU3H-JfvZZj" x="44" y="37">
+    <statement name="MyLoop">
+      <block type="controls_if" id="Oa^,z3Czd.S.`L:/8n1V">
+        <value name="IF0">
+          <block type="logic_compare_log" id="nbqscdb(AUdK*?!b?HO2">
+            <field name="OP">EQ</field>
+            <value name="A">
+              <shadow type="math_number" id="5pl`QgCsDv:pXC*P?wxz">
+                <field name="NUM">R</field>
+              </shadow>
+              <block type="digital_readbiR" id="LuzS!.KD?S#u!Yv!8JSb">
+                <field name="NUMBER">8</field>
+                <value name="PIN">
+                  <shadow type="math_number" id="b.3W:ov3$XMjYPbHk0O5">
+                    <field name="NUM">2</field>
+                  </shadow>
+                </value>
+              </block>
+            </value>
+            <value name="B">
+              <shadow type="math_number" id="?7m#0{PMI(D?s^4[%=x8">
+                <field name="NUM">0</field>
+              </shadow>
+            </value>
+          </block>
+        </value>
+        <statement name="DO0">
+          <block type="base_define_for" id="-!_`p=`5{AH8=vo%U~sG">
+            <value name="variable">
+              <shadow type="math_number" id="k/Pj4$k:hXebpb7SN}jC">
+                <field name="NUM">10</field>
+              </shadow>
+            </value>
+            <statement name="DO">
+              <block type="actuator_tonedure" id="L*_uNt$h^4w]M;VlUb`z">
+                <value name="PIN">
+                  <shadow type="math_number" id="uMOCfrkozfSJ17d|9_lE">
+                    <field name="NUM">3</field>
+                  </shadow>
+                </value>
+                <value name="NUM">
+                  <shadow type="math_number" id="N0wYB[[3S|KcnAkmqkMD">
+                    <field name="NUM">440</field>
+                  </shadow>
+                </value>
+                <value name="DUR">
+                  <shadow type="math_number" id="}^_Bi=u/llP?(s.yWq1=">
+                    <field name="NUM">300</field>
+                  </shadow>
+                </value>
+                <next>
+                  <block type="inout_digital_writeD" id="ZEXz*n$/E4ivqtsog?D%">
+                    <field name="OUTPUT_VALUE">1</field>
+                    <field name="STAT">1</field>
+                    <value name="PIN">
+                      <shadow type="math_number" id="{%T^;a?ILFXP;RmDQh`=">
+                        <field name="NUM">13</field>
+                      </shadow>
+                    </value>
+                    <next>
+                      <block type="actuator_tonedure" id="hCtdjYUl0)AU;!n)yBAc">
+                        <value name="PIN">
+                          <shadow type="math_number" id="GHO5(:U=,WLAX8Vw8m.3">
+                            <field name="NUM">3</field>
+                          </shadow>
+                        </value>
+                        <value name="NUM">
+                          <shadow type="math_number" id="h3V!AEDWt@wL)XTC;^*I">
+                            <field name="NUM">1000</field>
+                          </shadow>
+                        </value>
+                        <value name="DUR">
+                          <shadow type="math_number" id="C%e=lTN{:hyOlCnXz@+g">
+                            <field name="NUM">300</field>
+                          </shadow>
+                        </value>
+                        <next>
+                          <block type="inout_digital_writeD" id="npF9Z8-bfVhW,U{6+Sgm">
+                            <field name="OUTPUT_VALUE">1</field>
+                            <field name="STAT">0</field>
+                            <value name="PIN">
+                              <shadow type="math_number" id="g?Mb:wlU3XC{jm-dbdvf">
+                                <field name="NUM">13</field>
+                              </shadow>
+                            </value>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </statement>
+            <next>
+              <block type="notone22" id="Bw4l2I%GPF)=hciK2GrY">
+                <value name="PIN">
+                  <shadow type="math_number" id="J4D}2gx#Gd{5PrrZ`+vS">
+                    <field name="NUM">3</field>
+                  </shadow>
+                </value>
+              </block>
+            </next>
+          </block>
+        </statement>
+      </block>
+    </statement>
+  </block>
+</xml>

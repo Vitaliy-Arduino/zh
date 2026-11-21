@@ -1,0 +1,133 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <toolbox>toolbox_arduino_all</toolbox>
+  <block type="arduino_setup" id="0_,Cn4|r8v$`@B3Dc[!~" x="-12" y="-24">
+    <statement name="MySetup">
+      <block type="minilcdi2c_setup" id="?bRlW0#.ajdyll,dC{4L">
+        <next>
+          <block type="serial_init" id="|[-*WU^rRV/!~f]@p;Z?">
+            <field name="pin">0</field>
+            <field name="SPEED">9600</field>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <statement name="MyLoop">
+      <block type="serial_write_ln" id="5hvgKBHJ.G}xOiiWsyPG">
+        <value name="CONTENT">
+          <shadow type="text" id="F2K_lD05^rk7mbo_Zb#M">
+            <field name="TEXT">ArduBlock RU EN</field>
+          </shadow>
+          <block type="text_join" id="KEyYLJw61uq(d)aKp[:V">
+            <mutation items="6"></mutation>
+            <value name="ADD0">
+              <block type="ardublock_block24" id="0i!b6-yrm`Z!Y#V`hqnD">
+                <field name="d1">INA226 - V</field>
+                <field name="d2">INA.getBusVoltage()</field>
+                <field name="a1">#include "Wire.h" </field>
+                <field name="a2">#include "INA226.h"</field>
+                <field name="a3">INA226 INA(0x40);</field>
+                <field name="a4">Wire.begin(); if (!INA.begin() ){   } INA.setAverage(2);delay(100);INA.setMaxCurrentShunt(1, 0.002);</field>
+                <field name="a5">INA226</field>
+              </block>
+            </value>
+            <value name="ADD1">
+              <block type="text" id="sXPiuYyM^LLj^,S=)%o2">
+                <field name="TEXT">V | </field>
+              </block>
+            </value>
+            <value name="ADD2">
+              <block type="ardublock_block24" id="zWLxf7!mI5sF(.MM(783">
+                <field name="d1">INA226 - mA</field>
+                <field name="d2">INA.getShuntVoltage_mV()*10 &lt; 0 ? 0.0 : INA.getShuntVoltage_mV()*10</field>
+                <field name="a1">#include "Wire.h" </field>
+                <field name="a2">#include "INA226.h"</field>
+                <field name="a3">INA226 INA(0x40);</field>
+                <field name="a4">Wire.begin(); if (!INA.begin() ){   } INA.setAverage(2);delay(100);INA.setMaxCurrentShunt(1, 0.002);</field>
+                <field name="a5">INA226</field>
+              </block>
+            </value>
+            <value name="ADD3">
+              <block type="text" id="U(.kX(vG|V4$g(I.-Sm}">
+                <field name="TEXT"> mA | </field>
+              </block>
+            </value>
+            <value name="ADD4">
+              <block type="ardublock_block24" id="vq#`e]aEO#@lN23#!Q6`">
+                <field name="d1">INA226 - mW</field>
+                <field name="d2">(INA.getShuntVoltage_mV()*10 &lt; 0 ? 0.0 : INA.getShuntVoltage_mV()*10)*(INA.getBusVoltage())</field>
+                <field name="a1">#include "Wire.h" </field>
+                <field name="a2">#include "INA226.h"</field>
+                <field name="a3">INA226 INA(0x40);</field>
+                <field name="a4">Wire.begin(); if (!INA.begin() ){   } INA.setAverage(2);delay(100);INA.setMaxCurrentShunt(1, 0.002);</field>
+                <field name="a5">INA226</field>
+              </block>
+            </value>
+            <value name="ADD5">
+              <block type="text" id="/A%]g+]o6J(}`4_~;ETg">
+                <field name="TEXT"> mW </field>
+              </block>
+            </value>
+          </block>
+        </value>
+        <next>
+          <block type="minilcdi2c_setcursor" id="sIv#5N2CnS;y^iht1OHn">
+            <field name="dp">12x16</field>
+            <value name="print_x">
+              <shadow type="math_number" id="uAK-5a2;@61k5;HyjF1g">
+                <field name="NUM">2</field>
+              </shadow>
+            </value>
+            <value name="print_y">
+              <shadow type="math_number" id="qGUNox^TL,Idcy{jG(|I">
+                <field name="NUM">2</field>
+              </shadow>
+            </value>
+            <value name="texttoprint">
+              <shadow type="text" id="$z1X1nH(^3v4@*@iI!1X">
+                <field name="TEXT">ArduBlock RU EN</field>
+              </shadow>
+              <block type="text_st" id="KZER^wFEOOPhN+imYFk;">
+                <value name="string-int-block">
+                  <block type="text_join" id="WGs`^KlJ^swEx0KRnlZf">
+                    <mutation items="3"></mutation>
+                    <value name="ADD0">
+                      <block type="text" id="bYj2ab+A|2.HSL$s{a2;">
+                        <field name="TEXT">V:</field>
+                      </block>
+                    </value>
+                    <value name="ADD1">
+                      <block type="ardublock_block24" id="}WX^eTF@{l/DyOEuJ*MB">
+                        <field name="d1">INA226 - V</field>
+                        <field name="d2">INA.getBusVoltage()</field>
+                        <field name="a1">#include "Wire.h" </field>
+                        <field name="a2">#include "INA226.h"</field>
+                        <field name="a3">INA226 INA(0x40);</field>
+                        <field name="a4">Wire.begin(); if (!INA.begin() ){   } INA.setAverage(2);delay(100);INA.setMaxCurrentShunt(1, 0.002);</field>
+                        <field name="a5">INA226</field>
+                      </block>
+                    </value>
+                    <value name="ADD2">
+                      <block type="text" id="{{OWi%X.PF;06Uj(WNwp">
+                        <field name="TEXT">     </field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <next>
+              <block type="base_delay" id="IjAhL]XM$3$.F_p4hy(A">
+                <field name="unite">m</field>
+                <value name="DELAY_TIME">
+                  <shadow type="math_number" id="UU8A|s#|5$WH42d{bjT9">
+                    <field name="NUM">300</field>
+                  </shadow>
+                </value>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>

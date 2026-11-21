@@ -1,0 +1,465 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <toolbox>toolbox_arduino_all</toolbox>
+  <block type="arduino_setup" id="J6kb#)@i$gkpHb)Z9p,c" x="-17" y="-27">
+    <statement name="MySetup">
+      <block type="ardublock_block33" id="4:EuAAr,9OF%mWFHDf)i">
+        <field name="d1">Цифровой индикатор - WS2812</field>
+        <field name="d2">#include &lt;Adafruit_NeoPixel.h&gt;</field>
+        <field name="d3">Adafruit_NeoPixel pixels(</field>
+        <field name="d4">32, 2</field>
+        <field name="d5">, NEO_GRB + NEO_KHZ800); const uint8_t digitPatterns[10][8] = {{1, 1, 1, 0, 1, 1, 1, 0},{0, 0, 1, 0, 0, 0, 1, 0},{1, 1, 0, 1, 0, 1, 1, 0},{0, 1, 1, 1, 0, 1, 1, 0},{0, 0, 1, 1, 1, 0, 1, 0},{0, 1, 1, 1, 1, 1, 0, 0},{1, 1, 1, 1, 1, 1, 0, 0},{0, 0, 1, 0, 0, 1, 1, 0},{1, 1, 1, 1, 1, 1, 1, 0},{0, 1, 1, 1, 1, 1, 1, 0} };</field>
+        <field name="d6">Adafruit_NeoPixe</field>
+        <next>
+          <block type="variables_set_init" id=";l$mm:3ca*a|[r(s(!f)">
+            <field name="VAR">x</field>
+            <field name="VARIABLE_SETTYPE_TYPE">NUMBER</field>
+            <value name="VALUE">
+              <block type="math_number" id="2)ZG!s.ilruoG4]|f1Y#">
+                <field name="NUM">0</field>
+              </block>
+            </value>
+            <next>
+              <block type="ardublock_block23" id="QlK*VCoWdO8s:shT[[5P">
+                <field name="d1">Цифровой индикатор - WS2812 - Очистить</field>
+                <field name="d2">clearDisplay();</field>
+                <field name="a1"></field>
+                <field name="a2"></field>
+                <field name="a3">void clearDisplay() {     for (int i = 0; i &lt; pixels.numPixels(); i++) {         pixels.setPixelColor(i, pixels.Color(0, 0, 0));     }     pixels.show(); }</field>
+                <field name="a4"></field>
+                <field name="a5">clearDisplay</field>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <statement name="MyLoop">
+      <block type="ardublock_block23" id="IXrldQw2GRN+}j,}HXo6">
+        <field name="d1">Цифровой индикатор - WS2812 - Очистить</field>
+        <field name="d2">clearDisplay();</field>
+        <field name="a1"></field>
+        <field name="a2"></field>
+        <field name="a3">void clearDisplay() {     for (int i = 0; i &lt; pixels.numPixels(); i++) {         pixels.setPixelColor(i, pixels.Color(0, 0, 0));     }     pixels.show(); }</field>
+        <field name="a4"></field>
+        <field name="a5">clearDisplay</field>
+        <next>
+          <block type="controls_if" id="qcEb8b/v0Md7?n]8I_l;">
+            <value name="IF0">
+              <block type="logic_compare_log" id=":~m2;Q,6v?#nCe3zvW55">
+                <field name="OP">GTE</field>
+                <value name="A">
+                  <shadow type="math_number" id="o?bY-Y$dTdi.nzO4x_0C">
+                    <field name="NUM">R</field>
+                  </shadow>
+                  <block type="variables_get" id="xuZ![L+ax)aUmY*Lp7.{">
+                    <field name="VAR">x</field>
+                  </block>
+                </value>
+                <value name="B">
+                  <shadow type="math_number" id="OE|^k?lZbAo8TVMk.N)Z">
+                    <field name="NUM">1000</field>
+                  </shadow>
+                </value>
+              </block>
+            </value>
+            <statement name="DO0">
+              <block type="ardublock_block32" id="*+JVH)0|)f[]84Pwlx[-">
+                <field name="d1">Цифровой индикатор - WS2812 - Первый пиксель</field>
+                <field name="d2">displaySegment(</field>
+                <field name="d4">,</field>
+                <field name="d6">Пикселей в делении</field>
+                <field name="d5">,</field>
+                <field name="d8">Значение</field>
+                <field name="d7">,</field>
+                <field name="d9">Цвет RGB</field>
+                <field name="d10">);</field>
+                <field name="a1"></field>
+                <field name="a2"></field>
+                <field name="a3">void displaySegment(int startIndex, int numPixels, int number, int r, int g, int b) { for (int i = 0; i &lt; 8; i++) {         if (digitPatterns[number][i] == 1) {             for (int j = 0; j &lt; numPixels; j++) {                 pixels.setPixelColor(startIndex + i * numPixels + j, pixels.Color(r, g, b));             }         }     }     pixels.show(); }</field>
+                <field name="a4">pixels.begin();pixels.setBrightness(255);</field>
+                <field name="a5">pixels</field>
+                <value name="block1">
+                  <shadow type="math_number" id="iGD~L!}d/Bc(e;bYr8:c">
+                    <field name="NUM">0</field>
+                  </shadow>
+                </value>
+                <value name="block2">
+                  <shadow type="math_number" id="ZY2[O#_/i3jfOT|?3x{P">
+                    <field name="NUM">1</field>
+                  </shadow>
+                </value>
+                <value name="block3">
+                  <shadow type="math_number" id="Z~O)y9#}3B9(Zs[`90CP">
+                    <field name="NUM">-2</field>
+                  </shadow>
+                  <block type="ardublock_block28" id="Ok_Ib3(erq@j7,;?MX2Q">
+                    <field name="d1">Число</field>
+                    <field name="d2">((</field>
+                    <field name="d4"> / (int)pow(10, </field>
+                    <field name="d6">индекс</field>
+                    <field name="d5">)) % 10)</field>
+                    <field name="a1">#include &lt;math.h&gt;</field>
+                    <field name="a2"></field>
+                    <field name="a3"></field>
+                    <field name="a4"></field>
+                    <field name="a5">pow</field>
+                    <value name="block1">
+                      <shadow type="math_number" id="%Vu5)Z_C.I,;vH`V;?S3">
+                        <field name="NUM">0</field>
+                      </shadow>
+                      <block type="variables_get" id="1sdo$kyfl|g5Mzw(%$YJ">
+                        <field name="VAR">x</field>
+                      </block>
+                    </value>
+                    <value name="block2">
+                      <shadow type="math_number" id="h(HI|mi@2,xSz(;Y^dN;">
+                        <field name="NUM">3</field>
+                      </shadow>
+                    </value>
+                  </block>
+                </value>
+                <value name="block4">
+                  <shadow type="math_number" id="xG9^:Bt`|r6c%)ThNZ~P">
+                    <field name="NUM">3</field>
+                  </shadow>
+                  <block type="base_code_entree" id="CFKM6QQP@nY6B_SZkHss">
+                    <field name="TEXT">255,255,255</field>
+                  </block>
+                </value>
+              </block>
+            </statement>
+            <next>
+              <block type="controls_if" id="wvY|qwiE]LtVC19l/NXa">
+                <value name="IF0">
+                  <block type="logic_compare_log" id="tZej@uq}yEM/Wx.WIQ~Z">
+                    <field name="OP">GTE</field>
+                    <value name="A">
+                      <shadow type="math_number" id="o?bY-Y$dTdi.nzO4x_0C">
+                        <field name="NUM">R</field>
+                      </shadow>
+                      <block type="variables_get" id="*ptC2CI*,oE4sHfq},ak">
+                        <field name="VAR">x</field>
+                      </block>
+                    </value>
+                    <value name="B">
+                      <shadow type="math_number" id="6AXMe.P*{HNKa;bSob^#">
+                        <field name="NUM">100</field>
+                      </shadow>
+                    </value>
+                  </block>
+                </value>
+                <statement name="DO0">
+                  <block type="ardublock_block32" id="wEE2%t((`F$N]-MK/f22">
+                    <field name="d1">Цифровой индикатор - WS2812 - Первый пиксель</field>
+                    <field name="d2">displaySegment(</field>
+                    <field name="d4">,</field>
+                    <field name="d6">Пикселей в делении</field>
+                    <field name="d5">,</field>
+                    <field name="d8">Значение</field>
+                    <field name="d7">,</field>
+                    <field name="d9">Цвет RGB</field>
+                    <field name="d10">);</field>
+                    <field name="a1"></field>
+                    <field name="a2"></field>
+                    <field name="a3">void displaySegment(int startIndex, int numPixels, int number, int r, int g, int b) { for (int i = 0; i &lt; 8; i++) {         if (digitPatterns[number][i] == 1) {             for (int j = 0; j &lt; numPixels; j++) {                 pixels.setPixelColor(startIndex + i * numPixels + j, pixels.Color(r, g, b));             }         }     }     pixels.show(); }</field>
+                    <field name="a4">pixels.begin();pixels.setBrightness(255);</field>
+                    <field name="a5">pixels</field>
+                    <value name="block1">
+                      <shadow type="math_number" id="Lq(H~CD$Yoa9!Qq$.6MS">
+                        <field name="NUM">8</field>
+                      </shadow>
+                    </value>
+                    <value name="block2">
+                      <shadow type="math_number" id="z(p~S7HDpJe4-J~r{0h!">
+                        <field name="NUM">1</field>
+                      </shadow>
+                    </value>
+                    <value name="block3">
+                      <shadow type="math_number" id="Z~O)y9#}3B9(Zs[`90CP">
+                        <field name="NUM">-2</field>
+                      </shadow>
+                      <block type="ardublock_block28" id="PaUn(jc*43cwFs.~i=hJ">
+                        <field name="d1">Число</field>
+                        <field name="d2">((</field>
+                        <field name="d4"> / (int)pow(10, </field>
+                        <field name="d6">индекс</field>
+                        <field name="d5">)) % 10)</field>
+                        <field name="a1">#include &lt;math.h&gt;</field>
+                        <field name="a2"></field>
+                        <field name="a3"></field>
+                        <field name="a4"></field>
+                        <field name="a5">pow</field>
+                        <value name="block1">
+                          <shadow type="math_number" id="%Vu5)Z_C.I,;vH`V;?S3">
+                            <field name="NUM">0</field>
+                          </shadow>
+                          <block type="variables_get" id="Y4O~jy4zQ!4+P^Y:tU{G">
+                            <field name="VAR">x</field>
+                          </block>
+                        </value>
+                        <value name="block2">
+                          <shadow type="math_number" id="dZy?pAhIYDCWeGc%ENj*">
+                            <field name="NUM">2</field>
+                          </shadow>
+                        </value>
+                      </block>
+                    </value>
+                    <value name="block4">
+                      <shadow type="math_number" id="xG9^:Bt`|r6c%)ThNZ~P">
+                        <field name="NUM">3</field>
+                      </shadow>
+                      <block type="base_code_entree" id="OYKX-5|pk|2x.{J_hu-q">
+                        <field name="TEXT">255,255,255</field>
+                      </block>
+                    </value>
+                  </block>
+                </statement>
+                <next>
+                  <block type="controls_if" id="Ehb^T8%2H!qx}k9hB#e4">
+                    <value name="IF0">
+                      <block type="logic_compare_log" id="!7RIAJ$OzKGhc1A(|!qq">
+                        <field name="OP">GTE</field>
+                        <value name="A">
+                          <shadow type="math_number" id="o?bY-Y$dTdi.nzO4x_0C">
+                            <field name="NUM">R</field>
+                          </shadow>
+                          <block type="variables_get" id="*G`7]}+j#Z4bX_u{EJ_z">
+                            <field name="VAR">x</field>
+                          </block>
+                        </value>
+                        <value name="B">
+                          <shadow type="math_number" id="*+yx)52Y,ElOd-a(y3Tz">
+                            <field name="NUM">10</field>
+                          </shadow>
+                        </value>
+                      </block>
+                    </value>
+                    <statement name="DO0">
+                      <block type="ardublock_block32" id="!TtxnFi{b6tMicezl)h$">
+                        <field name="d1">Цифровой индикатор - WS2812 - Первый пиксель</field>
+                        <field name="d2">displaySegment(</field>
+                        <field name="d4">,</field>
+                        <field name="d6">Пикселей в делении</field>
+                        <field name="d5">,</field>
+                        <field name="d8">Значение</field>
+                        <field name="d7">,</field>
+                        <field name="d9">Цвет RGB</field>
+                        <field name="d10">);</field>
+                        <field name="a1"></field>
+                        <field name="a2"></field>
+                        <field name="a3">void displaySegment(int startIndex, int numPixels, int number, int r, int g, int b) { for (int i = 0; i &lt; 8; i++) {         if (digitPatterns[number][i] == 1) {             for (int j = 0; j &lt; numPixels; j++) {                 pixels.setPixelColor(startIndex + i * numPixels + j, pixels.Color(r, g, b));             }         }     }     pixels.show(); }</field>
+                        <field name="a4">pixels.begin();pixels.setBrightness(255);</field>
+                        <field name="a5">pixels</field>
+                        <value name="block1">
+                          <shadow type="math_number" id="Wc](K-B+#VA~+Fryb11H">
+                            <field name="NUM">16</field>
+                          </shadow>
+                        </value>
+                        <value name="block2">
+                          <shadow type="math_number" id="{0Sg0N0*Vhk`LSTibhxJ">
+                            <field name="NUM">1</field>
+                          </shadow>
+                        </value>
+                        <value name="block3">
+                          <shadow type="math_number" id="JTN#wX{NqJ^@^KRq8Ihg">
+                            <field name="NUM">3</field>
+                          </shadow>
+                          <block type="ardublock_block28" id="fA3?.;?3JaYPhEh[-K]0">
+                            <field name="d1">Число</field>
+                            <field name="d2">((</field>
+                            <field name="d4"> / (int)pow(10, </field>
+                            <field name="d6">индекс</field>
+                            <field name="d5">)) % 10)</field>
+                            <field name="a1">#include &lt;math.h&gt;</field>
+                            <field name="a2"></field>
+                            <field name="a3"></field>
+                            <field name="a4"></field>
+                            <field name="a5">pow</field>
+                            <value name="block1">
+                              <shadow type="math_number" id="%Vu5)Z_C.I,;vH`V;?S3">
+                                <field name="NUM">0</field>
+                              </shadow>
+                              <block type="variables_get" id="}U7`-$my%Zcy-xAy]9n=">
+                                <field name="VAR">x</field>
+                              </block>
+                            </value>
+                            <value name="block2">
+                              <shadow type="math_number" id="1u`)9O:^A(}!HiR7DKZj">
+                                <field name="NUM">1</field>
+                              </shadow>
+                            </value>
+                          </block>
+                        </value>
+                        <value name="block4">
+                          <shadow type="math_number" id="xG9^:Bt`|r6c%)ThNZ~P">
+                            <field name="NUM">3</field>
+                          </shadow>
+                          <block type="base_code_entree" id="z(2bDx9tzJB0?ywe#jyh">
+                            <field name="TEXT">255,255,255</field>
+                          </block>
+                        </value>
+                      </block>
+                    </statement>
+                    <next>
+                      <block type="controls_if" id="WR9/9mK`Pn(svgn(gxxU">
+                        <value name="IF0">
+                          <block type="logic_compare_log" id="S0L6]z{9-SLlVf_~LY9{">
+                            <field name="OP">GTE</field>
+                            <value name="A">
+                              <shadow type="math_number" id="o?bY-Y$dTdi.nzO4x_0C">
+                                <field name="NUM">R</field>
+                              </shadow>
+                              <block type="variables_get" id="(3W(cWH/b5ol%})uupb9">
+                                <field name="VAR">x</field>
+                              </block>
+                            </value>
+                            <value name="B">
+                              <shadow type="math_number" id="Vqe,SU{,G4zC~VELuL5=">
+                                <field name="NUM">0</field>
+                              </shadow>
+                            </value>
+                          </block>
+                        </value>
+                        <statement name="DO0">
+                          <block type="ardublock_block32" id="|]nq3)G[z}evwP;GP,xo">
+                            <field name="d1">Цифровой индикатор - WS2812 - Первый пиксель</field>
+                            <field name="d2">displaySegment(</field>
+                            <field name="d4">,</field>
+                            <field name="d6">Пикселей в делении</field>
+                            <field name="d5">,</field>
+                            <field name="d8">Значение</field>
+                            <field name="d7">,</field>
+                            <field name="d9">Цвет RGB</field>
+                            <field name="d10">);</field>
+                            <field name="a1"></field>
+                            <field name="a2"></field>
+                            <field name="a3">void displaySegment(int startIndex, int numPixels, int number, int r, int g, int b) { for (int i = 0; i &lt; 8; i++) {         if (digitPatterns[number][i] == 1) {             for (int j = 0; j &lt; numPixels; j++) {                 pixels.setPixelColor(startIndex + i * numPixels + j, pixels.Color(r, g, b));             }         }     }     pixels.show(); }</field>
+                            <field name="a4">pixels.begin();pixels.setBrightness(255);</field>
+                            <field name="a5">pixels</field>
+                            <value name="block1">
+                              <shadow type="math_number" id="X]q/zGZL@$)9FmZ3$d,B">
+                                <field name="NUM">24</field>
+                              </shadow>
+                            </value>
+                            <value name="block2">
+                              <shadow type="math_number" id="4Dwf,YqN?5p-SmKFeXRm">
+                                <field name="NUM">1</field>
+                              </shadow>
+                            </value>
+                            <value name="block3">
+                              <shadow type="math_number" id="JTN#wX{NqJ^@^KRq8Ihg">
+                                <field name="NUM">3</field>
+                              </shadow>
+                              <block type="ardublock_block28" id="%S-P~/L_i$*-njTLzpce">
+                                <field name="d1">Число</field>
+                                <field name="d2">((</field>
+                                <field name="d4"> / (int)pow(10, </field>
+                                <field name="d6">индекс</field>
+                                <field name="d5">)) % 10)</field>
+                                <field name="a1">#include &lt;math.h&gt;</field>
+                                <field name="a2"></field>
+                                <field name="a3"></field>
+                                <field name="a4"></field>
+                                <field name="a5">pow</field>
+                                <value name="block1">
+                                  <shadow type="math_number" id="%Vu5)Z_C.I,;vH`V;?S3">
+                                    <field name="NUM">0</field>
+                                  </shadow>
+                                  <block type="variables_get" id="cx`mHqeUp0P?swIyCF*C">
+                                    <field name="VAR">x</field>
+                                  </block>
+                                </value>
+                                <value name="block2">
+                                  <shadow type="math_number" id="xmXeFOFUjx,l*-EdZRLP">
+                                    <field name="NUM">0</field>
+                                  </shadow>
+                                </value>
+                              </block>
+                            </value>
+                            <value name="block4">
+                              <shadow type="math_number" id="xG9^:Bt`|r6c%)ThNZ~P">
+                                <field name="NUM">3</field>
+                              </shadow>
+                              <block type="base_code_entree" id="cu.lWjE):Uiihw~hBaHW">
+                                <field name="TEXT">255,255,255</field>
+                              </block>
+                            </value>
+                          </block>
+                        </statement>
+                        <next>
+                          <block type="base_delay" id="W^%5bz4pvf#[JGK@IIGX">
+                            <field name="unite">m</field>
+                            <value name="DELAY_TIME">
+                              <shadow type="math_number" id="-MPP1k+je-]H(C:/Vdp!">
+                                <field name="NUM">300</field>
+                              </shadow>
+                            </value>
+                            <next>
+                              <block type="variables_set" id="66,LA=C#Iy6)/{Fi-Vr8">
+                                <field name="VAR">x</field>
+                                <value name="VALUE">
+                                  <block type="math_arithmetic" id="h1K69bUNV:pT|-58,tlq">
+                                    <field name="OP">ADD</field>
+                                    <value name="A">
+                                      <shadow type="math_number" id="p|Z6;!0XE%kidUyKCZ`R">
+                                        <field name="NUM">R</field>
+                                      </shadow>
+                                      <block type="variables_get" id="1ER?%@!siv`9S,gcfi^W">
+                                        <field name="VAR">x</field>
+                                      </block>
+                                    </value>
+                                    <value name="B">
+                                      <shadow type="math_number" id="T_ai{IXx8,jCr}8s:6ZM">
+                                        <field name="NUM">1</field>
+                                      </shadow>
+                                    </value>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="controls_if" id="gLR},ZCA/d?nT_[Ft7a@">
+                                    <value name="IF0">
+                                      <block type="logic_compare_log" id="/D[0IhB.=z=r,OCk~o3y">
+                                        <field name="OP">EQ</field>
+                                        <value name="A">
+                                          <shadow type="math_number" id="31EF~S@ndO^bj,^FAc+Z">
+                                            <field name="NUM">R</field>
+                                          </shadow>
+                                          <block type="variables_get" id="_[$w6#.tyHkQhLeZF5NH">
+                                            <field name="VAR">x</field>
+                                          </block>
+                                        </value>
+                                        <value name="B">
+                                          <shadow type="math_number" id="60O!:(YQkJ)*~ZlEy:M+">
+                                            <field name="NUM">10000</field>
+                                          </shadow>
+                                        </value>
+                                      </block>
+                                    </value>
+                                    <statement name="DO0">
+                                      <block type="variables_set" id="ttvWKQ@I@0S(gAfBs2H!">
+                                        <field name="VAR">x</field>
+                                        <value name="VALUE">
+                                          <block type="math_number" id="$PW)W{q}X6qvV$2:QXh!">
+                                            <field name="NUM">0</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </statement>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>

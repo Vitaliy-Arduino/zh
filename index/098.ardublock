@@ -1,0 +1,97 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <toolbox>toolbox_arduino_all</toolbox>
+  <block type="arduino_setup" id="U+1WR;V}vnU3H-JfvZZj" x="44" y="37">
+    <statement name="MySetup">
+      <block type="variables_set_init" id="FEI;mjn:e)a)NT,KH`##">
+        <field name="VAR">x</field>
+        <field name="VARIABLE_SETTYPE_TYPE">CHARACTER</field>
+        <value name="VALUE">
+          <block type="math_number" id="+.:mx*Wi]Ws.!5d:pn1A">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <next>
+          <block type="minilcdi2c_setup" id="7h4q4?W{j({DI#~lY1OV">
+            <next>
+              <block type="minilcdi2c_setcursorR" id="5-yCnjLFW4H0-FoYVQ*l">
+                <field name="dp">12x16</field>
+                <field name="tipe">long</field>
+                <value name="print_x">
+                  <shadow type="math_number" id="|Ee*gNF3][3YE_Af.|?l">
+                    <field name="NUM">12</field>
+                  </shadow>
+                </value>
+                <value name="print_y">
+                  <shadow type="math_number" id="[d;Yb@Qub#OpCq!l[?9A">
+                    <field name="NUM">1</field>
+                  </shadow>
+                </value>
+                <value name="print_R">
+                  <shadow type="math_number" id="=Pg8z{It.aiwHx=W?=2/">
+                    <field name="NUM">123</field>
+                  </shadow>
+                  <block type="variables_get" id="tw~K(},/s16,pZpPw9+p">
+                    <field name="VAR">x</field>
+                  </block>
+                </value>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <statement name="MyLoop">
+      <block type="pin_botton_pro" id="iIkq,l3}bVYwF+K8lI36">
+        <field name="idn_text">2</field>
+        <field name="bb_dropdown">1</field>
+        <statement name="bot_statement">
+          <block type="variables_set" id="`g?G{K6K]G!mpZu4T8$G">
+            <field name="VAR">x</field>
+            <value name="VALUE">
+              <block type="math_arithmetic" id="qtvWAM!v|ST1]K7V1qLA">
+                <field name="OP">ADD</field>
+                <value name="A">
+                  <shadow type="math_number" id="++SN}4KQ%O+eHE8py7iY">
+                    <field name="NUM">R</field>
+                  </shadow>
+                  <block type="variables_get" id=";3sbg!o]%6[a^FOT(u48">
+                    <field name="VAR">x</field>
+                  </block>
+                </value>
+                <value name="B">
+                  <shadow type="math_number" id="{i9aSzjlO%SDg(713hop">
+                    <field name="NUM">1</field>
+                  </shadow>
+                </value>
+              </block>
+            </value>
+            <next>
+              <block type="minilcdi2c_setcursorR" id="6K+1C21o.n7~(v6wiQ,l">
+                <field name="dp">12x16</field>
+                <field name="tipe">long</field>
+                <value name="print_x">
+                  <shadow type="math_number" id="1Y{hwZ.Q91SeX`9rdFB1">
+                    <field name="NUM">12</field>
+                  </shadow>
+                </value>
+                <value name="print_y">
+                  <shadow type="math_number" id="T]t]1pEpVl=i+A#IPd*t">
+                    <field name="NUM">1</field>
+                  </shadow>
+                </value>
+                <value name="print_R">
+                  <shadow type="math_number" id="I.0k):kJ18Og{ffZT?B~">
+                    <field name="NUM">123</field>
+                  </shadow>
+                  <block type="variables_get" id=":iXF_Kv.^`lu6Hi9pX9Y">
+                    <field name="VAR">x</field>
+                  </block>
+                </value>
+              </block>
+            </next>
+          </block>
+        </statement>
+      </block>
+    </statement>
+  </block>
+</xml>

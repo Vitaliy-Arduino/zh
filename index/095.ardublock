@@ -1,0 +1,447 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <toolbox>toolbox_arduino_all</toolbox>
+  <block type="arduino_setup" id="J6kb#)@i$gkpHb)Z9p,c" x="-228" y="20">
+    <statement name="MyLoop">
+      <block type="LedStrip_WS2812B_init_top8x8" id="Shk?Dnjll:rA-Q*mEZE[">
+        <field name="pin">2</field>
+        <field name="x8">#ff0000</field>
+        <field name="x7">#ff0000</field>
+        <field name="x6">#000000</field>
+        <field name="x5">#000000</field>
+        <field name="x4">#000000</field>
+        <field name="x3">#000000</field>
+        <field name="x2">#000000</field>
+        <field name="x1">#000000</field>
+        <field name="x9">#000000</field>
+        <field name="x10">#ff0000</field>
+        <field name="x11">#ff0000</field>
+        <field name="x12">#000000</field>
+        <field name="x13">#000000</field>
+        <field name="x14">#000000</field>
+        <field name="x15">#000000</field>
+        <field name="x16">#000000</field>
+        <field name="x24">#000000</field>
+        <field name="x23">#000000</field>
+        <field name="x22">#ff0000</field>
+        <field name="x21">#ff0000</field>
+        <field name="x20">#000000</field>
+        <field name="x19">#000000</field>
+        <field name="x18">#000000</field>
+        <field name="x17">#000000</field>
+        <field name="x25">#ff0000</field>
+        <field name="x26">#ff0000</field>
+        <field name="x27">#ff0000</field>
+        <field name="x28">#ff0000</field>
+        <field name="x29">#ff0000</field>
+        <field name="x30">#000000</field>
+        <field name="x31">#000000</field>
+        <field name="x32">#000000</field>
+        <field name="x40">#ff0000</field>
+        <field name="x39">#ff0000</field>
+        <field name="x38">#ff0000</field>
+        <field name="x37">#ff0000</field>
+        <field name="x36">#ff0000</field>
+        <field name="x35">#000000</field>
+        <field name="x34">#000000</field>
+        <field name="x33">#000000</field>
+        <field name="x41">#000000</field>
+        <field name="x42">#000000</field>
+        <field name="x43">#ff0000</field>
+        <field name="x44">#ff0000</field>
+        <field name="x45">#000000</field>
+        <field name="x46">#000000</field>
+        <field name="x47">#000000</field>
+        <field name="x48">#000000</field>
+        <field name="x56">#000000</field>
+        <field name="x55">#ff0000</field>
+        <field name="x54">#ff0000</field>
+        <field name="x53">#000000</field>
+        <field name="x52">#000000</field>
+        <field name="x51">#000000</field>
+        <field name="x50">#000000</field>
+        <field name="x49">#000000</field>
+        <field name="x57">#ff0000</field>
+        <field name="x58">#ff0000</field>
+        <field name="x59">#000000</field>
+        <field name="x60">#000000</field>
+        <field name="x61">#000000</field>
+        <field name="x62">#000000</field>
+        <field name="x63">#000000</field>
+        <field name="x64">#000000</field>
+        <next>
+          <block type="base_delay" id="d#YlOz{$Jt#}[=*NhCb?">
+            <field name="unite">m</field>
+            <value name="DELAY_TIME">
+              <shadow type="math_number" id="@Dy,ANG(K6xMvW@?yy).">
+                <field name="NUM">300</field>
+              </shadow>
+            </value>
+            <next>
+              <block type="LedStrip_WS2812B_init_top8x8" id="I(^im(D#@:j,p%@`1_M.">
+                <field name="pin">2</field>
+                <field name="x8">#000000</field>
+                <field name="x7">#ff0000</field>
+                <field name="x6">#ff0000</field>
+                <field name="x5">#000000</field>
+                <field name="x4">#000000</field>
+                <field name="x3">#000000</field>
+                <field name="x2">#000000</field>
+                <field name="x1">#000000</field>
+                <field name="x9">#000000</field>
+                <field name="x10">#000000</field>
+                <field name="x11">#ff0000</field>
+                <field name="x12">#ff0000</field>
+                <field name="x13">#000000</field>
+                <field name="x14">#000000</field>
+                <field name="x15">#000000</field>
+                <field name="x16">#000000</field>
+                <field name="x24">#000000</field>
+                <field name="x23">#000000</field>
+                <field name="x22">#000000</field>
+                <field name="x21">#ff0000</field>
+                <field name="x20">#ff0000</field>
+                <field name="x19">#000000</field>
+                <field name="x18">#000000</field>
+                <field name="x17">#000000</field>
+                <field name="x25">#000000</field>
+                <field name="x26">#ff0000</field>
+                <field name="x27">#ff0000</field>
+                <field name="x28">#ff0000</field>
+                <field name="x29">#ff0000</field>
+                <field name="x30">#ff0000</field>
+                <field name="x31">#000000</field>
+                <field name="x32">#000000</field>
+                <field name="x40">#000000</field>
+                <field name="x39">#ff0000</field>
+                <field name="x38">#ff0000</field>
+                <field name="x37">#ff0000</field>
+                <field name="x36">#ff0000</field>
+                <field name="x35">#ff0000</field>
+                <field name="x34">#000000</field>
+                <field name="x33">#000000</field>
+                <field name="x41">#000000</field>
+                <field name="x42">#000000</field>
+                <field name="x43">#000000</field>
+                <field name="x44">#ff0000</field>
+                <field name="x45">#ff0000</field>
+                <field name="x46">#000000</field>
+                <field name="x47">#000000</field>
+                <field name="x48">#000000</field>
+                <field name="x56">#000000</field>
+                <field name="x55">#000000</field>
+                <field name="x54">#ff0000</field>
+                <field name="x53">#ff0000</field>
+                <field name="x52">#000000</field>
+                <field name="x51">#000000</field>
+                <field name="x50">#000000</field>
+                <field name="x49">#000000</field>
+                <field name="x57">#000000</field>
+                <field name="x58">#ff0000</field>
+                <field name="x59">#ff0000</field>
+                <field name="x60">#000000</field>
+                <field name="x61">#000000</field>
+                <field name="x62">#000000</field>
+                <field name="x63">#000000</field>
+                <field name="x64">#000000</field>
+                <next>
+                  <block type="base_delay" id="iHUcYH%Pw}},I;qRRD9n">
+                    <field name="unite">m</field>
+                    <value name="DELAY_TIME">
+                      <shadow type="math_number" id=";%ThUxm+s6BDC#P~.C@!">
+                        <field name="NUM">300</field>
+                      </shadow>
+                    </value>
+                    <next>
+                      <block type="LedStrip_WS2812B_init_top8x8" id="lWiIm{Z(k`1#b9WJf{e1">
+                        <field name="pin">2</field>
+                        <field name="x8">#000000</field>
+                        <field name="x7">#000000</field>
+                        <field name="x6">#ff0000</field>
+                        <field name="x5">#ff0000</field>
+                        <field name="x4">#000000</field>
+                        <field name="x3">#000000</field>
+                        <field name="x2">#000000</field>
+                        <field name="x1">#000000</field>
+                        <field name="x9">#000000</field>
+                        <field name="x10">#000000</field>
+                        <field name="x11">#000000</field>
+                        <field name="x12">#ff0000</field>
+                        <field name="x13">#ff0000</field>
+                        <field name="x14">#000000</field>
+                        <field name="x15">#000000</field>
+                        <field name="x16">#000000</field>
+                        <field name="x24">#000000</field>
+                        <field name="x23">#000000</field>
+                        <field name="x22">#000000</field>
+                        <field name="x21">#000000</field>
+                        <field name="x20">#ff0000</field>
+                        <field name="x19">#ff0000</field>
+                        <field name="x18">#000000</field>
+                        <field name="x17">#000000</field>
+                        <field name="x25">#000000</field>
+                        <field name="x26">#000000</field>
+                        <field name="x27">#ff0000</field>
+                        <field name="x28">#ff0000</field>
+                        <field name="x29">#ff0000</field>
+                        <field name="x30">#ff0000</field>
+                        <field name="x31">#ff0000</field>
+                        <field name="x32">#000000</field>
+                        <field name="x40">#000000</field>
+                        <field name="x39">#000000</field>
+                        <field name="x38">#ff0000</field>
+                        <field name="x37">#ff0000</field>
+                        <field name="x36">#ff0000</field>
+                        <field name="x35">#ff0000</field>
+                        <field name="x34">#ff0000</field>
+                        <field name="x33">#000000</field>
+                        <field name="x41">#000000</field>
+                        <field name="x42">#000000</field>
+                        <field name="x43">#000000</field>
+                        <field name="x44">#000000</field>
+                        <field name="x45">#ff0000</field>
+                        <field name="x46">#ff0000</field>
+                        <field name="x47">#000000</field>
+                        <field name="x48">#000000</field>
+                        <field name="x56">#000000</field>
+                        <field name="x55">#000000</field>
+                        <field name="x54">#000000</field>
+                        <field name="x53">#ff0000</field>
+                        <field name="x52">#ff0000</field>
+                        <field name="x51">#000000</field>
+                        <field name="x50">#000000</field>
+                        <field name="x49">#000000</field>
+                        <field name="x57">#000000</field>
+                        <field name="x58">#000000</field>
+                        <field name="x59">#ff0000</field>
+                        <field name="x60">#ff0000</field>
+                        <field name="x61">#000000</field>
+                        <field name="x62">#000000</field>
+                        <field name="x63">#000000</field>
+                        <field name="x64">#000000</field>
+                        <next>
+                          <block type="base_delay" id="kP[-1oj?-/2Vxb0lAUKg">
+                            <field name="unite">m</field>
+                            <value name="DELAY_TIME">
+                              <shadow type="math_number" id="V_LdSEI)2Kq(gY7n9tzt">
+                                <field name="NUM">300</field>
+                              </shadow>
+                            </value>
+                            <next>
+                              <block type="LedStrip_WS2812B_init_top8x8" id="O-aq2z_%cV61[vxu(jgr">
+                                <field name="pin">2</field>
+                                <field name="x8">#000000</field>
+                                <field name="x7">#000000</field>
+                                <field name="x6">#000000</field>
+                                <field name="x5">#ff0000</field>
+                                <field name="x4">#ff0000</field>
+                                <field name="x3">#000000</field>
+                                <field name="x2">#000000</field>
+                                <field name="x1">#000000</field>
+                                <field name="x9">#000000</field>
+                                <field name="x10">#000000</field>
+                                <field name="x11">#000000</field>
+                                <field name="x12">#000000</field>
+                                <field name="x13">#ff0000</field>
+                                <field name="x14">#ff0000</field>
+                                <field name="x15">#000000</field>
+                                <field name="x16">#000000</field>
+                                <field name="x24">#000000</field>
+                                <field name="x23">#000000</field>
+                                <field name="x22">#000000</field>
+                                <field name="x21">#000000</field>
+                                <field name="x20">#000000</field>
+                                <field name="x19">#ff0000</field>
+                                <field name="x18">#ff0000</field>
+                                <field name="x17">#000000</field>
+                                <field name="x25">#000000</field>
+                                <field name="x26">#000000</field>
+                                <field name="x27">#000000</field>
+                                <field name="x28">#ff0000</field>
+                                <field name="x29">#ff0000</field>
+                                <field name="x30">#ff0000</field>
+                                <field name="x31">#ff0000</field>
+                                <field name="x32">#ff0000</field>
+                                <field name="x40">#000000</field>
+                                <field name="x39">#000000</field>
+                                <field name="x38">#000000</field>
+                                <field name="x37">#ff0000</field>
+                                <field name="x36">#ff0000</field>
+                                <field name="x35">#ff0000</field>
+                                <field name="x34">#ff0000</field>
+                                <field name="x33">#ff0000</field>
+                                <field name="x41">#000000</field>
+                                <field name="x42">#000000</field>
+                                <field name="x43">#000000</field>
+                                <field name="x44">#000000</field>
+                                <field name="x45">#000000</field>
+                                <field name="x46">#ff0000</field>
+                                <field name="x47">#ff0000</field>
+                                <field name="x48">#000000</field>
+                                <field name="x56">#000000</field>
+                                <field name="x55">#000000</field>
+                                <field name="x54">#000000</field>
+                                <field name="x53">#000000</field>
+                                <field name="x52">#ff0000</field>
+                                <field name="x51">#ff0000</field>
+                                <field name="x50">#000000</field>
+                                <field name="x49">#000000</field>
+                                <field name="x57">#000000</field>
+                                <field name="x58">#000000</field>
+                                <field name="x59">#000000</field>
+                                <field name="x60">#ff0000</field>
+                                <field name="x61">#ff0000</field>
+                                <field name="x62">#000000</field>
+                                <field name="x63">#000000</field>
+                                <field name="x64">#000000</field>
+                                <next>
+                                  <block type="base_delay" id="ktxpP}NB2%54Q5Hu)QO$">
+                                    <field name="unite">m</field>
+                                    <value name="DELAY_TIME">
+                                      <shadow type="math_number" id="LKzT85Dg7$5*2$6(eK:0">
+                                        <field name="NUM">300</field>
+                                      </shadow>
+                                    </value>
+                                    <next>
+                                      <block type="LedStrip_WS2812B_init_top" id="@}hn,$B+Aoe3T=]1E%zl">
+                                        <field name="RGBCOLOR">#00FF00</field>
+                                        <field name="RE_NUMBER">6</field>
+                                        <value name="PINR">
+                                          <shadow type="math_number" id="pGx1pM@7c7$j4@ev;6AN">
+                                            <field name="NUM">64</field>
+                                          </shadow>
+                                        </value>
+                                        <value name="PIN">
+                                          <shadow type="math_number" id="p8}vCuq%)5{+eYE:y;i!">
+                                            <field name="NUM">2</field>
+                                          </shadow>
+                                        </value>
+                                        <value name="Pixel_number">
+                                          <shadow type="math_number" id="kpNlnHeRNKkTMi4(=c~f">
+                                            <field name="NUM">500</field>
+                                          </shadow>
+                                        </value>
+                                        <next>
+                                          <block type="LedStrip_WS2812B_init_top" id="m]ezn@{/.bFO1AieIC7?">
+                                            <field name="RGBCOLOR">#ffff00</field>
+                                            <field name="RE_NUMBER">6</field>
+                                            <value name="PINR">
+                                              <shadow type="math_number" id="1=S}]jIO[t4c7ib+!@Z]">
+                                                <field name="NUM">64</field>
+                                              </shadow>
+                                            </value>
+                                            <value name="PIN">
+                                              <shadow type="math_number" id="PdfuS!pB!a,#C?]h}p^n">
+                                                <field name="NUM">2</field>
+                                              </shadow>
+                                            </value>
+                                            <value name="Pixel_number">
+                                              <shadow type="math_number" id=",xlK8-)1rj%wm!5[lrjd">
+                                                <field name="NUM">500</field>
+                                              </shadow>
+                                            </value>
+                                            <next>
+                                              <block type="LedStrip_WS2812B_init_top" id="88jSljPZ#fIzGX1b|6UE">
+                                                <field name="RGBCOLOR">#ff0000</field>
+                                                <field name="RE_NUMBER">6</field>
+                                                <value name="PINR">
+                                                  <shadow type="math_number" id="wqT}UJJLhl^*`pkaEDo#">
+                                                    <field name="NUM">64</field>
+                                                  </shadow>
+                                                </value>
+                                                <value name="PIN">
+                                                  <shadow type="math_number" id="LTjMJmsG#LGzcDnYhhq/">
+                                                    <field name="NUM">2</field>
+                                                  </shadow>
+                                                </value>
+                                                <value name="Pixel_number">
+                                                  <shadow type="math_number" id="P9)c)dR+H3zZ+,*.ws5M">
+                                                    <field name="NUM">500</field>
+                                                  </shadow>
+                                                </value>
+                                                <next>
+                                                  <block type="LedStrip_WS2812B_init_top" id="0pMiLeM)u2razN%I%|Dt">
+                                                    <field name="RGBCOLOR">#000000</field>
+                                                    <field name="RE_NUMBER">8</field>
+                                                    <value name="PINR">
+                                                      <shadow type="math_number" id="0CSbii;q]cNp`P?XpyKz">
+                                                        <field name="NUM">64</field>
+                                                      </shadow>
+                                                    </value>
+                                                    <value name="PIN">
+                                                      <shadow type="math_number" id="jerjD1F59mK8~}d*:fr9">
+                                                        <field name="NUM">2</field>
+                                                      </shadow>
+                                                    </value>
+                                                    <value name="Pixel_number">
+                                                      <shadow type="math_number" id="Z1]Cm[x)!UM%VF:lTT6W">
+                                                        <field name="NUM">50</field>
+                                                      </shadow>
+                                                    </value>
+                                                    <next>
+                                                      <block type="LedStrip_WS2812B_init_top" id="bK_m0hWDJET|#vM@6+Dk">
+                                                        <field name="RGBCOLOR">#3333ff</field>
+                                                        <field name="RE_NUMBER">8</field>
+                                                        <value name="PINR">
+                                                          <shadow type="math_number" id="(D@aI+m7G!z$dS[-}Xib">
+                                                            <field name="NUM">64</field>
+                                                          </shadow>
+                                                        </value>
+                                                        <value name="PIN">
+                                                          <shadow type="math_number" id="V{_P+1qu=.ky^j%G6zCA">
+                                                            <field name="NUM">2</field>
+                                                          </shadow>
+                                                        </value>
+                                                        <value name="Pixel_number">
+                                                          <shadow type="math_number" id="w^@_`mRY$vpA2bbki~vJ">
+                                                            <field name="NUM">50</field>
+                                                          </shadow>
+                                                        </value>
+                                                        <next>
+                                                          <block type="LedStrip_WS2812B_init_top" id="CPs0(YHKG7VdIs%)XR-f">
+                                                            <field name="RGBCOLOR">#3333ff</field>
+                                                            <field name="RE_NUMBER">12</field>
+                                                            <value name="PINR">
+                                                              <shadow type="math_number" id=",}`hGv6W22+~uI~bJbuf">
+                                                                <field name="NUM">64</field>
+                                                              </shadow>
+                                                            </value>
+                                                            <value name="PIN">
+                                                              <shadow type="math_number" id="XhXdZek5a/?QSDif%`rq">
+                                                                <field name="NUM">2</field>
+                                                              </shadow>
+                                                            </value>
+                                                            <value name="Pixel_number">
+                                                              <shadow type="math_number" id=";%FP)DJ,nr}kL1E1Oxr?">
+                                                                <field name="NUM">50</field>
+                                                              </shadow>
+                                                            </value>
+                                                          </block>
+                                                        </next>
+                                                      </block>
+                                                    </next>
+                                                  </block>
+                                                </next>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>

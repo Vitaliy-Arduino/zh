@@ -1,0 +1,110 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <toolbox>toolbox_arduino_all</toolbox>
+  <block type="arduino_setup" id="J6kb#)@i$gkpHb)Z9p,c" x="-316" y="30">
+    <statement name="MyLoop">
+      <block type="LedStrip_WS2812B_init_top" id="4-LGGLe-E@F(wTm^cO{8">
+        <field name="RGBCOLOR">#ff0000</field>
+        <field name="RE_NUMBER">0</field>
+        <value name="PINR">
+          <shadow type="math_number" id="RiZoRQSm-lS#[8a{Pylc">
+            <field name="NUM">16</field>
+          </shadow>
+        </value>
+        <value name="PIN">
+          <shadow type="math_number" id="h5qCcNM{.gF2vjuM#60z">
+            <field name="NUM">4</field>
+          </shadow>
+        </value>
+        <value name="Pixel_number">
+          <shadow type="math_number" id="0-eNYPw6+;A(#Q7CO}@[">
+            <field name="NUM">50</field>
+          </shadow>
+        </value>
+        <next>
+          <block type="LedStrip_WS2812B_init_top" id="ENKv(1(eh(-dWK4V)lIS">
+            <field name="RGBCOLOR">#3333ff</field>
+            <field name="RE_NUMBER">0</field>
+            <value name="PINR">
+              <shadow type="math_number" id="pO#Xy$;0VaiS3U0`}Y^A">
+                <field name="NUM">16</field>
+              </shadow>
+            </value>
+            <value name="PIN">
+              <shadow type="math_number" id="DuA`sP(h$8;2{n/r`Fvu">
+                <field name="NUM">4</field>
+              </shadow>
+            </value>
+            <value name="Pixel_number">
+              <shadow type="math_number" id="iHE*sQ3O8+?yXmd:C]~9">
+                <field name="NUM">50</field>
+              </shadow>
+            </value>
+            <next>
+              <block type="LedStrip_WS2812B_init_top" id="A|rhHh41MO*+ptS?l_9}">
+                <field name="RGBCOLOR">#000000</field>
+                <field name="RE_NUMBER">0</field>
+                <value name="PINR">
+                  <shadow type="math_number" id="7M]8gVgZzBYTA9]S_gsN">
+                    <field name="NUM">16</field>
+                  </shadow>
+                </value>
+                <value name="PIN">
+                  <shadow type="math_number" id="RD*,(n=qVWx((Fn/PE8k">
+                    <field name="NUM">4</field>
+                  </shadow>
+                </value>
+                <value name="Pixel_number">
+                  <shadow type="math_number" id="WwD)Py-6KN58|,Y^FOw-">
+                    <field name="NUM">50</field>
+                  </shadow>
+                </value>
+                <next>
+                  <block type="LedStrip_WS2812B_init_top" id="[.6VLo#c(][WEc[EKt93">
+                    <field name="RGBCOLOR">#000000</field>
+                    <field name="RE_NUMBER">4</field>
+                    <value name="PINR">
+                      <shadow type="math_number" id=")T8J*F]$Z?UJ(=cekY*o">
+                        <field name="NUM">16</field>
+                      </shadow>
+                    </value>
+                    <value name="PIN">
+                      <shadow type="math_number" id="QZridmbs+k`uvFD[Y4v$">
+                        <field name="NUM">4</field>
+                      </shadow>
+                    </value>
+                    <value name="Pixel_number">
+                      <shadow type="math_number" id="Yt8fY(Iq=L2-bywTRx9`">
+                        <field name="NUM">100</field>
+                      </shadow>
+                    </value>
+                    <next>
+                      <block type="LedStrip_WS2812B_init_top" id="g=TZN*NXFF}M@1^Nh%d%">
+                        <field name="RGBCOLOR">#000000</field>
+                        <field name="RE_NUMBER">5</field>
+                        <value name="PINR">
+                          <shadow type="math_number" id="W4?.$_l6=YQuNtd8FDCX">
+                            <field name="NUM">16</field>
+                          </shadow>
+                        </value>
+                        <value name="PIN">
+                          <shadow type="math_number" id="~jn{#ZL$?a$aGw!o%{tb">
+                            <field name="NUM">4</field>
+                          </shadow>
+                        </value>
+                        <value name="Pixel_number">
+                          <shadow type="math_number" id="LM-@xHJ$[E]ulCJt7Uik">
+                            <field name="NUM">5</field>
+                          </shadow>
+                        </value>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>
