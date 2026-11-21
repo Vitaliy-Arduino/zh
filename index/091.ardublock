@@ -1,0 +1,133 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <toolbox>toolbox_arduino_all</toolbox>
+  <block type="arduino_setup" id="x9dsG-;4ea%lKlZz}poc" x="-766" y="-530">
+    <statement name="MySetup">
+      <block type="lcd_128x128px_spi_tv_vga" id="UvV:R`Kv:!g3`DgQLf~Z"></block>
+    </statement>
+    <statement name="MyLoop">
+      <block type="lcd_128x128px_spi_text_tv_vga" id="(U~%LCI{{A#f8x(~9+/A">
+        <field name="font">1</field>
+        <value name="texttoprint">
+          <shadow type="text" id="4{$1?_P^F/[]-REJG/P-">
+            <field name="TEXT">ArduBlock</field>
+          </shadow>
+        </value>
+        <value name="X_Nokia">
+          <shadow type="math_number" id="HG/1mV@{_D]L0iWl7ubx">
+            <field name="NUM">10</field>
+          </shadow>
+        </value>
+        <value name="Y_Nokia">
+          <shadow type="math_number" id="(Eb_L^3$7Elt6M`_k@kX">
+            <field name="NUM">0</field>
+          </shadow>
+        </value>
+        <next>
+          <block type="lcd_128x128px_spi_text_tv_vga" id="c#}~,:^K?*]xvsc[(mU%">
+            <field name="font">2</field>
+            <value name="texttoprint">
+              <shadow type="text" id="Vqy?PpT9KI)5g.9]E-hT">
+                <field name="TEXT">ArduBlock</field>
+              </shadow>
+            </value>
+            <value name="X_Nokia">
+              <shadow type="math_number" id="1liS.Q|(vy^ZOTwozWIp">
+                <field name="NUM">10</field>
+              </shadow>
+            </value>
+            <value name="Y_Nokia">
+              <shadow type="math_number" id="9AKy5:jNu_I35whP;_$g">
+                <field name="NUM">10</field>
+              </shadow>
+            </value>
+            <next>
+              <block type="lcd_128x128px_spi_text_tv_vga" id="DcF%HyDqicxOH,-w:3ij">
+                <field name="font">3</field>
+                <value name="texttoprint">
+                  <shadow type="text" id="0_UM86k#O5VE2isH(2s8">
+                    <field name="TEXT">ArduBlock</field>
+                  </shadow>
+                </value>
+                <value name="X_Nokia">
+                  <shadow type="math_number" id="icD:X}21EvZtN[_YQry=">
+                    <field name="NUM">10</field>
+                  </shadow>
+                </value>
+                <value name="Y_Nokia">
+                  <shadow type="math_number" id="I11}c:?}k[r(yONkY{b8">
+                    <field name="NUM">20</field>
+                  </shadow>
+                </value>
+                <next>
+                  <block type="lcd_128x128px_spi_text_tv_vga2" id="6OK,J@xtdebr=urG#E|V">
+                    <value name="X_Nokia">
+                      <shadow type="math_number" id="8~}E8GB`Zt0fp-uze/3/">
+                        <field name="NUM">3000</field>
+                      </shadow>
+                    </value>
+                    <next>
+                      <block type="lcd_128x128px_spi_text_tv_vga1" id="jCnGql[~2uYueo^)!R^|">
+                        <next>
+                          <block type="lcd_128x128px_spi_text_tv_vga" id="3|NV,:s@p,A(u.U#E|BE">
+                            <field name="font">1</field>
+                            <value name="texttoprint">
+                              <shadow type="text" id="Oz79c6Jd|p4zx)R.FR;Y">
+                                <field name="TEXT">123</field>
+                              </shadow>
+                            </value>
+                            <value name="X_Nokia">
+                              <shadow type="math_number" id="C;fh[fPQN0~8tF!blaPJ">
+                                <field name="NUM">10</field>
+                              </shadow>
+                            </value>
+                            <value name="Y_Nokia">
+                              <shadow type="math_number" id="7~@i|C}}h=x?0BarqH_@">
+                                <field name="NUM">0</field>
+                              </shadow>
+                            </value>
+                            <next>
+                              <block type="lcd_128x128px_spi_text_tv_vga" id="16T31JMAFBf(QcOe!da/">
+                                <field name="font">2</field>
+                                <value name="texttoprint">
+                                  <shadow type="text" id="P.$_|J;7/EhTkPa:7`]R">
+                                    <field name="TEXT">321</field>
+                                  </shadow>
+                                </value>
+                                <value name="X_Nokia">
+                                  <shadow type="math_number" id="3x-g`NWrUnCAoG;0zk(N">
+                                    <field name="NUM">10</field>
+                                  </shadow>
+                                </value>
+                                <value name="Y_Nokia">
+                                  <shadow type="math_number" id="LLJF}Utc70kB$@n,Gxqv">
+                                    <field name="NUM">10</field>
+                                  </shadow>
+                                </value>
+                                <next>
+                                  <block type="lcd_128x128px_spi_text_tv_vga2" id="Fl;AVP81J$Qe]iM%P;x-">
+                                    <value name="X_Nokia">
+                                      <shadow type="math_number" id="6]*zvKd`;1CDJK*G{eBZ">
+                                        <field name="NUM">3000</field>
+                                      </shadow>
+                                    </value>
+                                    <next>
+                                      <block type="lcd_128x128px_spi_text_tv_vga1" id="Tu,$L@c|5eMko{*(Ot{1"></block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>

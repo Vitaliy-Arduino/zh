@@ -1,0 +1,329 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <toolbox>toolbox_arduino_all</toolbox>
+  <block type="arduino_setup" id="eAmx:jBG*0a?mh[4Oaq8" x="71" y="76">
+    <statement name="MySetup">
+      <block type="serial_init" id="ift#w-L/Bm$]=?Obt-@Q">
+        <field name="pin">0</field>
+        <field name="SPEED">9600</field>
+        <next>
+          <block type="minilcdi2c_setup" id="DEY.~QT|Tl(sRpK5$ldP">
+            <next>
+              <block type="variables_set_init" id="BhAf0pj3C{T]B2+_i3{Q">
+                <field name="VAR">T</field>
+                <field name="VARIABLE_SETTYPE_TYPE">NUMBER</field>
+                <value name="VALUE">
+                  <block type="math_number" id="Y@pkWBe/VDOvbF={|)kd">
+                    <field name="NUM">0</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="variables_set_init" id="R3SpI@jt9R;i/ZJjWq$S">
+                    <field name="VAR">H</field>
+                    <field name="VARIABLE_SETTYPE_TYPE">NUMBER</field>
+                    <value name="VALUE">
+                      <block type="math_number" id="#qg=DsVRgNw!7xk-P14S">
+                        <field name="NUM">0</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="variables_set_init" id="s*0g;z$3qj5Wi;vl?cs3">
+                        <field name="VAR">t1</field>
+                        <field name="VARIABLE_SETTYPE_TYPE">NUMBER</field>
+                        <value name="VALUE">
+                          <block type="math_number" id="tNAB^tT`a%mb_bV`VSH#">
+                            <field name="NUM">0</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="variables_set_init" id="Vp[|0~9a2$cc]z6n|%F1">
+                            <field name="VAR">h1</field>
+                            <field name="VARIABLE_SETTYPE_TYPE">NUMBER</field>
+                            <value name="VALUE">
+                              <block type="math_number" id=":C*gIs9,TCJ~@@`Nm)UO">
+                                <field name="NUM">0</field>
+                              </block>
+                            </value>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <statement name="MyLoop">
+      <block type="variables_set" id="hC,Y]V,sv}[a4U[5{Xv.">
+        <field name="VAR">T</field>
+        <value name="VALUE">
+          <block type="dht_sensor" id="f#yh]dkv):LkUlnQ%2nr">
+            <field name="OUTPUT_TYPE">2</field>
+            <field name="OUTPUT_VALUE">0</field>
+            <value name="PIN_DHT">
+              <shadow type="math_number" id="HAd%goR;$u?rkn=|yHSZ">
+                <field name="NUM">4</field>
+              </shadow>
+            </value>
+          </block>
+        </value>
+        <next>
+          <block type="variables_set" id="N|ts=R9o)8tcCS*K;[I9">
+            <field name="VAR">H</field>
+            <value name="VALUE">
+              <block type="dht_sensor" id="=m6^el,?BjB:A!RC,)Ce">
+                <field name="OUTPUT_TYPE">2</field>
+                <field name="OUTPUT_VALUE">1</field>
+                <value name="PIN_DHT">
+                  <shadow type="math_number" id="7oNha)0/jlVr$z~V9:cQ">
+                    <field name="NUM">4</field>
+                  </shadow>
+                </value>
+              </block>
+            </value>
+            <next>
+              <block type="controls_if" id="}ud_b7:C}Xyj~(::@to+">
+                <value name="IF0">
+                  <block type="logic_compare_log" id="YsxRLEr(tXV[aRm+E7+N">
+                    <field name="OP">NEQ</field>
+                    <value name="A">
+                      <shadow type="math_number" id="E*|K{tKeH]e,8nT(=/QJ">
+                        <field name="NUM">R</field>
+                      </shadow>
+                      <block type="variables_get" id="[bITPD`V%l!ldbMxU-}l">
+                        <field name="VAR">T</field>
+                      </block>
+                    </value>
+                    <value name="B">
+                      <shadow type="math_number" id=".BVx_8DPeHVC27^_YK2%">
+                        <field name="NUM">10</field>
+                      </shadow>
+                      <block type="variables_get" id="Gf]kp3iU`f[wS)QJJ/$k">
+                        <field name="VAR">t1</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <statement name="DO0">
+                  <block type="minilcdi2c_setcursor" id="7_H2a{Z$xs2f3jwT)*u8">
+                    <field name="dp">12x16</field>
+                    <value name="print_x">
+                      <shadow type="math_number" id="G$chI}5oy$c5-qXX]%^u">
+                        <field name="NUM">10</field>
+                      </shadow>
+                    </value>
+                    <value name="print_y">
+                      <shadow type="math_number" id="RI,#7T/:ZvzFfPzf()IG">
+                        <field name="NUM">1</field>
+                      </shadow>
+                    </value>
+                    <value name="texttoprint">
+                      <shadow type="text" id="a!NFjN#va655e#tMktq1">
+                        <field name="TEXT">ArduBlock RU EN</field>
+                      </shadow>
+                      <block type="text_st" id="pzWm6!F`[`b**h9nfq05">
+                        <value name="string-int-block">
+                          <block type="text_join" id="~E7rb2wR(Ov?oTe+!tBn">
+                            <mutation items="3"></mutation>
+                            <value name="ADD0">
+                              <block type="text" id="D_DT2eT2Ptq(Vhr7wLU~">
+                                <field name="TEXT">Темп:</field>
+                              </block>
+                            </value>
+                            <value name="ADD1">
+                              <block type="variables_get" id="~DHNp$Tuh)8J#vfl.3eR">
+                                <field name="VAR">T</field>
+                              </block>
+                            </value>
+                            <value name="ADD2">
+                              <block type="text" id="n!N7@L$*Wk]))!Lv4jWB">
+                                <field name="TEXT">C  </field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="serial_write_ln" id="k(m;gk:|D#h@-}gN!S[{">
+                        <value name="CONTENT">
+                          <shadow type="text" id="M$L$uqp%uf+:ZS$nDmFG">
+                            <field name="TEXT">ArduBlock RU EN</field>
+                          </shadow>
+                          <block type="text_join" id="D%u%:Lfe`/@3B?L{_Fq3">
+                            <mutation items="4"></mutation>
+                            <value name="ADD0">
+                              <block type="text" id="gQ`XFLlG;kQ-mOA=*=QU">
+                                <field name="TEXT"> T - </field>
+                              </block>
+                            </value>
+                            <value name="ADD1">
+                              <block type="variables_get" id="kMTK.g,.!.4[fXKxegP2">
+                                <field name="VAR">T</field>
+                              </block>
+                            </value>
+                            <value name="ADD2">
+                              <block type="text" id="!$kTdgk_9Kvq.qI_[%+B">
+                                <field name="TEXT"> H - </field>
+                              </block>
+                            </value>
+                            <value name="ADD3">
+                              <block type="variables_get" id="IF]{EvPbh/y+a+UfED^?">
+                                <field name="VAR">H</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="base_delay" id="Bvw$Y3PoXcoCnrZ|@{Q*">
+                            <field name="unite">m</field>
+                            <value name="DELAY_TIME">
+                              <shadow type="math_number" id="@H#v2#V30.aYec`h%0ZR">
+                                <field name="NUM">500</field>
+                              </shadow>
+                            </value>
+                            <next>
+                              <block type="variables_set" id="[pLWu_9NHoUr:;X-rQ3k">
+                                <field name="VAR">t1</field>
+                                <value name="VALUE">
+                                  <block type="variables_get" id="/|*lK_=5CCxF@l3Q,P9I">
+                                    <field name="VAR">T</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+                <next>
+                  <block type="controls_if" id="VQ:5R),r~(MC]T7-J1Xk">
+                    <value name="IF0">
+                      <block type="logic_compare_log" id="7[KaT4`hRl-FkY[=POTp">
+                        <field name="OP">NEQ</field>
+                        <value name="A">
+                          <shadow type="math_number" id="E*|K{tKeH]e,8nT(=/QJ">
+                            <field name="NUM">R</field>
+                          </shadow>
+                          <block type="variables_get" id="1q;hvmmfB4njdKeeOE#F">
+                            <field name="VAR">H</field>
+                          </block>
+                        </value>
+                        <value name="B">
+                          <shadow type="math_number" id=".BVx_8DPeHVC27^_YK2%">
+                            <field name="NUM">10</field>
+                          </shadow>
+                          <block type="variables_get" id="k86INL$^+-*,Bez.K%oz">
+                            <field name="VAR">h1</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <statement name="DO0">
+                      <block type="minilcdi2c_setcursor" id="p!ga~RM,HWmFU/TV]Vq}">
+                        <field name="dp">12x16</field>
+                        <value name="print_x">
+                          <shadow type="math_number" id="!7M{lCk4*h%Zmbl{iE]f">
+                            <field name="NUM">10</field>
+                          </shadow>
+                        </value>
+                        <value name="print_y">
+                          <shadow type="math_number" id="z|8BT9L9h2Blx4Cdoel|">
+                            <field name="NUM">4</field>
+                          </shadow>
+                        </value>
+                        <value name="texttoprint">
+                          <shadow type="text" id="a!NFjN#va655e#tMktq1">
+                            <field name="TEXT">ArduBlock RU EN</field>
+                          </shadow>
+                          <block type="text_st" id="xj{9$w`-_=$FVeK|e8;{">
+                            <value name="string-int-block">
+                              <block type="text_join" id="+,Fl6[c$Sdi$-4~dn`TC">
+                                <mutation items="3"></mutation>
+                                <value name="ADD0">
+                                  <block type="text" id="WxjXr[uPOaYo4l^[|Ws+">
+                                    <field name="TEXT">Влаж:</field>
+                                  </block>
+                                </value>
+                                <value name="ADD1">
+                                  <block type="variables_get" id="fmPClPx:DuZHb;yys9nE">
+                                    <field name="VAR">H</field>
+                                  </block>
+                                </value>
+                                <value name="ADD2">
+                                  <block type="text" id="0.LXhfKU}8IBrA^5@O%;">
+                                    <field name="TEXT">%   </field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="serial_write_ln" id="0)J9bz8kzs{}aMZ_g^iv">
+                            <value name="CONTENT">
+                              <shadow type="text" id="M$L$uqp%uf+:ZS$nDmFG">
+                                <field name="TEXT">ArduBlock RU EN</field>
+                              </shadow>
+                              <block type="text_join" id="04*xHK+mo^,l;rbz%:g{">
+                                <mutation items="4"></mutation>
+                                <value name="ADD0">
+                                  <block type="text" id=";$T/RmfS/5o[OL$sd*ev">
+                                    <field name="TEXT"> T - </field>
+                                  </block>
+                                </value>
+                                <value name="ADD1">
+                                  <block type="variables_get" id="EE7.WE?94}`6$mU1dtrk">
+                                    <field name="VAR">T</field>
+                                  </block>
+                                </value>
+                                <value name="ADD2">
+                                  <block type="text" id="xv`I%TNEIG2gnF$E|O~[">
+                                    <field name="TEXT"> H - </field>
+                                  </block>
+                                </value>
+                                <value name="ADD3">
+                                  <block type="variables_get" id="7zb[yU@48C(QEp%i~tQ+">
+                                    <field name="VAR">H</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="base_delay" id="tSt(;cTfMq.r-z*,a6G:">
+                                <field name="unite">m</field>
+                                <value name="DELAY_TIME">
+                                  <shadow type="math_number" id="JyfV:EO)n#Xs(fpH~n74">
+                                    <field name="NUM">500</field>
+                                  </shadow>
+                                </value>
+                                <next>
+                                  <block type="variables_set" id="{7a|=Q0wF_N{#a#HLj2H">
+                                    <field name="VAR">h1</field>
+                                    <value name="VALUE">
+                                      <block type="variables_get" id="KH~|jIqLRxJ`w@Cp(7L/">
+                                        <field name="VAR">H</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </statement>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>

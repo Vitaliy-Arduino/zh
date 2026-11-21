@@ -1,0 +1,412 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <toolbox>toolbox_arduino_all</toolbox>
+  <block type="arduino_setup" id=")Pj~a?Fw}wkAMF2i:q^E" x="510" y="-76">
+    <statement name="MySetup">
+      <block type="serial_init" id="!ZGOVnF?Z@yw0kiQu3H?">
+        <field name="pin">0</field>
+        <field name="SPEED">9600</field>
+      </block>
+    </statement>
+    <statement name="MyLoop">
+      <block type="serial_write_ln" id="_k#Q5rt(tp[j5fxWm[h,">
+        <value name="CONTENT">
+          <shadow type="text" id=")b)jJ9WEb[sYvY=%rWX9">
+            <field name="TEXT">ArduBlock RU EN</field>
+          </shadow>
+          <block type="text_join" id="L#M7uz#4Vqm`o~6Up^*G">
+            <mutation items="3"></mutation>
+            <value name="ADD0">
+              <block type="ardublock_block26" id="omMe!ZCHQ*qlM3:Cq@3{">
+                <field name="d1">FS-iA6 канал (2-7)</field>
+                <field name="d2">getChannel(pin</field>
+                <field name="d4">)</field>
+                <field name="a1">const int pin2 = 2, pin3 = 3, pin4 = 4, pin5 = 5, pin6 = 6, pin7 = 7;</field>
+                <field name="a2">int  val2, val3, val4, val5, val6, val7;</field>
+                <field name="a3">int getChannel(int pin) {long p = pulseIn(pin, HIGH, 30000);if (p &gt; 900 &amp;&amp; p &lt; 2100) {return map(p, 1000, 2000, 0, 255);}return 128;}</field>
+                <field name="a4">pinMode(pin2, INPUT); pinMode(pin3, INPUT); pinMode(pin4, INPUT);pinMode(pin5, INPUT); pinMode(pin6, INPUT); pinMode(pin7, INPUT);</field>
+                <field name="a5">fs</field>
+                <value name="block1">
+                  <shadow type="math_number" id="C[0V*AO0~Sl5Mse!Q!a6">
+                    <field name="NUM">6</field>
+                  </shadow>
+                </value>
+              </block>
+            </value>
+            <value name="ADD1">
+              <block type="text" id="#LyZP[T2;xN}07Siu1Mt">
+                <field name="TEXT"> - </field>
+              </block>
+            </value>
+            <value name="ADD2">
+              <block type="ardublock_block26" id="Q`f:]=dZ}wU|*IU!!FeF">
+                <field name="d1">FS-iA6 канал (2-7)</field>
+                <field name="d2">getChannel(pin</field>
+                <field name="d4">)</field>
+                <field name="a1">const int pin2 = 2, pin3 = 3, pin4 = 4, pin5 = 5, pin6 = 6, pin7 = 7;</field>
+                <field name="a2">int  val2, val3, val4, val5, val6, val7;</field>
+                <field name="a3">int getChannel(int pin) {long p = pulseIn(pin, HIGH, 30000);if (p &gt; 900 &amp;&amp; p &lt; 2100) {return map(p, 1000, 2000, 0, 255);}return 128;}</field>
+                <field name="a4">pinMode(pin2, INPUT); pinMode(pin3, INPUT); pinMode(pin4, INPUT);pinMode(pin5, INPUT); pinMode(pin6, INPUT); pinMode(pin7, INPUT);</field>
+                <field name="a5">fs</field>
+                <value name="block1">
+                  <shadow type="math_number" id=";}AZ{O;{g7%oS_r3ck$t">
+                    <field name="NUM">7</field>
+                  </shadow>
+                </value>
+              </block>
+            </value>
+          </block>
+        </value>
+        <next>
+          <block type="controls_if" id="OamL3ZP)vPq7BLTDqef;">
+            <mutation else="1"></mutation>
+            <value name="IF0">
+              <block type="logic_compare_log" id="GT/i:(9d_mvQAp~UqK@U">
+                <field name="OP">GT</field>
+                <value name="A">
+                  <shadow type="math_number" id=",9?2SJbf1Z!{@h6%+np1">
+                    <field name="NUM">R</field>
+                  </shadow>
+                  <block type="ardublock_block26" id="]5A?4{hp]0aG_*x@a?8z">
+                    <field name="d1">FS-iA6 канал (2-7)</field>
+                    <field name="d2">getChannel(pin</field>
+                    <field name="d4">)</field>
+                    <field name="a1">const int pin2 = 2, pin3 = 3, pin4 = 4, pin5 = 5, pin6 = 6, pin7 = 7;</field>
+                    <field name="a2">int  val2, val3, val4, val5, val6, val7;</field>
+                    <field name="a3">int getChannel(int pin) {long p = pulseIn(pin, HIGH, 30000);if (p &gt; 900 &amp;&amp; p &lt; 2100) {return map(p, 1000, 2000, 0, 255);}return 128;}</field>
+                    <field name="a4">pinMode(pin2, INPUT); pinMode(pin3, INPUT); pinMode(pin4, INPUT);pinMode(pin5, INPUT); pinMode(pin6, INPUT); pinMode(pin7, INPUT);</field>
+                    <field name="a5">fs</field>
+                    <value name="block1">
+                      <shadow type="math_number" id="%dlJY}iDnwi/7UjH7uI[">
+                        <field name="NUM">6</field>
+                      </shadow>
+                    </value>
+                  </block>
+                </value>
+                <value name="B">
+                  <shadow type="math_number" id=";Oh!GLHfSBL#mM:hfeo(">
+                    <field name="NUM">200</field>
+                  </shadow>
+                </value>
+              </block>
+            </value>
+            <statement name="DO0">
+              <block type="motor_autoL" id="39w;=50YDRZ}JZM!#_@|">
+                <field name="MOTOR_DIR">1</field>
+                <value name="PIN_RM1">
+                  <shadow type="math_number" id="FfAmTw}YfX0th,PdR[{)">
+                    <field name="NUM">8</field>
+                  </shadow>
+                </value>
+                <value name="PIN_RM2">
+                  <shadow type="math_number" id="tfQrWFO/|YcGzbaQb,})">
+                    <field name="NUM">9</field>
+                  </shadow>
+                </value>
+                <value name="CONTENT">
+                  <shadow type="math_number" id="U#*(S50-=qU-}2Jb3dG6">
+                    <field name="NUM">255</field>
+                  </shadow>
+                </value>
+                <next>
+                  <block type="motor_autoL" id="G?F|Sf3u3[~r[;Z,fql0">
+                    <field name="MOTOR_DIR">1</field>
+                    <value name="PIN_RM1">
+                      <shadow type="math_number" id="w_bRBdXM7b5%Gk]b)24|">
+                        <field name="NUM">10</field>
+                      </shadow>
+                    </value>
+                    <value name="PIN_RM2">
+                      <shadow type="math_number" id="A@!7GRNLXxds_uk~Ic5N">
+                        <field name="NUM">11</field>
+                      </shadow>
+                    </value>
+                    <value name="CONTENT">
+                      <shadow type="math_number" id="lkKO-ya$FR%K$a1x]8uZ">
+                        <field name="NUM">255</field>
+                      </shadow>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </statement>
+            <statement name="ELSE">
+              <block type="controls_if" id="6xk[;hHFvb+Zhja]{T(G">
+                <mutation else="1"></mutation>
+                <value name="IF0">
+                  <block type="logic_compare_log" id="Z7~8PG#CHg$M3ykl^tlp">
+                    <field name="OP">LT</field>
+                    <value name="A">
+                      <shadow type="math_number" id="00e+8uWg0j{DQg`P3^l`">
+                        <field name="NUM">R</field>
+                      </shadow>
+                      <block type="ardublock_block26" id="?Yk!UZf[Lc}~L1FjH;.q">
+                        <field name="d1">FS-iA6 канал (2-7)</field>
+                        <field name="d2">getChannel(pin</field>
+                        <field name="d4">)</field>
+                        <field name="a1">const int pin2 = 2, pin3 = 3, pin4 = 4, pin5 = 5, pin6 = 6, pin7 = 7;</field>
+                        <field name="a2">int  val2, val3, val4, val5, val6, val7;</field>
+                        <field name="a3">int getChannel(int pin) {long p = pulseIn(pin, HIGH, 30000);if (p &gt; 900 &amp;&amp; p &lt; 2100) {return map(p, 1000, 2000, 0, 255);}return 128;}</field>
+                        <field name="a4">pinMode(pin2, INPUT); pinMode(pin3, INPUT); pinMode(pin4, INPUT);pinMode(pin5, INPUT); pinMode(pin6, INPUT); pinMode(pin7, INPUT);</field>
+                        <field name="a5">fs</field>
+                        <value name="block1">
+                          <shadow type="math_number" id="P!V]k9`mt)S.ffkOP+GL">
+                            <field name="NUM">6</field>
+                          </shadow>
+                        </value>
+                      </block>
+                    </value>
+                    <value name="B">
+                      <shadow type="math_number" id="h,aF!WlDf51vSB@*XEuP">
+                        <field name="NUM">50</field>
+                      </shadow>
+                    </value>
+                  </block>
+                </value>
+                <statement name="DO0">
+                  <block type="motor_autoL" id="X;2LWM@u.%@Es2(8hmnG">
+                    <field name="MOTOR_DIR">0</field>
+                    <value name="PIN_RM1">
+                      <shadow type="math_number" id="8oI7dQ=N;yKzhc0;5TgU">
+                        <field name="NUM">8</field>
+                      </shadow>
+                    </value>
+                    <value name="PIN_RM2">
+                      <shadow type="math_number" id="4I{QoYfTE5Tom{HM;#~~">
+                        <field name="NUM">9</field>
+                      </shadow>
+                    </value>
+                    <value name="CONTENT">
+                      <shadow type="math_number" id="=;XwBR;(l6{ZvMLM=k-Z">
+                        <field name="NUM">255</field>
+                      </shadow>
+                    </value>
+                    <next>
+                      <block type="motor_autoL" id="t|IN5_*v@l/Ca%z=ft[m">
+                        <field name="MOTOR_DIR">0</field>
+                        <value name="PIN_RM1">
+                          <shadow type="math_number" id="}cJ{*`o+bM::B9B:C$G(">
+                            <field name="NUM">10</field>
+                          </shadow>
+                        </value>
+                        <value name="PIN_RM2">
+                          <shadow type="math_number" id="Xj2p@FfX[YaH?;jPH44I">
+                            <field name="NUM">11</field>
+                          </shadow>
+                        </value>
+                        <value name="CONTENT">
+                          <shadow type="math_number" id="nl*l:yL.6porkscQG!yQ">
+                            <field name="NUM">255</field>
+                          </shadow>
+                        </value>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+                <statement name="ELSE">
+                  <block type="controls_if" id="zX8RDR)|P9zPWn6De!wX">
+                    <mutation else="1"></mutation>
+                    <value name="IF0">
+                      <block type="logic_compare_log" id="+]+%*@Y$H[*hyk%AR72_">
+                        <field name="OP">GT</field>
+                        <value name="A">
+                          <shadow type="math_number" id="H76o()0hs9#AgEydY49K">
+                            <field name="NUM">R</field>
+                          </shadow>
+                          <block type="ardublock_block26" id="#F]AW?1`.6lJAa~3[Td#">
+                            <field name="d1">FS-iA6 канал (2-7)</field>
+                            <field name="d2">getChannel(pin</field>
+                            <field name="d4">)</field>
+                            <field name="a1">const int pin2 = 2, pin3 = 3, pin4 = 4, pin5 = 5, pin6 = 6, pin7 = 7;</field>
+                            <field name="a2">int  val2, val3, val4, val5, val6, val7;</field>
+                            <field name="a3">int getChannel(int pin) {long p = pulseIn(pin, HIGH, 30000);if (p &gt; 900 &amp;&amp; p &lt; 2100) {return map(p, 1000, 2000, 0, 255);}return 128;}</field>
+                            <field name="a4">pinMode(pin2, INPUT); pinMode(pin3, INPUT); pinMode(pin4, INPUT);pinMode(pin5, INPUT); pinMode(pin6, INPUT); pinMode(pin7, INPUT);</field>
+                            <field name="a5">fs</field>
+                            <value name="block1">
+                              <shadow type="math_number" id="rmCGLaGafGA+4YDb[W|y">
+                                <field name="NUM">7</field>
+                              </shadow>
+                            </value>
+                          </block>
+                        </value>
+                        <value name="B">
+                          <shadow type="math_number" id="1+ZPZA%(Z{N4ab?kcgPX">
+                            <field name="NUM">200</field>
+                          </shadow>
+                        </value>
+                      </block>
+                    </value>
+                    <statement name="DO0">
+                      <block type="motor_autoL" id="_r1wPCDCJkH3-@_!hCKc">
+                        <field name="MOTOR_DIR">0</field>
+                        <value name="PIN_RM1">
+                          <shadow type="math_number" id=":zC1$(l63pn_S1/@XGC.">
+                            <field name="NUM">8</field>
+                          </shadow>
+                        </value>
+                        <value name="PIN_RM2">
+                          <shadow type="math_number" id="`O1CY51nUgYEX*^9J?qW">
+                            <field name="NUM">9</field>
+                          </shadow>
+                        </value>
+                        <value name="CONTENT">
+                          <shadow type="math_number" id="eL:{*#4wQc!ii5r0pU.;">
+                            <field name="NUM">255</field>
+                          </shadow>
+                        </value>
+                        <next>
+                          <block type="motor_autoL" id="c4RB]A3n?H*q(ow-U}/:">
+                            <field name="MOTOR_DIR">1</field>
+                            <value name="PIN_RM1">
+                              <shadow type="math_number" id="@iV3g[*23dl`^Pk/55iC">
+                                <field name="NUM">10</field>
+                              </shadow>
+                            </value>
+                            <value name="PIN_RM2">
+                              <shadow type="math_number" id="A~f*c]dS8;zN1vh.#e+W">
+                                <field name="NUM">11</field>
+                              </shadow>
+                            </value>
+                            <value name="CONTENT">
+                              <shadow type="math_number" id="gs;^.??RS5Aca:)7Y5OW">
+                                <field name="NUM">255</field>
+                              </shadow>
+                            </value>
+                          </block>
+                        </next>
+                      </block>
+                    </statement>
+                    <statement name="ELSE">
+                      <block type="controls_if" id="w/Z@q_wc-#m;CG2HXW)R">
+                        <mutation else="1"></mutation>
+                        <value name="IF0">
+                          <block type="logic_compare_log" id="CHZgE`z[xeE:OlYSZP=I">
+                            <field name="OP">LT</field>
+                            <value name="A">
+                              <shadow type="math_number" id="KfUFF(]JGsc(7AUzw{vP">
+                                <field name="NUM">R</field>
+                              </shadow>
+                              <block type="ardublock_block26" id="Z{xcE~N09kUZKXx?1w:p">
+                                <field name="d1">FS-iA6 канал (2-7)</field>
+                                <field name="d2">getChannel(pin</field>
+                                <field name="d4">)</field>
+                                <field name="a1">const int pin2 = 2, pin3 = 3, pin4 = 4, pin5 = 5, pin6 = 6, pin7 = 7;</field>
+                                <field name="a2">int  val2, val3, val4, val5, val6, val7;</field>
+                                <field name="a3">int getChannel(int pin) {long p = pulseIn(pin, HIGH, 30000);if (p &gt; 900 &amp;&amp; p &lt; 2100) {return map(p, 1000, 2000, 0, 255);}return 128;}</field>
+                                <field name="a4">pinMode(pin2, INPUT); pinMode(pin3, INPUT); pinMode(pin4, INPUT);pinMode(pin5, INPUT); pinMode(pin6, INPUT); pinMode(pin7, INPUT);</field>
+                                <field name="a5">fs</field>
+                                <value name="block1">
+                                  <shadow type="math_number" id="$.*)bdZ}W~wA6@QFr_4A">
+                                    <field name="NUM">7</field>
+                                  </shadow>
+                                </value>
+                              </block>
+                            </value>
+                            <value name="B">
+                              <shadow type="math_number" id="0M76JAgU2gxHWA_n=Zzm">
+                                <field name="NUM">50</field>
+                              </shadow>
+                            </value>
+                          </block>
+                        </value>
+                        <statement name="DO0">
+                          <block type="motor_autoL" id="c4U-)Q`a8PqlERkDt#79">
+                            <field name="MOTOR_DIR">1</field>
+                            <value name="PIN_RM1">
+                              <shadow type="math_number" id="!BpB_}!$wp|O:YrhKtuf">
+                                <field name="NUM">8</field>
+                              </shadow>
+                            </value>
+                            <value name="PIN_RM2">
+                              <shadow type="math_number" id="jsqZKsa%o%,UQw,~TUOx">
+                                <field name="NUM">9</field>
+                              </shadow>
+                            </value>
+                            <value name="CONTENT">
+                              <shadow type="math_number" id=";.kn.GL)8DNq8]/L+}7M">
+                                <field name="NUM">255</field>
+                              </shadow>
+                            </value>
+                            <next>
+                              <block type="motor_autoL" id="_Sp5=@NCB4^DNCG).nEj">
+                                <field name="MOTOR_DIR">0</field>
+                                <value name="PIN_RM1">
+                                  <shadow type="math_number" id="PiMEA3n;q;E`7%k#3Y_|">
+                                    <field name="NUM">10</field>
+                                  </shadow>
+                                </value>
+                                <value name="PIN_RM2">
+                                  <shadow type="math_number" id="!6S6fPL,gR#{59{Mk4K{">
+                                    <field name="NUM">11</field>
+                                  </shadow>
+                                </value>
+                                <value name="CONTENT">
+                                  <shadow type="math_number" id="7KN,S24#aT/(P]|*2~`5">
+                                    <field name="NUM">255</field>
+                                  </shadow>
+                                </value>
+                              </block>
+                            </next>
+                          </block>
+                        </statement>
+                        <statement name="ELSE">
+                          <block type="motor_autoL" id="1J@c?:;9+L#NS~uBF,zb">
+                            <field name="MOTOR_DIR">1</field>
+                            <value name="PIN_RM1">
+                              <shadow type="math_number" id="n$HF@yL05}RI/qwVWb6#">
+                                <field name="NUM">8</field>
+                              </shadow>
+                            </value>
+                            <value name="PIN_RM2">
+                              <shadow type="math_number" id="61g@PdbqxGwayprqdo6)">
+                                <field name="NUM">9</field>
+                              </shadow>
+                            </value>
+                            <value name="CONTENT">
+                              <shadow type="math_number" id="U:P1d-zcv{=|3,a.V{.K">
+                                <field name="NUM">0</field>
+                              </shadow>
+                            </value>
+                            <next>
+                              <block type="motor_autoL" id="Xy.z58;VoNxcF+BV$yJ6">
+                                <field name="MOTOR_DIR">1</field>
+                                <value name="PIN_RM1">
+                                  <shadow type="math_number" id="90du8T1}H/cMVZC4(!o0">
+                                    <field name="NUM">10</field>
+                                  </shadow>
+                                </value>
+                                <value name="PIN_RM2">
+                                  <shadow type="math_number" id="CQyGUVqimR60o+`84^9f">
+                                    <field name="NUM">11</field>
+                                  </shadow>
+                                </value>
+                                <value name="CONTENT">
+                                  <shadow type="math_number" id="5`w$Jgi[+hGrHJhe?tn4">
+                                    <field name="NUM">0</field>
+                                  </shadow>
+                                </value>
+                              </block>
+                            </next>
+                          </block>
+                        </statement>
+                      </block>
+                    </statement>
+                  </block>
+                </statement>
+              </block>
+            </statement>
+            <next>
+              <block type="base_delay" id="sd;]O%7hvT~.m|EYt-qb">
+                <field name="unite">m</field>
+                <value name="DELAY_TIME">
+                  <shadow type="math_number" id="jB;2s%^ReSC;8T`5wD`V">
+                    <field name="NUM">10</field>
+                  </shadow>
+                </value>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>
